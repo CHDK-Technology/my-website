@@ -1,0 +1,6 @@
+node_modules/
+.tmp/
+.tmp.driveupload/
+.tmp.drivedownload/
+.vscode/
+desktop.ini
