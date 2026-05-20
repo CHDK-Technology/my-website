@@ -1,0 +1,1750 @@
+
+:root {
+
+  /* ── Brand Colors ─────────────────────────────────────────────── */
+  --chdk-teal:       #1B8C8C;
+  --chdk-navy:       #1A3A8A;
+  --chdk-sky:        #00AEEF;
+  --chdk-cyan:       #5AC8FA;
+  --chdk-accent:     #00AEEF;
+
+  /* Brand alphas */
+  --chdk-accent-08:  rgba(0, 174, 239, 0.08);
+  --chdk-accent-12:  rgba(0, 174, 239, 0.12);
+  --chdk-accent-20:  rgba(0, 174, 239, 0.20);
+  --chdk-accent-35:  rgba(0, 174, 239, 0.35);
+
+  /* Brand gradients */
+  --chdk-gradient:   linear-gradient(135deg, #1A3A8A 0%, #1B8C8C 50%, #00AEEF 100%);
+  --chdk-gradient-h: linear-gradient(90deg,  #1A3A8A 0%, #00AEEF 100%);
+  --chdk-gradient-v: linear-gradient(180deg, #1A3A8A 0%, #00AEEF 100%);
+
+  /* ── Neutral Surface Palette (Dark Mode — default) ─────────────── */
+  --black:   #010101;  /* page background */
+  --dark:    #111111;  /* cards, panels */
+  --dark-2:  #181818;  /* elevated cards */
+  --mid:     #242424;  /* borders, dividers */
+  --light:   #efefef;  /* primary text */
+  --light-80: rgba(239, 239, 239, 0.80);
+  --light-60: rgba(239, 239, 239, 0.60);
+  --light-40: rgba(239, 239, 239, 0.40);
+  --light-30: rgba(239, 239, 239, 0.30);  /* FIX: was undefined in Apply.css */
+  --light-20: rgba(239, 239, 239, 0.20);
+  --light-15: rgba(239, 239, 239, 0.15);
+  --light-08: rgba(239, 239, 239, 0.08);
+
+  /* ── Nav ─────────────────────────────────────────────────────── */
+  --nav-height:   72px;
+  --nav-bg:       rgba(5, 5, 5, 0.60);
+  --nav-blur:     18px;
+
+  /* ── Dropdown ────────────────────────────────────────────────── */
+  --dropdown-bg:       #020202;
+  --dropdown-text:     #efefef;
+  --dropdown-text-60:  rgba(239, 239, 239, 0.60);
+  --dropdown-line:     rgba(239, 239, 239, 0.10);
+
+ 
+  --t-hero:    clamp(44px, 6.5vw, 76px);
+  --t-page:    clamp(38px, 5vw,   64px);
+  --t-section: clamp(30px, 4vw,   52px);
+  --t-card:    20px;
+  --t-body:    15px;
+  --t-small:   13px;
+  --t-micro:   11px;
+
+  /* ── Spacing Scale (4px base grid) ──────────────────────────── */
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-7:  28px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-14: 56px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+  --sp-28: 112px;
+  --sp-32: 128px;
+
+  /* Section vertical padding (standardized) */
+  --section-sm:  clamp(56px, 8vw, 80px);
+  --section-md:  clamp(72px, 10vw, 104px);
+  --section-lg:  clamp(88px, 12vw, 128px);
+
+  /* ── Border Radius Scale ─────────────────────────────────────── */
+  /* FIX: Was 4/6/8/10/12/14/20/30/50px scattered. Now a clean 5-step scale. */
+  --radius-xs:  4px;   /* tags, chips, small inputs */
+  --radius-sm:  8px;   /* cards, panels */
+  --radius-md:  12px;  /* larger cards, modals */
+  --radius-lg:  20px;  /* hero cards, prominent sections */
+  --radius-pill: 999px; /* pills, full-round buttons */
+
+  /* ── Shadow Scale ────────────────────────────────────────────── */
+  --shadow-xs:  0 1px 3px rgba(0,0,0,0.14);
+  --shadow-sm:  0 2px 8px  rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.10);
+  --shadow-md:  0 4px 20px rgba(0,0,0,0.24), 0 2px 8px rgba(0,0,0,0.14);
+  --shadow-lg:  0 8px 40px rgba(0,0,0,0.34), 0 4px 16px rgba(0,0,0,0.18);
+  --shadow-xl:  0 20px 64px rgba(0,0,0,0.44), 0 8px 24px rgba(0,0,0,0.22);
+  --shadow-2xl: 0 32px 80px rgba(0,0,0,0.55), 0 16px 40px rgba(0,0,0,0.28);
+
+  /* Brand glow variants */
+  --glow-sky:   0 0 0 1px var(--chdk-accent-12), 0 4px 24px var(--chdk-accent-20);
+  --glow-sky-lg: 0 0 32px var(--chdk-accent-35);
+  --glow-teal:  0 4px 24px rgba(27,140,140, 0.22);
+
+  /* ── Animation System ────────────────────────────────────────── */
+  /* FIX: Was mix of "0.3s", "0.3s ease", "cubic-bezier", bare "0.3s" */
+  --ease-out:       cubic-bezier(0.0, 0, 0.2, 1);   /* decelerate */
+  --ease-in:        cubic-bezier(0.4, 0, 1, 1);     /* accelerate */
+  --ease-inout:     cubic-bezier(0.4, 0, 0.2, 1);   /* standard */
+  --ease-spring:    cubic-bezier(0.16, 1, 0.3, 1);  /* spring/expo out */
+  --ease-back:      cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot */
+
+  /* Duration tokens */
+  --dur-fast:   150ms;
+  --dur-base:   250ms;
+  --dur-slow:   400ms;
+  --dur-slower: 600ms;
+  --dur-reveal: 700ms;
+
+  /* Canonical transitions */
+  --t-color:     color var(--dur-base) var(--ease-inout),
+                 background-color var(--dur-base) var(--ease-inout),
+                 border-color var(--dur-base) var(--ease-inout);
+  --t-transform: transform var(--dur-base) var(--ease-spring);
+  --t-opacity:   opacity var(--dur-base) var(--ease-inout);
+  --t-all:       all var(--dur-slow) var(--ease-spring);
+  --t-reveal:    opacity var(--dur-reveal) var(--ease-spring),
+                 transform var(--dur-reveal) var(--ease-spring);
+
+  /* ── Z-Index Stack ───────────────────────────────────────────── */
+  --z-base:    0;
+  --z-above:   10;
+  --z-dropdown: 100;
+  --z-overlay: 500;
+  --z-modal:   800;
+  --z-nav:     1000;
+  --z-toast:   1200;
+
+  /* Existing compatibility aliases */
+  --primary:        #010101;
+  --primary-dim:    rgba(22, 56, 110, 0.15);
+  --primary-shadow: rgba(22, 56, 110, 0.20);
+  --accent:         #00AEEF;
+  --bg:             #F4F8FB;
+  --white:          #FFFFFF;
+  --gradient:       var(--chdk-gradient);
+}
+
+/* ── Light Mode Variable Overrides ────────────────────────────── */
+body:not(.dark-mode) {
+  --black:   #F4F8FB;  /* page background */
+  --dark:    #FFFFFF;  /* cards, panels */
+  --dark-2:  #F0F4F8;  /* elevated cards */
+  --mid:     rgba(17,17,17,0.10);
+  --light:   #0B1F3A;  /* primary text — brand navy */
+  --light-80: rgba(11, 31, 58, 0.80);
+  --light-60: rgba(11, 31, 58, 0.60);
+  --light-40: rgba(11, 31, 58, 0.40);
+  --light-30: rgba(11, 31, 58, 0.30);
+  --light-20: rgba(11, 31, 58, 0.20);
+  --light-15: rgba(11, 31, 58, 0.12);
+  --light-08: rgba(11, 31, 58, 0.06);
+  --nav-bg:   rgba(255, 255, 255, 0.88);
+  --dropdown-bg:       #010101;
+  --dropdown-text:     #efefef;
+  --dropdown-text-60:  rgba(239,239,239,0.60);
+  --dropdown-line:     rgba(239,239,239,0.10);
+  --shadow-md: 0 4px 20px rgba(11,31,58,0.10), 0 2px 8px rgba(11,31,58,0.06);
+  --shadow-lg: 0 8px 40px rgba(11,31,58,0.14), 0 4px 16px rgba(11,31,58,0.08);
+}
+
+body.dark-mode {
+  --black:   #010101;
+  --dark:    #111111;
+  --dark-2:  #181818;
+  --mid:     rgba(239,239,239,0.10);
+  --light:   #efefef;
+  --nav-bg:  rgba(5,5,5,0.60);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 1 — GLOBAL RESET & BASE
+   ════════════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* FIX: style.css was setting font-family to "Helvetica Neue" overriding Poppins */
+body {
+  font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+  font-size: var(--t-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: var(--black);
+  color: var(--light);
+  /* Premium font rendering across platforms */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+  transition: background-color var(--dur-slow) var(--ease-inout),
+              color var(--dur-slow) var(--ease-inout);
+}
+
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ── Brand-colored text selection ────────────────────────────── */
+::selection      { background: var(--chdk-accent-35); color: #fff; }
+::-moz-selection { background: var(--chdk-accent-35); color: #fff; }
+
+/* ── Custom scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--chdk-accent-20); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--chdk-sky); }
+
+/* ── Accessible focus rings ──────────────────────────────────── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--chdk-sky);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+
+
+/* Hero background parallax zoom */
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.05); }
+}
+
+/* Hero background zoom for pages using webdevSlowZoom etc. */
+@keyframes webdevSlowZoom       { from { transform: scale(1); } to { transform: scale(1.05); } }
+@keyframes scanningSlowZoom     { from { transform: scale(1); } to { transform: scale(1.05); } }
+@keyframes appdevSlowZoom       { from { transform: scale(1); } to { transform: scale(1.05); } }
+@keyframes digmktSlowZoom       { from { transform: scale(1); } to { transform: scale(1.05); } }
+@keyframes calibrationSlowZoom  { from { transform: scale(1); } to { transform: scale(1.05); } }
+@keyframes metrologySlowZoom    { from { transform: scale(1); } to { transform: scale(1.05); } }
+
+/* Scroll chevron cascade */
+@keyframes chevronFlow {
+  0%   { transform: translateY(0);    opacity: 0; }
+  30%  { opacity: 0.5; }
+  60%  { transform: translateY(12px); opacity: 1; }
+  100% { transform: translateY(20px); opacity: 0; }
+}
+
+/* Floating bounce for scroll arrows */
+@keyframes elegantFloat {
+  0%, 100% { transform: translateY(-4px); }
+  50%       { transform: translateY(4px); }
+}
+
+/* Section card reveal */
+@keyframes cardReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Client logo marquee */
+@keyframes clientScrollLeft  { from { transform: translateX(0);    } to { transform: translateX(-50%); } }
+@keyframes clientScrollRight { from { transform: translateX(-50%); } to { transform: translateX(0);    } }
+
+/* Fade up — generic reveal */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero progress bar */
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+
+.section-label,
+.sol-label,
+.overview-label,
+.inn-label,
+.adv-label,
+.contact-page .contact-section-label,
+.careers-page .careers-section-label,
+.apply-section-label {
+  display: block;
+  font-size: var(--t-micro);       /* 11px */
+  font-weight: 500;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--chdk-cyan) !important;  /* FIX: was var(--light-60) — poor contrast */
+  margin-bottom: var(--sp-3);
+  line-height: 1.4;
+}
+
+/* Section heading */
+.section-heading,
+.sol-heading,
+.overview-heading,
+.inn-heading,
+.adv-heading,
+.contact-page .contact-section-heading,
+.careers-page .careers-section-heading,
+.apply-section-heading {
+  font-size: var(--t-section);     /* clamp(30px, 4vw, 52px) */
+  font-weight: 600;                /* FIX: was 650 (non-standard) */
+  line-height: 1.12;
+  letter-spacing: -0.4px;
+  color: var(--light);
+  margin-bottom: var(--sp-6);
+}
+
+/* Section body */
+.section-description,
+.sol-intro-body,
+.apply-section-desc,
+.careers-page .careers-section-desc {
+  font-size: var(--t-body);
+  color: var(--light-60);
+  line-height: 1.85;
+}
+
+/* Section description — highlighted variant */
+.section-description.highlight {
+  color: var(--light);
+  font-weight: 500;
+  border-left: 2px solid var(--chdk-accent-35);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--chdk-accent-08);
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  margin-bottom: var(--sp-10);
+}
+
+/* Hero heading (full-page heroes) */
+.hero-slide-title,
+.ov-hero-title,
+.sol-hero-title,
+.biz-hero-title,
+.contact-page .contact-hero-title,
+.careers-page .careers-hero-title,
+.apply-title {
+  font-size: var(--t-hero);        /* clamp(44px, 6.5vw, 76px) */
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -1px;
+  color: #fff;
+}
+
+/* Hero tag */
+.hero-slide-tag,
+.ov-hero-tag,
+.sol-hero-tag,
+.biz-hero-tag,
+.contact-page .contact-hero-tag,
+.careers-page .careers-hero-tag,
+.apply-tag {
+  font-size: var(--t-micro);
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--chdk-cyan) !important;  /* FIX: was rgba(255,255,255,0.7) — poor contrast */
+  margin-bottom: var(--sp-4);
+  display: block;
+}
+
+/* Hero subtitle / border-left accent */
+.hero-slide-stat,
+.ov-hero-sub,
+.sol-hero-sub,
+.biz-hero-subtitle,
+.contact-page .contact-hero-subtitle,
+.careers-page .careers-hero-sub {
+  font-size: clamp(14px, 1.4vw, 16px);
+  font-weight: 400;
+  border-left: 3px solid var(--chdk-accent);   /* FIX: was #fff — use brand */
+  padding-left: var(--sp-4);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Card headings */
+[class$="-card"] h3,
+[class*="-card "] h3,
+.why-line-item h3,
+.apply-benefit-card h4 {
+  font-size: var(--t-card);       /* 20px */
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.2px;
+  color: var(--light);
+}
+
+/* Small caps stat value */
+.ov-stat-num,
+.sol-stat-val,
+.careers-page .careers-stat-value,
+.highlight-number,
+.badge-number {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+  /* Brand gradient text */
+  background: var(--chdk-gradient-h);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Stat labels */
+.ov-stat-lbl,
+.sol-stat-lbl,
+.careers-page .careers-stat-label,
+.highlight-label,
+.badge-text {
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--light-60);
+  line-height: 1.5;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 4 — BUTTON SYSTEM
+   FIX: Mixed border-radius: 30px / 50px / 4px / 50px across pages.
+        Mixed transition patterns: 0.3s / cubic-bezier / bare "0.3s".
+        Brand gradient applied inconsistently.
+        Multiple duplicated .btn-outline definitions (5 separate files).
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── PRIMARY: gradient fill ──────────────────────────────────── */
+.btn-primary,
+.btn-outline,
+.ov-btn-outline,
+.sol-btn-outline,
+.inn-btn-outline,
+.know-more-btn,
+.contact-page .contact-submit-btn,
+.contact-page .contact-btn-outline,
+.careers-page .careers-btn-outline,
+.apply-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 13px 32px;
+  border-radius: var(--radius-xs);      /* FIX: Unified — corporate 4px, not pill */
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  background: var(--chdk-gradient-h);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-base) var(--ease-spring),
+              box-shadow var(--dur-base) var(--ease-inout),
+              opacity var(--dur-base) var(--ease-inout);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer pseudo-element for premium feel */
+.btn-primary::before,
+.btn-outline::before,
+.ov-btn-outline::before,
+.sol-btn-outline::before,
+.inn-btn-outline::before,
+.know-more-btn::before,
+.contact-page .contact-submit-btn::before,
+.contact-page .contact-btn-outline::before,
+.careers-page .careers-btn-outline::before,
+.apply-submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-inout);
+}
+
+.btn-primary:hover,
+.btn-outline:hover,
+.ov-btn-outline:hover,
+.sol-btn-outline:hover,
+.inn-btn-outline:hover,
+.know-more-btn:hover,
+.contact-page .contact-submit-btn:hover,
+.contact-page .contact-btn-outline:hover,
+.careers-page .careers-btn-outline:hover,
+.apply-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md), var(--glow-sky-lg);
+  opacity: 1;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn-primary:hover::before,
+.btn-outline:hover::before,
+.ov-btn-outline:hover::before,
+.sol-btn-outline:hover::before,
+.inn-btn-outline:hover::before,
+.know-more-btn:hover::before,
+.contact-page .contact-submit-btn:hover::before,
+.contact-page .contact-btn-outline:hover::before,
+.careers-page .careers-btn-outline:hover::before,
+.apply-submit-btn:hover::before { opacity: 1; }
+
+.btn-primary:active,
+.btn-outline:active,
+.know-more-btn:active {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── SECONDARY: ghost outline ────────────────────────────────── */
+.btn-ghost,
+.careers-page .careers-know-more-btn,
+.quote-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 11px 26px;
+  border-radius: var(--radius-xs);
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  background: transparent;
+  color: var(--light);
+  border: 1px solid var(--light-20);
+  transition: var(--t-color),
+              transform var(--dur-base) var(--ease-spring),
+              box-shadow var(--dur-base) var(--ease-inout);
+}
+
+.btn-ghost:hover,
+.careers-page .careers-know-more-btn:hover,
+.quote-btn:hover {
+  background: var(--chdk-gradient-h);
+  color: #ffffff;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm), var(--glow-sky);
+  text-decoration: none;
+}
+
+/* ── Apply button (job listings) ─────────────────────────────── */
+.careers-page .careers-apply-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 10px 24px;
+  border-radius: var(--radius-xs);
+  font-size: var(--t-micro);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  background: var(--chdk-gradient-h);
+  color: #fff;
+  border: none;
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--dur-base) var(--ease-spring),
+              box-shadow var(--dur-base) var(--ease-inout);
+}
+
+.careers-page .careers-apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm), var(--glow-sky);
+}
+
+/* ── Filter chips ─────────────────────────────────────────────── */
+.careers-page .careers-filter-chip {
+  padding: 9px 22px;
+  border-radius: var(--radius-xs);   /* FIX: was 30px pill — inconsistent with rest */
+  border: 1px solid var(--light-15);
+  background: transparent;
+  color: var(--light-60);
+  font-size: var(--t-small);
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: var(--t-color);
+}
+
+.careers-page .careers-filter-chip:hover {
+  color: var(--light);
+  border-color: var(--light-40);
+}
+
+.careers-page .careers-filter-chip.active {
+  background: var(--chdk-gradient-h);
+  color: #fff;
+  border-color: transparent;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 5 — CARD SYSTEM
+   FIX: Multiple card types had different padding, radius, shadows.
+        Domain cards: 12px radius. Overview stats: 0 radius. Apply: 14px.
+        Standardized on 4-variant card system.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── Base card — elevated dark panel ─────────────────────────── */
+.card-base,
+.careers-page .careers-why-card,
+.contact-page .contact-form-block,
+.apply-form,
+.apply-benefit-card,
+[class$="-card"][class*="domain"],
+[class*="-why-card"] {
+  background: var(--dark);
+  border: 1px solid var(--light-08);
+  border-radius: var(--radius-sm);    /* 8px */
+  padding: var(--sp-10);
+  transition: background-color var(--dur-slow) var(--ease-inout),
+              border-color var(--dur-slow) var(--ease-inout),
+              box-shadow var(--dur-slow) var(--ease-inout);
+}
+
+/* ── Feature card — glassmorphism for dark sections ──────────── */
+/* (domain cards, solution cards) */
+[class$="-card"]:not(.careers-page .careers-why-card):not(.careers-page .careers-job-card):not(.apply-benefit-card),
+.domain-card,
+[class*="webdev-card"],
+[class*="appdev-card"],
+[class*="seopage-card"],
+[class*="digmkt-card"],
+[class*="scanning-card"],
+[class*="metrology-card"],
+[class*="calibration-card"],
+[class*="jigmould-card"],
+[class*="laser-card"],
+[class*="precmfg-card"],
+[class*="revengg-card"] {
+  background: rgba(18, 18, 18, 0.65);
+  border: 1px solid var(--light-08);
+  border-radius: var(--radius-sm);    /* FIX: was 12px on some, standardized to 8px */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: var(--sp-10);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--dur-slow) var(--ease-spring),
+              box-shadow var(--dur-slow) var(--ease-spring),
+              background-color var(--dur-slow) var(--ease-inout);
+}
+
+/* Card hover — unified lift pattern */
+[class$="-card"]:hover,
+.domain-card:hover,
+.careers-page .careers-why-card:hover,
+.apply-benefit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg), 0 0 0 1px var(--chdk-accent-12);
+  background: rgba(26, 26, 26, 0.85);
+}
+
+/* FIX: Glow line accent (left border on feature cards) */
+.domain-card:hover .domain-glow-line,
+[class*="-card"]:hover [class*="-glow-line"] {
+  background: linear-gradient(to bottom, var(--chdk-sky), var(--chdk-teal)) !important;
+}
+
+/* Card title underline on hover */
+.domain-card:hover h3::after,
+[class*="-card"]:hover h3::after {
+  background: var(--chdk-gradient-h) !important;
+}
+
+/* ── Job card ─────────────────────────────────────────────────── */
+.careers-page .careers-job-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-5);
+  padding: var(--sp-8) var(--sp-10);
+  background: var(--black);
+  border-bottom: 1px solid var(--light-08);
+  transition: background-color var(--dur-base) var(--ease-inout);
+}
+
+.careers-page .careers-job-card:hover {
+  background-color: var(--dark);
+  transform: none;  /* FIX: job cards should not lift — they're table rows */
+  box-shadow: none;
+}
+
+/* FIX: job info shift uses transform not padding */
+.careers-page .careers-job-info {
+  transition: transform var(--dur-base) var(--ease-spring);
+  transform: translateZ(0);
+}
+.careers-page .careers-job-card:hover .careers-job-info {
+  transform: translateX(10px);
+}
+
+/* ── Stats band card ──────────────────────────────────────────── */
+.ov-stat,
+.sol-stat,
+.careers-page .careers-stat-item,
+.highlight-card {
+  padding: var(--sp-8) var(--sp-5);
+  transition: background-color var(--dur-base) var(--ease-inout),
+              border-color var(--dur-base) var(--ease-inout);
+}
+
+.highlight-card {
+  border-left: 2px solid transparent;
+}
+
+.highlight-card:hover {
+  background: var(--dark-2);
+  border-left-color: var(--chdk-accent);
+}
+
+/* ── Highlights grid definition (FIX: was only defined inside @media) */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--light-08);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.highlight-card {
+  background: var(--dark);
+  border-right: 1px solid var(--light-08);
+}
+.highlight-card:last-child { border-right: none; }
+
+@media (max-width: 1100px) { .highlights-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .highlights-grid { grid-template-columns: 1fr; } }
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 6 — FORM SYSTEM
+   FIX: Apply.css uses border-radius: 10px for inputs, 20px for form wrap.
+        Contact uses 4px. Standardized to radius-xs (4px) for inputs.
+   ════════════════════════════════════════════════════════════════════ */
+
+.apply-field input,
+.apply-field textarea,
+.apply-field select,
+.contact-page .contact-field-input,
+.contact-page .contact-field-select,
+.contact-page .contact-field-textarea {
+  background: var(--black);
+  border: 1px solid var(--light-15);
+  border-radius: var(--radius-xs);    /* FIX: was 10px in Apply — unified to 4px */
+  padding: 13px 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--t-body);
+  color: var(--light);
+  outline: none;
+  width: 100%;
+  transition: border-color var(--dur-base) var(--ease-inout),
+              box-shadow var(--dur-base) var(--ease-inout);
+}
+
+.apply-field input::placeholder,
+.apply-field textarea::placeholder,
+.contact-page .contact-field-input::placeholder {
+  color: var(--light-40);
+}
+
+.apply-field input:focus,
+.apply-field textarea:focus,
+.apply-field select:focus,
+.contact-page .contact-field-input:focus,
+.contact-page .contact-field-select:focus,
+.contact-page .contact-field-textarea:focus {
+  border-color: var(--chdk-sky);
+  box-shadow: 0 0 0 3px var(--chdk-accent-12);
+  outline: none;
+}
+
+/* Form wrappers */
+.apply-form {
+  background: var(--dark);
+  border: 1px solid var(--light-08);
+  border-radius: var(--radius-sm);    /* FIX: was 20px — unified */
+  padding: var(--sp-10);
+}
+
+.contact-page .contact-form-block {
+  background: var(--dark);
+  border: 1px solid var(--light-08);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+/* Field labels */
+.apply-field label,
+.contact-page .contact-field-label {
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--light-60);
+  margin-bottom: var(--sp-2);
+  display: block;
+}
+
+/* Contact info icon circles */
+.contact-page .contact-info-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark);
+  border: 1px solid var(--chdk-accent-20);
+  border-radius: 50%;
+  color: var(--chdk-sky);
+  flex-shrink: 0;
+}
+
+/* Office type badge */
+.contact-page .contact-office-type {
+  display: inline-block;
+  font-size: var(--t-micro);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--chdk-cyan);
+  border: 1px solid var(--chdk-accent-20);
+  padding: 6px 14px;
+  border-radius: var(--radius-xs);    /* FIX: was 30px pill — unified */
+  margin-bottom: var(--sp-6);
+}
+
+/* Office card hover */
+.contact-page .contact-office-card {
+  background: var(--black);
+  padding: var(--sp-10);
+  transition: background-color var(--dur-base) var(--ease-inout),
+              border-left var(--dur-base) var(--ease-inout);
+  border-left: 2px solid transparent;
+}
+
+.contact-page .contact-office-card:hover {
+  background: var(--dark);
+  border-left-color: var(--chdk-accent);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 7 — NAVBAR SYSTEM
+   (Enhancements on top of Navbar.css)
+   ════════════════════════════════════════════════════════════════════ */
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  font-family: 'Poppins', sans-serif;
+  background: var(--nav-bg);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  z-index: var(--z-nav);
+  transition: background-color var(--dur-slow) var(--ease-inout),
+              box-shadow var(--dur-slow) var(--ease-inout),
+              border-color var(--dur-slow) var(--ease-inout);
+}
+
+/* FIX: Scrolled state — brand-tinted bottom border */
+.navbar.scrolled {
+  box-shadow: 0 2px 28px rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid var(--chdk-accent-12);
+}
+
+/* FIX: Nav active underline — brand sky instead of plain white */
+.nav-item::after {
+  background: var(--chdk-sky) !important;
+}
+
+/* Mega dropdown section title accent */
+.mega-section h2 {
+  border-bottom: 1px solid rgba(0, 174, 239, 0.18) !important;
+}
+
+/* Mega link hover — brand accent */
+.mega-link:hover,
+.column .mega-link:hover {
+  color: var(--chdk-cyan) !important;
+}
+
+.learn-more-btn:hover::after {
+  background: var(--chdk-accent) !important;
+}
+
+/* Mobile submenu hover */
+.mobile-submenu-link:hover {
+  color: var(--chdk-sky) !important;
+  background: var(--chdk-accent-08) !important;
+}
+
+/* Mobile quote button gradient hover */
+.mobile-quote-btn:hover {
+  background: var(--chdk-gradient-h) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 8 — HERO SYSTEM
+   (Shared hero styles referenced across all page heroes)
+   ════════════════════════════════════════════════════════════════════ */
+
+/* FIX: Hero progress bar — brand accent */
+.hero-progress-bar {
+  background: var(--chdk-gradient-h) !important;
+}
+
+/* FIX: Hero dot nav — active dot brand glow */
+.hero-panel-item.active::after {
+  background: var(--chdk-sky) !important;
+  box-shadow: 0 0 8px var(--chdk-accent-35) !important;
+}
+
+/* FIX: Chevron scroll — brand teal hover */
+.hero-scroll-chevrons:hover .chevron polyline {
+  stroke: var(--chdk-sky) !important;
+  transition: stroke var(--dur-base) var(--ease-inout);
+}
+
+/* Tata-style scroll arrow */
+.tata-scroll-arrow {
+  position: absolute;
+  bottom: 40px;
+  left: 5%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  z-index: 30;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background-color var(--dur-base) var(--ease-spring),
+              border-color var(--dur-base) var(--ease-spring),
+              box-shadow var(--dur-base) var(--ease-inout);
+}
+
+.tata-scroll-arrow svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.2;
+  animation: elegantFloat 3s infinite cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
+}
+
+.tata-scroll-arrow:hover {
+  background-color: var(--chdk-sky);
+  border-color: var(--chdk-sky);
+  color: #000;
+  box-shadow: var(--glow-sky-lg);
+}
+
+.tata-scroll-arrow:hover svg {
+  animation-play-state: paused;
+  transform: translateY(3px);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 9 — SECTION SYSTEM
+   FIX: Section padding was 70px / 100px / 120px / 130px with no system.
+        All section paddings now use the spacing scale tokens.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Standard sections */
+.about-section,
+.why-section,
+.clients-section,
+.highlights-section,
+.premium-accordion-section,
+.business-section,
+.gallery-section {
+  padding-top: var(--section-md);
+  padding-bottom: var(--section-md);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Large sections */
+.careers-page .careers-whyjoin-section,
+.careers-page .careers-jobs-section,
+.contact-page .contact-main,
+.contact-page .contact-offices-section,
+.sol-intro,
+.sol-categories,
+.apply-form-section {
+  padding-top: var(--section-lg);
+  padding-bottom: var(--section-lg);
+}
+
+/* Standard container */
+.container,
+.overview-container,
+.sol-container,
+.innovation-container,
+.advisory-container,
+.gallery-container,
+.careers-page .careers-container,
+.contact-page .contact-container,
+.apply-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+/* FIX: Section label — accent underline decoration */
+.section-label::after,
+.sol-label::after,
+.overview-label::after,
+.inn-label::after,
+.adv-label::after {
+  display: none;  /* Clean — no decorations that weren't there before */
+}
+
+/* Accent left border on hero subtitles — brand teal */
+.hero-slide-stat,
+.ov-hero-sub,
+.sol-hero-sub,
+.biz-hero-subtitle,
+.contact-page .contact-hero-subtitle,
+.careers-page .careers-hero-sub {
+  border-left-color: var(--chdk-accent);
+}
+
+/* Section label accent color (override) */
+.section-label,
+.sol-label,
+.overview-label,
+.inn-label,
+.adv-label,
+.contact-page .contact-section-label,
+.careers-page .careers-section-label,
+.apply-section-label {
+  color: var(--chdk-cyan) !important;
+}
+
+/* About experience badge */
+.about-experience-badge {
+  border-left: 3px solid var(--chdk-accent);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Why section big text */
+.why-big span {
+  color: var(--chdk-cyan) !important;
+  opacity: 1 !important;
+}
+
+/* Events nav buttons */
+.events-nav-btn:hover {
+  background: var(--chdk-gradient-h) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: var(--glow-sky) !important;
+}
+
+/* Events photo card border */
+.event-photo-card {
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: border-color var(--dur-slow) var(--ease-inout);
+}
+.event-photo-card:hover {
+  border-color: var(--chdk-accent-20);
+}
+
+/* Process steps */
+[class*="-process-step"]:hover {
+  border-left-color: var(--chdk-accent) !important;
+}
+[class*="-process-step"]:hover [class*="-process-number"] {
+  color: var(--chdk-sky) !important;
+}
+
+/* Why hover */
+.why-line-item:hover h3 {
+  color: var(--chdk-sky) !important;
+}
+
+/* Solution link */
+.solution-link:hover {
+  color: var(--chdk-sky) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 10 — FOOTER SYSTEM
+   FIX: Pre-footer CTA and site footer were duplicated in 5 files.
+        All page-specific footer overrides now harmonized here.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Pre-footer CTA — shared across all pages */
+.pre-footer-cta,
+.ov-pre-footer-cta,
+.sol-pre-footer-cta,
+.inn-pre-footer-cta,
+.contact-page .contact-pre-footer-cta,
+.careers-page .careers-pre-footer-cta {
+  background-color: var(--dark);
+  padding: var(--section-md) 20px;
+  text-align: center;
+  border-top: 1px solid var(--chdk-accent-12);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle brand sweep at top of CTA */
+.pre-footer-cta::before,
+.ov-pre-footer-cta::before,
+.sol-pre-footer-cta::before,
+.inn-pre-footer-cta::before,
+.contact-page .contact-pre-footer-cta::before,
+.careers-page .careers-pre-footer-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--chdk-sky), transparent);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* CTA content */
+.cta-content,
+.ov-cta-content,
+.sol-cta-content,
+.inn-cta-content,
+.contact-page .contact-cta-content,
+.careers-page .careers-cta-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* FIX: CTA heading standardized across all CTA sections */
+.cta-content h2,
+.ov-cta-content h2,
+.sol-cta-content h2,
+.inn-cta-content h2,
+.contact-page .contact-cta-content h2,
+.careers-page .careers-cta-content h2 {
+  font-size: clamp(28px, 4vw, 46px);  /* FIX: was 3.3rem in Footer, 36px in pages */
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: var(--light);
+  margin-bottom: var(--sp-5);
+}
+
+.cta-content p,
+.ov-cta-content p,
+.sol-cta-content p,
+.inn-cta-content p,
+.contact-page .contact-cta-content p,
+.careers-page .careers-cta-content p {
+  font-size: var(--t-body);
+  color: var(--light-60);
+  line-height: 1.75;
+  margin-bottom: var(--sp-10);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Site footer */
+.site-footer,
+.ov-site-footer,
+.sol-site-footer,
+.inn-site-footer,
+.contact-page .contact-site-footer,
+.careers-page .careers-site-footer {
+  background-color: var(--black);
+  padding: var(--sp-12) var(--sp-10);
+  border-top: 1px solid var(--chdk-accent-12);
+}
+
+.footer-links a:hover,
+.ov-footer-links a:hover,
+.sol-footer-links a:hover,
+.careers-page .careers-footer-links a:hover {
+  color: var(--chdk-sky) !important;
+  text-decoration: none;
+}
+
+/* Light mode footer */
+body:not(.dark-mode) .pre-footer-cta,
+body:not(.dark-mode) .ov-pre-footer-cta,
+body:not(.dark-mode) .sol-pre-footer-cta,
+body:not(.dark-mode) .inn-pre-footer-cta,
+body:not(.dark-mode) .contact-page .contact-pre-footer-cta,
+body:not(.dark-mode) .careers-page .careers-pre-footer-cta {
+  background: #EEF2F7;
+}
+
+body:not(.dark-mode) .cta-content h2,
+body:not(.dark-mode) .ov-cta-content h2 { color: #0B1F3A; }
+body:not(.dark-mode) .cta-content p,
+body:not(.dark-mode) .ov-cta-content p { color: rgba(11,31,58,0.60); }
+
+body:not(.dark-mode) .site-footer,
+body:not(.dark-mode) .ov-site-footer { background-color: #0B1F3A; }
+
+body:not(.dark-mode) .footer-links a,
+body:not(.dark-mode) .ov-footer-links a,
+body:not(.dark-mode) .careers-page .careers-footer-links a { color: rgba(255,255,255,0.82); }
+body:not(.dark-mode) .copyright-text,
+body:not(.dark-mode) .ov-copyright { color: rgba(255,255,255,0.50); }
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 11 — ANIMATION / SCROLL REVEAL SYSTEM
+   FIX: ov-animate (0.7s), inn-animate (0.65s), adv-animate (0.65s),
+        sol-animate (0.7s) — all different durations with same purpose.
+        Standardized on 0.68s with spring easing.
+   ════════════════════════════════════════════════════════════════════ */
+
+.ov-animate,
+.sol-animate,
+.inn-animate,
+.adv-animate {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-reveal) var(--ease-spring),
+              transform var(--dur-reveal) var(--ease-spring);
+}
+
+.ov-animate.visible,
+.sol-animate.visible,
+.inn-animate.visible,
+.adv-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays */
+.ov-animate:nth-child(2),  .sol-animate:nth-child(2),
+.inn-animate:nth-child(2), .adv-animate:nth-child(2) { transition-delay: 0.08s; }
+.ov-animate:nth-child(3),  .sol-animate:nth-child(3),
+.inn-animate:nth-child(3), .adv-animate:nth-child(3) { transition-delay: 0.16s; }
+.ov-animate:nth-child(4),  .sol-animate:nth-child(4),
+.inn-animate:nth-child(4), .adv-animate:nth-child(4) { transition-delay: 0.24s; }
+.ov-animate:nth-child(5),  .sol-animate:nth-child(5),
+.inn-animate:nth-child(5), .adv-animate:nth-child(5) { transition-delay: 0.32s; }
+.ov-animate:nth-child(6),  .sol-animate:nth-child(6),
+.inn-animate:nth-child(6), .adv-animate:nth-child(6) { transition-delay: 0.40s; }
+
+/* Gallery section reveal */
+.gallery-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-reveal) var(--ease-spring),
+              transform var(--dur-reveal) var(--ease-spring);
+}
+.gallery-section.highlights-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 12 — STATS BANDS
+   FIX: Stats numbers not using brand gradient. Standardized here.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Stat bands — shared structure */
+.ov-stats-band,
+.sol-stats-band,
+.careers-page .careers-stats-strip {
+  background: var(--dark);
+  border-top: 1px solid var(--chdk-accent-12);
+  border-bottom: 1px solid var(--chdk-accent-12);
+}
+
+/* Vertical dividers */
+.ov-stat,
+.sol-stat,
+.careers-page .careers-stat-item {
+  border-right-color: var(--chdk-accent-12) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 13 — LEGAL PAGES
+   ════════════════════════════════════════════════════════════════════ */
+
+.legal-page {
+  background: var(--black);
+  color: var(--light);
+  min-height: 100vh;
+  padding: 140px 0 100px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.legal-container {
+  width: min(1100px, 92%);
+  margin: auto;
+}
+
+.legal-title {
+  font-size: var(--t-page);
+  margin-bottom: var(--sp-5);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.legal-updated {
+  color: var(--light-60);
+  margin-bottom: var(--sp-16);
+  font-size: var(--t-small);
+}
+
+.legal-section {
+  margin-bottom: var(--sp-12);
+}
+
+.legal-section h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: var(--sp-4);
+  color: var(--light);
+}
+
+.legal-section p,
+.legal-section li {
+  color: var(--light-60);
+  line-height: 1.9;
+  font-size: var(--t-body);
+}
+
+.legal-section ul {
+  padding-left: var(--sp-5);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 14 — CLIENT MARQUEE — FADE FIXES
+   FIX: Fade edges needed exact page background color to dissolve.
+   ════════════════════════════════════════════════════════════════════ */
+
+body.dark-mode .clients-fade-left {
+  background: linear-gradient(to right, var(--black), transparent) !important;
+}
+body.dark-mode .clients-fade-right {
+  background: linear-gradient(to left,  var(--black), transparent) !important;
+}
+body:not(.dark-mode) .clients-fade-left {
+  background: linear-gradient(to right, #F4F8FB, transparent) !important;
+}
+body:not(.dark-mode) .clients-fade-right {
+  background: linear-gradient(to left,  #F4F8FB, transparent) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 15 — LIGHT MODE — GLOBAL TEXT CONTRAST
+   FIX: In light mode, --light: #1f1f1f was near-black — functional but
+        bland. Using brand navy #0B1F3A as primary text for premium feel.
+   ════════════════════════════════════════════════════════════════════ */
+
+body:not(.dark-mode) {
+  color: #0B1F3A;
+  background-color: #F4F8FB;
+}
+
+body:not(.dark-mode) .section-heading,
+body:not(.dark-mode) .overview-heading,
+body:not(.dark-mode) .sol-heading,
+body:not(.dark-mode) .inn-heading,
+body:not(.dark-mode) .adv-heading,
+body:not(.dark-mode) [class*="-section-heading"] {
+  color: #0B1F3A !important;
+}
+
+body:not(.dark-mode) .section-description,
+body:not(.dark-mode) .why-line-item p,
+body:not(.dark-mode) .events-tagline,
+body:not(.dark-mode) [class*="-section-desc"] {
+  color: rgba(11,31,58,0.62) !important;
+}
+
+body:not(.dark-mode) .why-big {
+  color: #0B1F3A !important;
+}
+
+body:not(.dark-mode) .domain-card h3 { color: #0B1F3A !important; }
+body:not(.dark-mode) .domain-card p  { color: rgba(11,31,58,0.62) !important; }
+
+body:not(.dark-mode) .contact-page .contact-form-block {
+  background: #ffffff !important;
+  border-color: rgba(11,31,58,0.08) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+body:not(.dark-mode) .contact-page .contact-field-input,
+body:not(.dark-mode) .contact-page .contact-field-select {
+  background: #F4F8FB !important;
+  border-color: rgba(11,31,58,0.12) !important;
+  color: #0B1F3A !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 16 — SEARCH MODAL
+   ════════════════════════════════════════════════════════════════════ */
+
+/* FIX: Search input focus — brand accent */
+[class*="search"] input:focus,
+[class*="search-input"]:focus {
+  border-bottom-color: var(--chdk-sky) !important;
+  outline: none !important;
+}
+
+/* FIX: Search result hover — brand accent */
+[class*="search-result"]:hover {
+  color: var(--chdk-sky) !important;
+  border-left-color: var(--chdk-accent) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 17 — ACCESSIBILITY POLISH
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Visually hidden (screen reader utility) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip to main content */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: var(--z-toast);
+  padding: 8px 16px;
+  background: var(--chdk-sky);
+  color: #000;
+  font-size: var(--t-small);
+  font-weight: 600;
+  border-radius: var(--radius-xs);
+  transition: top var(--dur-fast) var(--ease-out);
+}
+.skip-link:focus { top: 16px; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 18 — RESPONSIVE SYSTEM
+   FIX: Inconsistent breakpoints mixed px/em. Standardized to px.
+        Section paddings use clamp() tokens — no media query needed.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Containers */
+@media (max-width: 1280px) {
+  .navbar { padding: 0 40px; }
+}
+
+@media (max-width: 1024px) {
+  .navbar { padding: 0 32px; }
+  .about-intro-grid { grid-template-columns: 1fr; gap: 56px; }
+  .sol-intro-grid   { grid-template-columns: 1fr; gap: 56px; }
+  .apply-form-wrapper { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 900px) {
+  .navbar { padding: 0 20px; }
+  .why-split { grid-template-columns: 1fr; gap: 32px; }
+  .careers-page .careers-whyjoin-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-page .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 768px) {
+  .hero-slide-content {
+    left: 4%;
+    bottom: 90px;
+    max-width: 92%;
+  }
+  .premium-accordion-section { padding: 40px 10px; }
+  .events-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .careers-page .careers-why-cards-grid { grid-template-columns: 1fr; }
+  .contact-page .contact-offices-grid { grid-template-columns: 1fr; }
+  .apply-grid { grid-template-columns: 1fr; }
+  .full-width { grid-column: span 1; }
+}
+
+@media (max-width: 600px) {
+  .about-section, .why-section { padding-left: 16px; padding-right: 16px; }
+  .apply-form { padding: 24px; }
+  .careers-page .careers-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .careers-page .careers-job-card { padding: 20px; flex-direction: column; align-items: flex-start; }
+  .footer-links { flex-direction: column; align-items: center; gap: 12px; }
+  .footer-container { flex-direction: column; text-align: center; }
+  .footer-links-wrapper { padding: 20px 0; }
+  .cta-content h2, .ov-cta-content h2 { font-size: 1.8rem; }
+  .site-footer, .ov-site-footer { padding: 40px 20px; }
+}
+
+@media (max-width: 480px) {
+  .hero-slide-title { font-size: clamp(32px, 9vw, 48px); }
+  .hero-panel { width: 28px; }
+  .about-experience-badge { right: 10px; bottom: -20px; padding: 14px 18px; }
+  .premium-accordion-wrapper {
+    height: 420px;
+    grid-template-columns: 3fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+  }
+  .premium-title { font-size: 1.5rem; }
+  .premium-desc { display: none; }
+  .premium-content-active { left: 16px; bottom: 16px; }
+  .careers-page .careers-apply-btn { width: 100%; justify-content: center; }
+  .know-more-btn { width: 100%; justify-content: center; }
+}
+
+/* Ultra-wide */
+@media (min-width: 1600px) {
+  .container,
+  .overview-container,
+  .sol-container { max-width: 1400px; }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   LAYER 19 — UTILITY CLASSES (Reusable Tailwind-style patterns)
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── Flex utilities ──────────────────────────────────────────── */
+.u-flex         { display: flex; }
+.u-flex-center  { display: flex; align-items: center; justify-content: center; }
+.u-flex-between { display: flex; align-items: center; justify-content: space-between; }
+.u-flex-col     { display: flex; flex-direction: column; }
+.u-flex-wrap    { flex-wrap: wrap; }
+
+/* ── Grid utilities ──────────────────────────────────────────── */
+.u-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-8); }
+.u-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-8); }
+.u-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-8); }
+
+@media (max-width: 768px) {
+  .u-grid-3, .u-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .u-grid-2, .u-grid-3, .u-grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Spacing utilities ───────────────────────────────────────── */
+.u-mt-section  { margin-top:    var(--section-md); }
+.u-mb-section  { margin-bottom: var(--section-md); }
+.u-pt-section  { padding-top:   var(--section-md); }
+.u-pb-section  { padding-bottom: var(--section-md); }
+.u-mb-heading  { margin-bottom: var(--sp-6); }
+.u-mb-desc     { margin-bottom: var(--sp-5); }
+
+/* ── Text utilities ──────────────────────────────────────────── */
+.u-text-center   { text-align: center; }
+.u-text-label    { font-size: var(--t-micro); font-weight: 500; letter-spacing: 3.5px; text-transform: uppercase; color: var(--chdk-cyan); }
+.u-text-muted    { color: var(--light-60); }
+.u-text-accent   { color: var(--chdk-sky); }
+.u-text-gradient { background: var(--chdk-gradient-h); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* ── Surface utilities ───────────────────────────────────────── */
+.u-surface      { background: var(--dark); border: 1px solid var(--light-08); border-radius: var(--radius-sm); }
+.u-surface-card { background: var(--dark); border: 1px solid var(--light-08); border-radius: var(--radius-sm); padding: var(--sp-10); }
+.u-glass        { background: rgba(18,18,18,0.65); border: 1px solid var(--light-08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.u-brand-border { border: 1px solid var(--chdk-accent-12); }
+.u-brand-top    { border-top: 1px solid var(--chdk-accent-12); }
+
+/* ── Dividers ────────────────────────────────────────────────── */
+.u-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--light-08);
+  margin: var(--sp-8) 0;
+}
+.u-divider-brand {
+  width: 40px;
+  height: 2px;
+  background: var(--chdk-gradient-h);
+  border-radius: 1px;
+  margin-bottom: var(--sp-6);
+}
+
+/* ── Visibility ──────────────────────────────────────────────── */
+.u-animate-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-reveal) var(--ease-spring),
+              transform var(--dur-reveal) var(--ease-spring);
+}
+.u-animate-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Override style.css's font-family */
+body {
+  font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif !important;
+  background: var(--black) !important;
+}
+
+body.dark-mode {
+  background-color: #010101 !important;
+}
+
+/* Override style.css's .navbar overriding Navbar.css */
+.navbar {
+  background: var(--nav-bg) !important;
+}
+
+/* Override style.css's .card border-radius to use design token */
+.card {
+  border-radius: var(--radius-sm) !important;
+}
+
+/*
+   --chdk-sky    #00AEEF  
+   --chdk-teal   #1B8C8C  
+   --chdk-navy   #1A3A8A  
+   --chdk-cyan   #5AC8FA  
+   --black       #010101  
+   --dark        #111111 
+   --light       #efefef  
+
+   
+   Hero:    clamp(44px, 6.5vw, 76px)  w700 ls:-1px
+   Page:    clamp(38px, 5vw,   64px)  w700 ls:-1px
+   Section: clamp(30px, 4vw,   52px)  w600 ls:-0.4px
+   Card:    20px                       w600
+   Body:    15px                       w400 lh:1.85
+   Small:   13px                       w400/500
+   Micro:   11px                       w500 ls:3.5px
+
+   SPACING
+   ───────
+   --section-sm  clamp(56px, 8vw,  80px)
+   --section-md  clamp(72px, 10vw, 104px)
+   --section-lg  clamp(88px, 12vw, 128px)
+
+   RADIUS
+   ──────
+   --radius-xs    4px   inputs, tags, chips, CTAs
+   --radius-sm    8px   cards, panels
+   --radius-md   12px   large cards
+   --radius-lg   20px   hero cards
+   --radius-pill 999px  social icons
+
+   SHADOWS
+   ───────
+   --shadow-xs  subtle
+   --shadow-sm  card default
+   --shadow-md  card hover
+   --shadow-lg  modals / prominent
+   --shadow-xl  hero elements
+   --shadow-2xl full-screen overlays
+   --glow-sky   brand blue glow (CTAs)
+
+   ANIMATIONS
+   ──────────
+   --dur-fast    150ms
+   --dur-base    250ms
+   --dur-slow    400ms
+   --dur-reveal  700ms
+   --ease-spring cubic-bezier(0.16, 1, 0.3, 1)
+   --ease-inout  cubic-bezier(0.4, 0, 0.2, 1)
+   --ease-back   cubic-bezier(0.34, 1.56, 0.64, 1)
+*/

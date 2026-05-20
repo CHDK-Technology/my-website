@@ -1,0 +1,321 @@
+/* =========================================================
+   GLOBAL DESIGN SYSTEM
+========================================================= */
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+
+  /* COLORS */
+  --bg-primary: #050505;
+  --bg-secondary: #101010;
+  --bg-card: rgba(255,255,255,0.04);
+
+  --text-primary: #f5f7fa;
+  --text-secondary: rgba(245,247,250,0.78);
+  --text-muted: rgba(245,247,250,0.52);
+
+  --border-color: rgba(255,255,255,0.08);
+
+  /* BRAND */
+  --accent-primary: #00AEEF;
+  --accent-secondary: #1B8C8C;
+  --accent-gradient:
+    linear-gradient(
+      135deg,
+      #1A3A8A 0%,
+      #1B8C8C 50%,
+      #00AEEF 100%
+    );
+
+  /* TYPOGRAPHY */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* SHADOWS */
+  --shadow-sm:
+    0 2px 8px rgba(0,0,0,0.12);
+
+  --shadow-md:
+    0 8px 24px rgba(0,0,0,0.18);
+
+  --shadow-lg:
+    0 20px 50px rgba(0,0,0,0.28);
+
+  /* RADIUS */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  /* TRANSITIONS */
+  --transition-fast: 0.25s ease;
+  --transition-normal: 0.4s ease;
+
+  /* SPACING */
+  --container-width: 1280px;
+}
+
+
+/* LIGHT MODE */
+
+body.light-mode {
+  --bg-primary: #eef2f7;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255,255,255,0.75);
+
+  --text-primary: #101010;
+  --text-secondary: rgba(16,16,16,0.82);
+  --text-muted: rgba(16,16,16,0.52);
+
+  --border-color: rgba(16,16,16,0.08);
+}
+
+/* RESET */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* BODY */
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  transition:
+    background var(--transition-normal),
+    color var(--transition-normal);
+}
+
+/* TYPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+p,
+li,
+span,
+a {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* LINKS */
+
+a {
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+/* IMAGES */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* SELECTION */
+
+::selection {
+  background: rgba(0,174,239,0.3);
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+
+/* IMPROVEMENT: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ════════════════════════════════════════
+   GLOBAL LIGHT MODE TYPOGRAPHY FIX
+════════════════════════════════════════ */
+
+body.light-mode p,
+body.light-mode .section-description,
+body.light-mode .hero-slide-stat,
+body.light-mode .why-card p,
+body.light-mode .accordion-description,
+body.light-mode .mega-link,
+body.light-mode .column .mega-link,
+body.light-mode .cta-content p,
+body.light-mode .news-card p,
+body.light-mode .footer-links a,
+body.light-mode .mobile-submenu-link {
+  color: rgba(16,16,16,0.82) !important;
+}
+
+/* Stronger headings */
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode .section-heading,
+body.light-mode .why-big,
+body.light-mode .accordion-title {
+  color: #111111 !important;
+}
+
+/* Improve readability */
+body.light-mode p,
+body.light-mode .section-description,
+body.light-mode .why-card p,
+body.light-mode .cta-content p {
+  line-height: 1.85;
+}
+
+/* Softer secondary labels */
+body.light-mode .section-label,
+body.light-mode .mega-heading {
+  color: rgba(16,16,16,0.55) !important;
+}
+
+/* ════════════════════════════════════════
+   GLOBAL LIGHT MODE COLOR SYSTEM
+   Fixes washed-out text across entire website
+════════════════════════════════════════ */
+
+body.light-mode {
+
+  /* PRIMARY TEXT */
+  --light: #111111;
+
+  /* SECONDARY TEXT */
+  --light-60: rgba(17,17,17,0.82);
+
+  /* SUBTLE TEXT */
+  --light-15: rgba(17,17,17,0.12);
+
+  /* SURFACE COLORS */
+  --black: #eef2f7;
+  --dark: #eef2f7;
+}
+
+/* GLOBAL TEXT READABILITY */
+body.light-mode p,
+body.light-mode li,
+body.light-mode span,
+body.light-mode .mega-link,
+body.light-mode .mobile-submenu-link,
+body.light-mode .section-description,
+body.light-mode .accordion-description,
+body.light-mode .hero-slide-stat,
+body.light-mode .why-card p,
+body.light-mode .cta-content p {
+  color: var(--light-60) !important;
+}
+
+/* HEADINGS */
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode .section-heading,
+body.light-mode .accordion-title,
+body.light-mode .why-big {
+  color: var(--light) !important;
+}
+
+/* LABELS */
+body.light-mode .section-label,
+body.light-mode .mega-heading {
+  color: rgba(17,17,17,0.55) !important;
+}
+
+/* BETTER TYPOGRAPHY RHYTHM */
+body.light-mode p,
+body.light-mode .section-description,
+body.light-mode .accordion-description,
+body.light-mode .why-card p {
+  line-height: 1.85;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  background: #050505;
+}
+
+/* CRITICAL FIX */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* PREVENT ALL LAYOUT OVERFLOW */
+.home,
+.hero-slider-root,
+.premium-accordion-section,
+.highlights-section,
+.clients-section,
+.why-section {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* SWIPER FIX */
+.swiper,
+.swiper-wrapper,
+.swiper-slide {
+  max-width: 100%;
+}
+
+/* IMAGE SAFETY */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  overflow-x: clip !important;
+}
+

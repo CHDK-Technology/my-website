@@ -8,7 +8,7 @@ uploads/
 .env
 build/
 dist/
-.zip
+*.zip
 # Created by https://www.toptal.com/developers/gitignore/api/node,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,react
 
@@ -171,5 +171,3 @@ desktop.ini
 Thumbs.db
 .DS_Store
 
-echo backend/.env >> .gitignore
-echo *.zip >> .gitignore

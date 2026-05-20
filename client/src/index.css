@@ -1,0 +1,129 @@
+/* ===== GLOBAL RESET ONLY ===== */
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #050505;
+}
+
+/* Box sizing */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ===== GLOBAL TYPOGRAPHY ===== */
+
+body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #efefef;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===== GLOBAL READABILITY IMPROVEMENT ===== */
+
+p,
+li,
+.section-description,
+.hero-slide-stat,
+.accordion-description,
+.why-card p,
+.cta-content p,
+.mega-link,
+.footer-links a,
+.highlight-desc {
+  font-size: 18px !important;
+  line-height: 1.9 !important;
+  letter-spacing: 0.01em;
+}
+.section-description,
+.why-card p,
+.cta-content p {
+  margin-bottom: 18px;
+}
+/* ===== GLOBAL CARD VISIBILITY IMPROVEMENT ===== */
+
+.why-card,
+.highlight-card,
+.news-card,
+.cta-card,
+.event-photo-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Better hover feel */
+
+.why-card:hover,
+.highlight-card:hover,
+.news-card:hover,
+.cta-card:hover,
+.event-photo-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(255,255,255,0.10);
+  box-shadow:
+  0 14px 40px rgba(0,0,0,0.32);
+}
+
+/* Better text visibility */
+
+.why-card p,
+.highlight-desc,
+.news-card p,
+.cta-card p {
+  color: rgba(255,255,255,0.92) !important;
+}
+/* ===== LIGHT MODE CARD FIX ===== */
+
+body.light-mode .why-card,
+body.light-mode .highlight-card,
+body.light-mode .news-card,
+body.light-mode .cta-card,
+body.light-mode .event-photo-card {
+
+  background: rgba(255,255,255,0.92) !important;
+
+  border: 1px solid rgba(20,20,20,0.08) !important;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.06);
+
+  backdrop-filter: blur(12px);
+}
+
+/* Light mode paragraph visibility */
+
+body.light-mode .why-card p,
+body.light-mode .highlight-desc,
+body.light-mode .news-card p,
+body.light-mode .cta-card p {
+
+  color: rgba(20,20,20,0.78) !important;
+}
+
+/* Light mode heading visibility */
+
+body.light-mode .why-card h3,
+body.light-mode .highlight-card h3,
+body.light-mode .news-card h3 {
+
+  color: #101010 !important;
+}
