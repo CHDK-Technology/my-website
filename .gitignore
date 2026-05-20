@@ -4,6 +4,7 @@ node_modules/
 .tmp.drivedownload/
 .vscode/
 desktop.ini
+uploads/
 .env
 build/
 dist/
