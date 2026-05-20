@@ -170,3 +170,6 @@ sketch
 desktop.ini
 Thumbs.db
 .DS_Store
+
+echo backend/.env >> .gitignore
+echo *.zip >> .gitignore
