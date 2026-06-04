@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecosaras — Product Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     CONFIG you may edit lives in the <script> at the bottom:
+       • API_KEY   – your Google Drive API key  (REQUIRED for live sync)
+       • FOLDER_ID – the catalogue folder (already filled in)
+       • CURATED   – nice names / descriptions / categories
+     Colours are the CSS variables right below.
+     ============================================================ */
+  :root{
+    --ink:#10241a;--ink-soft:#2f4438;--paper:#f6f2e9;--paper-2:#fffdf8;--card:#fffefb;
+    --line:#d9d2c2;--solar:#e8941c;--solar-deep:#c9760a;--leaf:#3f8a52;--muted:#6f7a70;
+    --shadow:0 1px 2px rgba(16,36,26,.04),0 12px 30px -12px rgba(16,36,26,.18);
+    --display:'Bricolage Grotesque',sans-serif;--body:'Hanken Grotesk',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;position:relative}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  header.topbar{position:sticky;top:0;z-index:50;background:rgba(246,242,233,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
+  .brand .mark{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--solar),var(--leaf));color:#fff;font-size:.95rem;box-shadow:0 4px 10px -3px rgba(232,148,28,.5)}
+  /* ---- YOUR PNG LOGO ---- size & position handled here; just drop the file in. */
+  .brand .logo-img{height:40px;width:auto;max-width:170px;object-fit:contain;display:block}
+  footer .brand .logo-img{height:48px;max-width:200px}
+  @media(max-width:680px){.brand .logo-img{height:34px;max-width:140px}}
+  .topbar nav{display:flex;gap:26px;font-size:.93rem;font-weight:500}
+  .topbar nav a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+  .topbar nav a:hover{color:var(--solar-deep)}
+  @media(max-width:680px){.topbar nav{display:none}}
+
+  .hero{padding:88px 0 56px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-140px;top:-80px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(232,148,28,.22),rgba(63,138,82,.06) 60%,transparent 72%);z-index:0}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--solar-deep);margin-bottom:22px}
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--solar)}
+  h1.title{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:.98;font-size:clamp(2.9rem,7vw,5.6rem);max-width:14ch}
+  h1.title em{font-style:normal;color:var(--leaf)}
+  .lede{margin-top:26px;max-width:54ch;font-size:1.12rem;color:var(--ink-soft)}
+  .cta-row{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:999px;font-weight:600;font-size:.98rem;text-decoration:none;cursor:pointer;border:1.5px solid transparent;transition:.22s}
+  .btn-primary{background:var(--ink);color:var(--paper-2)}
+  .btn-primary:hover{background:#06140d;transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper-2)}
+  .btn svg{width:17px;height:17px}
+  .stats{margin-top:50px;display:flex;gap:46px;flex-wrap:wrap}
+  .stat .n{font-family:var(--display);font-weight:800;font-size:2.1rem;line-height:1;color:var(--ink)}
+  .stat .l{font-size:.82rem;color:var(--muted);margin-top:6px;letter-spacing:.02em}
+
+  /* status / setup banner */
+  .banner{border-radius:14px;padding:16px 18px;margin:0 0 8px;font-size:.9rem;display:flex;gap:12px;align-items:flex-start}
+  .banner b{font-weight:700}
+  .banner.warn{background:#fff4e2;border:1px solid #f3d7a6;color:#7a4d09}
+  .banner.live{background:#e9f3ec;border:1px solid #bcdcc4;color:#23502f}
+  .banner.err{background:#fbeceb;border:1px solid #eccac6;color:#7a2d24}
+  .banner .dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none}
+  .banner.live .dot{background:#3f8a52;box-shadow:0 0 0 4px rgba(63,138,82,.18)}
+  .banner.warn .dot{background:#e8941c}
+  .banner.err .dot{background:#cf4a3c}
+  .banner code{background:rgba(0,0,0,.06);padding:1px 6px;border-radius:5px;font-size:.85em}
+
+  .filter-sec{padding:18px 0 4px}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+  .section-head h2{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.2vw,2.4rem);letter-spacing:-.02em}
+  .section-head p{color:var(--muted);font-size:.95rem;max-width:42ch}
+  .filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px}
+  .chip{padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper-2);font-size:.88rem;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.18s}
+  .chip:hover{border-color:var(--ink-soft)}
+  .chip.active{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+  .chip .c{opacity:.6;font-weight:600;margin-left:5px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;padding-bottom:30px;min-height:120px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+  .card:hover{transform:translateY(-6px);box-shadow:0 1px 2px rgba(16,36,26,.05),0 26px 46px -18px rgba(16,36,26,.32)}
+  .thumb{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#eef0e8,#e6e2d4);overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:3rem;color:#fff;background:linear-gradient(135deg,var(--leaf),var(--ink));letter-spacing:-.02em}
+  .tag{position:absolute;top:12px;left:12px;z-index:2;padding:5px 11px;border-radius:999px;background:rgba(255,253,248,.92);backdrop-filter:blur(4px);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--solar-deep)}
+  .tag.new{color:#fff;background:var(--leaf)}
+  .card-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+  .card-body h3{font-family:var(--display);font-weight:600;font-size:1.18rem;letter-spacing:-.01em;line-height:1.2}
+  .card-body p{margin-top:9px;font-size:.92rem;color:var(--muted);flex:1}
+  .more{margin-top:18px;display:inline-flex;align-items:center;gap:7px;align-self:flex-start;font-weight:700;font-size:.9rem;color:var(--ink);text-decoration:none;position:relative;padding-bottom:3px}
+  .more::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--solar);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+  .more:hover::after{transform:scaleX(1)}
+  .more svg{width:15px;height:15px;transition:transform .2s}
+  .more:hover svg{transform:translateX(3px)}
+  .loading{grid-column:1/-1;display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.95rem;padding:30px 0}
+  .spin{width:18px;height:18px;border:2.5px solid var(--line);border-top-color:var(--solar);border-radius:50%;animation:sp .8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  footer{margin-top:50px;background:var(--ink);color:#cdd6cd;padding:56px 0 40px}
+  footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  footer .brand{color:#fff}
+  footer h4{color:#fff;font-family:var(--display);font-size:1.1rem;margin-bottom:6px}
+  footer p{font-size:.9rem;max-width:34ch}
+  footer .note{font-size:.78rem;color:#8a978c;margin-top:26px;width:100%;border-top:1px solid #25362c;padding-top:18px}
+  footer a{color:var(--solar);text-decoration:none}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <!-- LOGO: put your file named  logo.png  in the SAME folder as this HTML.
+         Size/position is already handled in CSS (.brand .logo-img). If your logo
+         image already includes the company name, delete the word Ecosaras after the <img>. -->
+    <a class="brand" href="#" style="text-decoration:none;color:inherit">
+      <img class="logo-img" src="/logo.png" alt="Company logo"
+           onerror="this.outerHTML='<span class=&quot;mark&quot;>E</span>'">Ecosaras</a>
+    <nav><a href="#products">Products</a><a href="#categories">Categories</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Product Portfolio</span>
+    <h1 class="title">Solar-powered <em>cold chain</em> &amp; agri-tech.</h1>
+    <p class="lede">A complete range of clean-energy cold storage, drying, cooling and food-handling solutions — engineered to cut spoilage, save power, and serve farms, dairies and businesses at the last mile.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" id="fullCatalogue" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Full catalogue
+      </a>
+      <a class="btn btn-ghost" href="#products">Browse products</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n" id="statProducts">—</div><div class="l">Products</div></div>
+      <div class="stat"><div class="n" id="statCats">—</div><div class="l">Categories</div></div>
+      <div class="stat"><div class="n">Solar</div><div class="l">Clean-energy first</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="filter-sec" id="products">
+  <div class="wrap">
+    <div id="status"></div>
+    <div class="section-head" id="categories">
+      <h2>The product range</h2>
+      <p>Tap a category to filter. Each card links to its catalogue on Drive — and new uploads to the folder appear here automatically.</p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid">
+      <div class="loading"><span class="spin"></span> Loading products…</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <!-- Footer logo uses the same logo.png file. -->
+      <a class="brand" href="https://chdkindia.com" target="_blank" rel="noopener" style="text-decoration:none;color:#fff">
+        <img class="logo-img" src="/logo.png" alt="Company logo"
+             onerror="this.outerHTML='<span class=&quot;mark&quot;>E</span>'">Ecosaras</a>
+      <p style="margin-top:12px">Clean-energy cold chain &amp; agricultural technology — a CHDK Technology Center brand. Power &amp; energy, industrial, electrical and tooling solutions since 2018.</p>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <p>
+        2nd Floor, A-12, Sawant Elite,<br>
+        Near Sai Eshanya, Balewadi,<br>
+        Pune – 411045, Maharashtra, India<br><br>
+        <a href="mailto:info@chdkindia.com">info@chdkindia.com</a><br>
+        <a href="tel:+919558637801">+91 95586 37801</a><br>
+        <a href="https://chdkindia.com" target="_blank" rel="noopener">chdkindia.com</a>
+      </p>
+    </div>
+    <div>
+      <h4>Follow us</h4>
+      <p>
+        <a href="https://in.linkedin.com/company/chdk-india" target="_blank" rel="noopener">LinkedIn</a><br>
+        <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noopener">Instagram</a><br>
+        <a href="https://www.youtube.com/@chdktechnologycenter" target="_blank" rel="noopener">YouTube</a>
+      </p>
+    </div>
+    <p class="note">© <span id="yr"></span> CHDK Technology Center &amp; Ecosaras. All rights reserved. &nbsp;·&nbsp; Live portfolio — reads the Drive catalogue folder on load; files must be set to "Anyone with the link can view" so they open and show thumbnails for everyone.</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   1. CONFIG  — paste your API key here to turn on live sync
+   ============================================================ */
+const API_KEY   = "AIzaSyAvp18LgtjHfM7QulvQ19YGI1uykGiXAXA";  /* Google Drive API key */
+const FOLDER_ID = "1OY-TmlvSgtI21LAdWLU30bPx14U6DYPP";  /* catalogue folder — CHDK-QR CODE LINKS */
+const MASTER_FALLBACK = "1A59nBoR8fBZn00F-vyUtZ9i-4INDmciN"; /* full catalogue pdf */
+
+/* ============================================================
+   2. CURATED  — nice name + category + description per product.
+      Matched against each Drive file name (case-insensitive,
+      first matching "key" wins, so put specific keys first).
+      role:"master" = use as the "Full catalogue" button, hide as a card.
+      Anything NOT matched here still shows up automatically,
+      filed under "New / Uncategorised".
+   ============================================================ */
+const CURATED = [
+  { key:"all product catalogue", role:"master" },
+  { key:"minus 15",                name:"Solar Cold Room −15°C", cat:"Cold Storage & Cooling", desc:"Solar cold room engineered to hold −15°C for perishable storage." },
+  { key:"minus 20",                name:"Solar Cold Room −20°C", cat:"Cold Storage & Cooling", desc:"Solar cold room engineered to hold −20°C for deep-cold storage." },
+  { key:"cold storage one pager",  name:"Solar Cold Storage — Overview", cat:"Cold Storage & Cooling", desc:"One-page overview of the solar cold storage system." },
+  { key:"cold storage specific",   name:"Solar Cold Storage", cat:"Cold Storage & Cooling", desc:"Off-grid solar-powered cold storage for the last-mile cold chain." },
+  { key:"power cold storage",      name:"Power Cold Storage", cat:"Cold Storage & Cooling", desc:"Grid / hybrid-powered high-capacity cold storage." },
+  { key:"power cold room",         name:"Power Cold Room — Specs", cat:"Cold Storage & Cooling", desc:"Technical specifications for the power-driven cold room." },
+  { key:"subjee cooler",           name:"Vegetable & Subjee Cooler", cat:"Cold Storage & Cooling", desc:"Compact cooler that extends the shelf life of fresh vegetables." },
+  { key:"vegitable",               name:"Vegetable & Subjee Cooler", cat:"Cold Storage & Cooling", desc:"Compact cooler that extends the shelf life of fresh vegetables." },
+  { key:"evaporative cool",        name:"Evaporative Cool Chamber", cat:"Cold Storage & Cooling", desc:"Low-energy evaporative chamber for short-term produce storage." },
+  { key:"solar dryer presentation",name:"Solar Dryer — Presentation", cat:"Solar Solutions", desc:"Presentation deck for the solar dryer range." },
+  { key:"solar dryer",             name:"Solar Dryer", cat:"Solar Solutions", desc:"Fuel-free solar dryer for crops, spices and produce." },
+  { key:"solar tunnel dryer",      name:"Solar Tunnel Dryer", cat:"Solar Solutions", desc:"Large-format tunnel dryer for bulk solar drying." },
+  { key:"solar tree",              name:"Solar Tree", cat:"Solar Solutions", desc:"Vertical solar array that generates clean power from a compact footprint." },
+  { key:"food machine",            name:"Food Processing Machine", cat:"Food & Dairy", desc:"Food processing and handling machinery for agri-businesses." },
+  { key:"milk atm",                name:"Milk ATM", cat:"Food & Dairy", desc:"Automated milk vending unit for fresh, measured dispensing." },
+  { key:"vegetable cart",          name:"Vegetable Cart", cat:"Mobility & Materials", desc:"Mobile vending cart designed for fresh-produce sellers." },
+  { key:"ecofoam",                 name:"Ecofoam", cat:"Mobility & Materials", desc:"Insulation / packaging foam solution. (Verify description.)" },
+  { key:"latchgrab booklet",       name:"Latchgrab — Booklet", cat:"Industrial", desc:"Latchgrab product booklet. (Verify description.)" },
+  { key:"latchgrab",               name:"Latchgrab — Catalogue", cat:"Industrial", desc:"Engineered latching / hardware product line. (Verify description.)" },
+  { key:"chdk aerospace",          name:"CHDK Aerospace Tooling", cat:"Industrial", desc:"Precision aerospace tooling and manufacturing capabilities." },
+  { key:"hydro turbine",           name:"Toyam Hydro Turbine", cat:"Industrial", desc:"Hydro turbine systems for renewable power generation." },
+];
+
+/* ============================================================
+   3. FALLBACK  — shown if the API key isn't set or Drive can't
+      be reached, so the page is never empty. (Known file IDs.)
+   ============================================================ */
+const FALLBACK = [
+  {name:"Solar Cold Room",cat:"Cold Storage & Cooling",desc:"Off-grid solar cold room, available in −15°C and −20°C configurations.",fileId:"1XrDS6P_ECoRPbnPHN16JDwDBgzpusw39"},
+  {name:"Vegetable & Subjee Cooler",cat:"Cold Storage & Cooling",desc:"Compact cooler that extends the shelf life of fresh vegetables.",fileId:"1yAvcjm-o4fkjDH0XV456uZNxbmX4ytJ0"},
+  {name:"Evaporative Cool Chamber",cat:"Cold Storage & Cooling",desc:"Low-energy evaporative chamber for short-term produce storage.",fileId:"1KXioUz23dF__mXzXcyKWzOMmCPNkKleI"},
+  {name:"Solar Dryer",cat:"Solar Solutions",desc:"Fuel-free solar dryer for crops, spices and produce.",fileId:"12VE4bZ9TpwQYTvsTWStMV-rNRkT69AHb"},
+  {name:"Solar Tunnel Dryer",cat:"Solar Solutions",desc:"Large-format tunnel dryer for bulk solar drying.",fileId:"1bw9DLjBn57a0BLTRnNekxiR2z-Ln-20j"},
+  {name:"Solar Tree",cat:"Solar Solutions",desc:"Vertical solar array that generates clean power from a compact footprint.",fileId:"1h2dzRigqouV-DCJM_yrzstXJSTZN_okS"},
+  {name:"Food Processing Machine",cat:"Food & Dairy",desc:"Food processing and handling machinery for agri-businesses.",fileId:"12a6D7HsHZa9dym95ryWbXX3NN_AmxJ2O"},
+  {name:"Milk ATM",cat:"Food & Dairy",desc:"Automated milk vending unit for fresh, measured dispensing.",fileId:"1Elg7H4xyTMYp0_IaWGnNJ1-9XsiV2Eey"},
+  {name:"Vegetable Cart",cat:"Mobility & Materials",desc:"Mobile vending cart designed for fresh-produce sellers.",fileId:"1_-UumNdy1YnjJo2QSBHfQgqMykJk6Je_"},
+  {name:"Ecofoam",cat:"Mobility & Materials",desc:"Insulation / packaging foam solution. (Verify description.)",fileId:"1_Hjnei3phydl9wEv_yV62Cnkh1J3YsDF"},
+  {name:"Latchgrab",cat:"Industrial",desc:"Engineered latching / hardware product line. (Verify description.)",fileId:"187QhkwZ_OVQcy-7FsPKCzinsAXxJf-E5"},
+];
+
+/* ============================================================
+   4. ENGINE  — no need to edit below.
+   ============================================================ */
+const fileUrl  = id => `https://drive.google.com/file/d/${id}/view`;
+const thumbUrl = id => `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+const arrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+const NEW_CAT = "New / Uncategorised";
+const grid = document.getElementById("grid");
+const statusEl = document.getElementById("status");
+let ITEMS = [];
+
+document.getElementById("fullCatalogue").href = fileUrl(MASTER_FALLBACK);
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+function banner(type, html){ statusEl.innerHTML = `<div class="banner ${type}"><span class="dot"></span><div>${html}</div></div>`; }
+
+function cleanName(fn){
+  return fn.replace(/\.[a-z0-9]+$/i,"")           // drop extension
+           .replace(/^\s*[\d.]+\)\s*/,"")          // drop "3.1) " numbering
+           .replace(/\b(catlogue|catlog)\b/gi,"Catalogue")
+           .replace(/\s+/g," ").trim();
+}
+function prefixVal(fn){ const m = fn.match(/^\s*([\d.]+)\)/); return m?parseFloat(m[1]):999; }
+
+/* turn a RAW folder name like "ECO-SOLAR-PUMP" into "Eco Solar Pump" */
+function prettyCat(folderName){
+  return folderName.replace(/[-_]+/g," ")
+                   .toLowerCase()
+                   .replace(/\b\w/g, ch=>ch.toUpperCase())
+                   .trim();
+}
+
+function classify(fileName){
+  const low = fileName.toLowerCase();
+  for(const c of CURATED){ if(low.includes(c.key)) return c; }
+  return null;
+}
+
+/* turn raw Drive files into display items, set master button.
+   Each file may carry _cat (the sub-folder it came from). */
+function buildItems(files){
+  const items = [];
+  files.sort((a,b)=> prefixVal(a.name)-prefixVal(b.name) || a.name.localeCompare(b.name));
+  for(const f of files){
+    const c = classify(f.name);
+    if(c && c.role==="master"){ document.getElementById("fullCatalogue").href = fileUrl(f.id); continue; }
+    items.push({
+      name: c?.name || cleanName(f.name),
+      cat:  c?.cat  || f._cat || NEW_CAT,
+      desc: c?.desc || "Recently added to the catalogue — add a description for this product.",
+      fileId: f.id,
+      isNew: !c && !f._cat
+    });
+  }
+  return items;
+}
+
+function buildCard(p){
+  const link = fileUrl(p.fileId);
+  const initial = (p.name.trim()[0]||"E").toUpperCase();
+  const img = p.fileId
+    ? `<img src="${thumbUrl(p.fileId)}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+       <div class="ph" style="display:none">${initial}</div>`
+    : `<div class="ph">${initial}</div>`;
+  const tagTxt = p.isNew ? "New" : p.cat.split(" ")[0];
+  return `<article class="card reveal">
+      <div class="thumb"><span class="tag ${p.isNew?'new':''}">${tagTxt}</span>${img}</div>
+      <div class="card-body">
+        <h3>${p.name}</h3><p>${p.desc}</p>
+        <a class="more" href="${link}" target="_blank" rel="noopener">View catalogue ${arrow}</a>
+      </div></article>`;
+}
+
+function categoriesOf(items){
+  const order = ["Cold Storage & Cooling","Solar Solutions","Food & Dairy","Mobility & Materials","Industrial"];
+  const present = [...new Set(items.map(i=>i.cat))];
+  const known = order.filter(o=>present.includes(o));
+  const extra = present.filter(p=>!order.includes(p) && p!==NEW_CAT).sort();
+  const tail  = present.includes(NEW_CAT) ? [NEW_CAT] : [];
+  return ["All",...known,...extra,...tail];
+}
+
+function render(filter){
+  const list = ITEMS.filter(p=> filter==="All" || p.cat===filter);
+  grid.innerHTML = list.map(buildCard).join("") || `<div class="loading">No products in this category yet.</div>`;
+  requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach((el,i)=>setTimeout(()=>el.classList.add("in"), i*40)));
+}
+
+function buildFilters(){
+  const cats = categoriesOf(ITEMS);
+  const fbar = document.getElementById("filters"); fbar.innerHTML="";
+  cats.forEach((c,i)=>{
+    const n = c==="All"?ITEMS.length:ITEMS.filter(x=>x.cat===c).length;
+    const b=document.createElement("button");
+    b.className="chip"+(i===0?" active":"");
+    b.innerHTML=`${c}<span class="c">${n}</span>`;
+    b.onclick=()=>{document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(c);};
+    fbar.appendChild(b);
+  });
+}
+
+function finish(){
+  document.getElementById("statProducts").textContent = ITEMS.length;
+  document.getElementById("statCats").textContent = Math.max(0, categoriesOf(ITEMS).length-1);
+  buildFilters(); render("All");
+}
+
+function useFallback(){
+  ITEMS = FALLBACK.map(p=>({...p,isNew:false}));
+  finish();
+}
+
+const isFolder = f => f.mimeType==="application/vnd.google-apps.folder";
+
+async function listChildren(folderId){
+  const q = `'${folderId}' in parents and trashed = false`;
+  const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}`
+            + `&key=${API_KEY}&fields=files(id,name,mimeType)&pageSize=300&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+  const res = await fetch(url);
+  if(!res.ok){ throw new Error("HTTP "+res.status); }
+  const data = await res.json();
+  return data.files || [];
+}
+
+async function loadLive(){
+  const top = await listChildren(FOLDER_ID);
+  const subfolders = top.filter(isFolder);
+  // loose files sitting directly in the main folder (no category)
+  let collected = top.filter(f=>!isFolder(f));
+  // read one level into each sub-folder; the sub-folder name becomes the category
+  const nested = await Promise.all(subfolders.map(async sf=>{
+    const kids = await listChildren(sf.id);
+    return kids.filter(f=>!isFolder(f)).map(f=>({...f, _cat: prettyCat(sf.name)}));
+  }));
+  nested.forEach(arr=> collected = collected.concat(arr));
+  if(!collected.length){ throw new Error("empty"); }
+  ITEMS = buildItems(collected);
+  finish();
+  banner("live", `<b>Live sync on.</b> Showing ${ITEMS.length} products from ${subfolders.length} folders in your Drive — new uploads appear automatically on refresh.`);
+}
+
+(function init(){
+  if(!API_KEY){
+    useFallback();
+    banner("warn", `<b>Live sync not set up yet.</b> Showing the built-in product list. To make new Drive uploads appear automatically, paste a Google Drive API key into <code>API_KEY</code> near the top of this file, and make the catalogue folder "Anyone with the link can view".`);
+    return;
+  }
+  loadLive().catch(err=>{
+    useFallback();
+    banner("err", `<b>Couldn't reach Drive live</b> (${err.message}) — showing the built-in list instead. Check that the API key is valid, the Drive API is enabled, and the folder is shared "Anyone with the link can view".`);
+  });
+})();
+</script>
+</body>
+</html>

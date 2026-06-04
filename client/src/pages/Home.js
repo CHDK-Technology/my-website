@@ -237,12 +237,12 @@ function WhySection() {
   );
 }
 const EVENT_IMAGES = [
-  { src: "/event1.PNG", alt: "CHDK Event" },
-  { src: "/event2.PNG", alt: "CHDK Event" },
-  { src: "/event3.PNG", alt: "CHDK Event" },
-  { src: "/event1.PNG", alt: "CHDK Event" },
-  { src: "/event2.PNG", alt: "CHDK Event" },
-  { src: "/event3.PNG", alt: "CHDK Event" },
+  { src: "/event1.png", alt: "CHDK Event" },
+  { src: "/event2.png", alt: "CHDK Event" },
+  { src: "/event3.png", alt: "CHDK Event" },
+  { src: "/event1.png", alt: "CHDK Event" },
+  { src: "/event2.png", alt: "CHDK Event" },
+  { src: "/event3.png", alt: "CHDK Event" },
 ];
 
 
@@ -416,9 +416,9 @@ function HeroSlider() {
       </a>
 
       <div className="social">
-        <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-        <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-        <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+        <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+        <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+        <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
         <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
       </div>
     </div>

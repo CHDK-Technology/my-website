@@ -17,7 +17,6 @@ const SERVICE_CATEGORIES = [
     desc: "Precision inspection and measurement solutions using advanced portable metrology systems for aerospace, defence, and industrial applications.",
     path: "/solutions/advanced-metrology",
     links: [
-      { name: "Laser Tracker Measurement", path: "/solutions/laser-tracker" },
       { name: "Portable Metrology", path: "/solutions/advanced-metrology" },
     ],
   },

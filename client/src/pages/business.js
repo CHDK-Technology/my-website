@@ -19,22 +19,22 @@ const VERTICALS_GRID_DATA = [
   {
     title: "Renewable Energy",
     desc: "Sustainable Energy Solutions for a Cleaner Tomorrow",
-    img: "/acc4.webp",
+    img: "/acc4.jpg",
   },
   {
     title: "Infrastructure",
     desc: "Building scalable, and future-ready infrastructure from the ground up.",
-    img: "/acc6.webp",
+    img: "/acc6.jpg",
   },
   {
     title: "Industrial Services",
     desc: "Innovation That Drives Industrial Growth.",
-    img: "/acc5.webp",
+    img: "/acc5.png",
   },
   {
     title: "Waste Management",
     desc: "Driving sustainability through advanced waste reduction and management methods.",
-    img: "/acc7.webp",
+    img: "/acc7.png",
   },
   {
     title: "IT & Digital",
