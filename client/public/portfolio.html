@@ -33,7 +33,7 @@
   .brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
   .brand .mark{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--solar),var(--leaf));color:#fff;font-size:.95rem;box-shadow:0 4px 10px -3px rgba(232,148,28,.5)}
   /* ---- YOUR PNG LOGO ---- size & position handled here; just drop the file in. */
-  .brand .logo-img{height:40px;width:auto;max-width:170px;object-fit:contain;display:block}
+  .brand .logo-img{height: 48px;width:auto;max-width:200px;object-fit:contain;display:block}
   footer .brand .logo-img{height:48px;max-width:200px}
   @media(max-width:680px){.brand .logo-img{height:34px;max-width:140px}}
   .topbar nav{display:flex;gap:26px;font-size:.93rem;font-weight:500}
@@ -122,7 +122,7 @@
          image already includes the company name, delete the word Ecosaras after the <img>. -->
     <a class="brand" href="#" style="text-decoration:none;color:inherit">
       <img class="logo-img" src="/logo.png" alt="Company logo"
-           onerror="this.outerHTML='<span class=&quot;mark&quot;>E</span>'">Ecosaras</a>
+           onerror="this.outerHTML='<span class=&quot;mark&quot;>E</span>'"></a>
     <nav><a href="#products">Products</a><a href="#categories">Categories</a><a href="#contact">Contact</a></nav>
   </div>
 </header>
@@ -167,7 +167,7 @@
       <!-- Footer logo uses the same logo.png file. -->
       <a class="brand" href="https://chdkindia.com" target="_blank" rel="noopener" style="text-decoration:none;color:#fff">
         <img class="logo-img" src="/logo.png" alt="Company logo"
-             onerror="this.outerHTML='<span class=&quot;mark&quot;>E</span>'">Ecosaras</a>
+             onerror="this.outerHTML='<span class=&quot;mark&quot;>E</span>'"></a>
       <p style="margin-top:12px">Clean-energy cold chain &amp; agricultural technology — a CHDK Technology Center brand. Power &amp; energy, industrial, electrical and tooling solutions since 2018.</p>
     </div>
     <div>
@@ -377,21 +377,52 @@ async function listChildren(folderId){
   return data.files || [];
 }
 
-async function loadLive(){
-  const top = await listChildren(FOLDER_ID);
-  const subfolders = top.filter(isFolder);
-  // loose files sitting directly in the main folder (no category)
-  let collected = top.filter(f=>!isFolder(f));
-  // read one level into each sub-folder; the sub-folder name becomes the category
-  const nested = await Promise.all(subfolders.map(async sf=>{
-    const kids = await listChildren(sf.id);
-    return kids.filter(f=>!isFolder(f)).map(f=>({...f, _cat: prettyCat(sf.name)}));
-  }));
-  nested.forEach(arr=> collected = collected.concat(arr));
-  if(!collected.length){ throw new Error("empty"); }
+async function getAllFiles(folderId, category = null) {
+
+  const items = await listChildren(folderId);
+
+  let files = [];
+
+  for (const item of items) {
+
+    if (isFolder(item)) {
+
+      const nestedFiles = await getAllFiles(
+        item.id,
+        category || prettyCat(item.name)
+      );
+
+      files = files.concat(nestedFiles);
+
+    } else {
+
+      files.push({
+        ...item,
+        _cat: category
+      });
+
+    }
+  }
+
+  return files;
+}
+
+async function loadLive() {
+
+  const collected = await getAllFiles(FOLDER_ID);
+
+  if (!collected.length) {
+    throw new Error("empty");
+  }
+
   ITEMS = buildItems(collected);
+
   finish();
-  banner("live", `<b>Live sync on.</b> Showing ${ITEMS.length} products from ${subfolders.length} folders in your Drive — new uploads appear automatically on refresh.`);
+
+  banner(
+    "live",
+    `<b>Live sync on.</b> Showing ${ITEMS.length} products from all nested folders in Drive.`
+  );
 }
 
 (function init(){
