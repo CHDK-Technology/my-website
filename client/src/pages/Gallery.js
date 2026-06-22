@@ -4,41 +4,81 @@ import { HiOutlineMail } from "react-icons/hi";
 import "../pages/Home.css";
 import "./Gallery.css";
 
-// ===== GALLERY DATA =====
-// Replace src paths with your actual image files
+// ============================================================================
+// GALLERY DATA  —  this is the only part you normally edit
+// ----------------------------------------------------------------------------
+// IMAGE item:
+//   { id, type: "image", src: "/gallery/file.jpg", alt, category, size }
+//
+// VIDEO item — pick ONE source. In order of preference:
+//   YouTube (recommended, adaptive streaming = no lag):
+//     { id, type: "video", youtube: "VIDEO_ID", alt, category, size: "wide" }
+//   Vimeo:
+//     { id, type: "video", vimeo: "VIDEO_ID", alt, category, size: "wide" }
+//   Self-hosted file in /public/gallery (only for very short clips):
+//     { id, type: "video", videoSrc: "/gallery/clip.mp4", poster: "/gallery/clip.jpg", alt, category, size: "wide" }
+//
+// The YouTube ID is the part after "v=" in the URL
+//   https://www.youtube.com/watch?v=dQw4w9WgXcQ  ->  "dQw4w9WgXcQ"
+// For YouTube videos you can skip "poster" — the thumbnail is pulled automatically.
+//
+// size options: "normal" (4:3), "tall" (3:4), "wide" (16:9). Use "wide" for video.
+// ============================================================================
 const GALLERY_ITEMS = [
-  // Aerospace & Defence
-  { id: 1,  src: "/gallery/aero-1.jpg",       alt: "Aerospace precision component",         category: "Aerospace & Defence",  size: "tall" },
-  { id: 2,  src: "/gallery/aero-2.jpg",       alt: "Defence systems assembly",              category: "Aerospace & Defence",  size: "wide" },
-  { id: 3,  src: "/gallery/aero-3.jpg",       alt: "Aerospace tooling inspection",          category: "Aerospace & Defence",  size: "normal" },
-  { id: 4,  src: "/gallery/aero-4.jpg",       alt: "Laser tracker measurement",             category: "Aerospace & Defence",  size: "normal" },
+  // ==========================================================================
+  // RENEWABLE ENERGY — Ecosaras solar products & installations
+  // Images live in client/public/gallery/  (videos are from @ecosaras YouTube)
+  // ==========================================================================
+  { id: 1,   type: "image", src: "/gallery/solar-dryer-field.jpg",     alt: "Ecosaras Hybrid Solar Dehydrator",            category: "Renewable Energy", size: "wide" },
+  { id: 2,   type: "image", src: "/gallery/cold-storage-onsite.jpg",   alt: "Ecosaras solar cold storage units on-site",   category: "Renewable Energy", size: "normal" },
+  { id: 101, type: "video", youtube: "OPiuBv8tCB0",                    alt: "Ecosaras Solar Tree",                         category: "Renewable Energy", size: "wide" },
+  { id: 3,   type: "image", src: "/gallery/solar-dryer-product.jpg",   alt: "Ecosaras Hybrid Solar Dryer",                 category: "Renewable Energy", size: "normal" },
+  { id: 4,   type: "image", src: "/gallery/cold-storage-install.jpg",  alt: "EcoSaras solar-powered cold storage installation", category: "Renewable Energy", size: "wide" },
+  { id: 102, type: "video", youtube: "t5YDJ5HXpWU",                    alt: "Ecosaras Solar Dryer / Dehydrator",           category: "Renewable Energy", size: "wide" },
 
-  // Metrology & Engineering
-  { id: 5,  src: "/gallery/metro-1.jpg",      alt: "3D scanning in progress",               category: "Metrology",            size: "wide" },
-  { id: 6,  src: "/gallery/metro-2.jpg",      alt: "Calibration services on-site",          category: "Metrology",            size: "normal" },
-  { id: 7,  src: "/gallery/metro-3.jpg",      alt: "Reverse engineering CAD model",         category: "Metrology",            size: "tall" },
-  { id: 8,  src: "/gallery/metro-4.jpg",      alt: "Dimensional inspection report",         category: "Metrology",            size: "normal" },
+  // ==========================================================================
+  // EVENTS & TEAM
+  // ==========================================================================
+  { id: 5,   type: "image", src: "/gallery/event-coldstorage-launch.jpg", alt: "Ecosaras solar cold storage launch event", category: "Events & Team", size: "wide" },
+  { id: 6,   type: "image", src: "/gallery/team-farmers.jpg",            alt: "EcoSaras team with farmers at a cold storage site", category: "Events & Team", size: "normal" },
+  { id: 103, type: "video", youtube: "ZSUm9vEg96Y",                      alt: "Solar Cold Storage inauguration ceremony", category: "Events & Team", size: "wide" },
+  { id: 7,   type: "image", src: "/gallery/team-officials.jpg",          alt: "EcoSaras team at an installation",          category: "Events & Team", size: "normal" },
 
-  // Renewable Energy
-  { id: 9,  src: "/gallery/solar-1.jpg",      alt: "Solar tree installation",               category: "Renewable Energy",     size: "tall" },
-  { id: 10, src: "/gallery/solar-2.jpg",      alt: "Rooftop solar panels",                  category: "Renewable Energy",     size: "wide" },
-  { id: 11, src: "/gallery/solar-3.jpg",      alt: "Solar cold storage unit",               category: "Renewable Energy",     size: "normal" },
-  { id: 12, src: "/gallery/solar-4.jpg",      alt: "Off-grid solar deployment",             category: "Renewable Energy",     size: "normal" },
+  // ==========================================================================
+  // OPTIONAL / TO ADD
+  // ==========================================================================
+  // The three original placeholder event images — re-enable if you want them:
+  // { id: 16, type: "image", src: "/event1.png", alt: "CHDK team at industry event", category: "Events & Team", size: "wide" },
+  // { id: 17, type: "image", src: "/event2.png", alt: "Exhibition participation",     category: "Events & Team", size: "normal" },
+  // { id: 18, type: "image", src: "/event3.png", alt: "Client collaboration session", category: "Events & Team", size: "tall" },
 
-  // Infrastructure
-  { id: 13, src: "/gallery/infra-1.jpg",      alt: "PUF panel installation",                category: "Infrastructure",       size: "wide" },
-  { id: 14, src: "/gallery/infra-2.jpg",      alt: "Portable office structure",             category: "Infrastructure",       size: "normal" },
-  { id: 15, src: "/gallery/infra-3.jpg",      alt: "Roofing panel assembly",                category: "Infrastructure",       size: "tall" },
+  // Infrastructure (Ecofoam) — drop a file in /gallery/ and uncomment:
+  // { id: 20, type: "image", src: "/gallery/ecofoam-panel-1.jpg", alt: "Ecofoam insulated panel", category: "Infrastructure", size: "wide" },
 
-  // Events & Team
-  { id: 16, src: "/event1.PNG",               alt: "CHDK team at industry event",           category: "Events & Team",        size: "wide" },
-  { id: 17, src: "/event2.PNG",               alt: "Exhibition participation",              category: "Events & Team",        size: "normal" },
-  { id: 18, src: "/event3.PNG",               alt: "Client collaboration session",          category: "Events & Team",        size: "tall" },
-  { id: 19, src: "/event1.PNG",               alt: "Awards and recognition ceremony",       category: "Events & Team",        size: "normal" },
-  { id: 20, src: "/event2.PNG",               alt: "Team building workshop",                category: "Events & Team",        size: "wide" },
+  // Extra Ecosaras video — uncomment to add:
+  // { id: 104, type: "video", youtube: "6QVEtsiZ4nY", alt: "Solar Dryer — innovation at CHDK", category: "Renewable Energy", size: "wide" },
 ];
 
-const FILTERS = ["All", "Aerospace & Defence", "Metrology", "Renewable Energy", "Infrastructure", "Events & Team"];
+// Categories with content right now. Add others back when you have images.
+const FILTERS = ["All", "Renewable Energy", "Events & Team"];
+
+// Thumbnail for any item: explicit poster > image src > auto YouTube thumbnail
+function getThumb(item) {
+  if (item.poster) return item.poster;
+  if (item.type === "video" && item.youtube) return `https://img.youtube.com/vi/${item.youtube}/hqdefault.jpg`;
+  return item.src;
+}
+
+// Play-button badge shown on video thumbnails
+function PlayBadge() {
+  return (
+    <span className="gallery-play-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </span>
+  );
+}
 
 // ===== LIGHTBOX =====
 function Lightbox({ item, total, onClose, onPrev, onNext }) {
@@ -51,6 +91,46 @@ function Lightbox({ item, total, onClose, onPrev, onNext }) {
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [onClose, onPrev, onNext]);
+
+  const isVideo = item.type === "video";
+
+  // Build the correct player for the lightbox
+  let media;
+  if (isVideo && item.youtube) {
+    media = (
+      <div className="lightbox-video-wrap">
+        <iframe
+          key={item.id}
+          src={`https://www.youtube-nocookie.com/embed/${item.youtube}?autoplay=1&rel=0&modestbranding=1`}
+          title={item.alt}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    );
+  } else if (isVideo && item.vimeo) {
+    media = (
+      <div className="lightbox-video-wrap">
+        <iframe
+          key={item.id}
+          src={`https://player.vimeo.com/video/${item.vimeo}?autoplay=1`}
+          title={item.alt}
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    );
+  } else if (isVideo && item.videoSrc) {
+    media = (
+      <div className="lightbox-video-wrap">
+        <video key={item.id} src={item.videoSrc} poster={item.poster} controls autoPlay playsInline />
+      </div>
+    );
+  } else {
+    media = <img src={item.src} alt={item.alt} className="lightbox-img" />;
+  }
 
   return (
     <div className="gallery-lightbox" onClick={onClose}>
@@ -68,7 +148,7 @@ function Lightbox({ item, total, onClose, onPrev, onNext }) {
       </button>
 
       <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-        <img src={item.src} alt={item.alt} className="lightbox-img" />
+        {media}
         <div className="lightbox-caption">
           <span className="lightbox-category">{item.category}</span>
           <p className="lightbox-alt">{item.alt}</p>
@@ -122,7 +202,6 @@ export default function Gallery() {
   return (
     <div className="home gallery-page">
 
-
       {/* ===== FILTER + GRID ===== */}
       <section id="gallery-grid" ref={ref1} className={`gallery-section ${show1 ? "highlights-visible" : ""}`}>
         <div className="gallery-container">
@@ -151,18 +230,23 @@ export default function Gallery() {
             {filtered.map((item, i) => (
               <div
                 key={item.id}
-                className={`gallery-item gallery-item--${item.size}`}
+                className={`gallery-item gallery-item--${item.size} ${item.type === "video" ? "gallery-item--video" : ""}`}
                 onClick={() => openLightbox(i)}
                 style={{ animationDelay: `${i * 0.04}s` }}
               >
-                <img src={item.src} alt={item.alt} loading="lazy" />
+                <img src={getThumb(item)} alt={item.alt} loading="lazy" />
+                {item.type === "video" && <PlayBadge />}
                 <div className="gallery-item-overlay">
                   <span className="gallery-item-category">{item.category}</span>
                   <p className="gallery-item-alt">{item.alt}</p>
                   <span className="gallery-item-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20">
-                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                    </svg>
+                    {item.type === "video" ? (
+                      <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M8 5v14l11-7z" /></svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg>
+                    )}
                   </span>
                 </div>
               </div>
@@ -171,7 +255,7 @@ export default function Gallery() {
 
           {/* Empty state */}
           {filtered.length === 0 && (
-            <p className="gallery-empty">No images in this category yet.</p>
+            <p className="gallery-empty">No items in this category yet.</p>
           )}
 
         </div>
