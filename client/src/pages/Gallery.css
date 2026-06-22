@@ -409,3 +409,60 @@
   .gallery-section { padding: 60px 16px; }
   .gallery-grid { grid-template-columns: 1fr; gap: 12px; }
 }
+
+/* ============================================================================
+   VIDEO SUPPORT  (added)
+   ============================================================================ */
+
+/* Play badge centered on a video thumbnail */
+.gallery-play-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 3;
+  padding-left: 3px; /* optical centering of the triangle */
+  pointer-events: none;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-item--video:hover .gallery-play-badge {
+  background: #00AEEF;
+  border-color: #00AEEF;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* Keep the play badge crisp; don't let the thumbnail zoom hide it */
+.gallery-item--video:hover img {
+  transform: scale(1.04);
+}
+
+/* ===== LIGHTBOX VIDEO PLAYER (responsive 16:9) ===== */
+.lightbox-video-wrap {
+  position: relative;
+  width: min(90vw, 1280px);
+  aspect-ratio: 16 / 9;
+  max-height: 80vh;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.lightbox-video-wrap iframe,
+.lightbox-video-wrap video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
