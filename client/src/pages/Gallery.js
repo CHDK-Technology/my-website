@@ -26,41 +26,56 @@ import "./Gallery.css";
 // ============================================================================
 const GALLERY_ITEMS = [
   // ==========================================================================
-  // RENEWABLE ENERGY — Ecosaras solar products & installations
-  // Images live in client/public/gallery/  (videos are from @ecosaras YouTube)
+  // RENEWABLE ENERGY — Ecosaras solar products, cold chain & installations
+  // Images: client/public/gallery/   Videos: @ecosaras / @chdktechnologycenter
   // ==========================================================================
-  { id: 1,   type: "image", src: "/gallery/solar-dryer-field.jpg",     alt: "Ecosaras Hybrid Solar Dehydrator",            category: "Renewable Energy", size: "wide" },
-  { id: 2,   type: "image", src: "/gallery/cold-storage-onsite.jpg",   alt: "Ecosaras solar cold storage units on-site",   category: "Renewable Energy", size: "normal" },
-  { id: 101, type: "video", youtube: "OPiuBv8tCB0",                    alt: "Ecosaras Solar Tree",                         category: "Renewable Energy", size: "wide" },
-  { id: 3,   type: "image", src: "/gallery/solar-dryer-product.jpg",   alt: "Ecosaras Hybrid Solar Dryer",                 category: "Renewable Energy", size: "normal" },
-  { id: 4,   type: "image", src: "/gallery/cold-storage-install.jpg",  alt: "EcoSaras solar-powered cold storage installation", category: "Renewable Energy", size: "wide" },
-  { id: 102, type: "video", youtube: "t5YDJ5HXpWU",                    alt: "Ecosaras Solar Dryer / Dehydrator",           category: "Renewable Energy", size: "wide" },
+  { id: 1,   type: "image", src: "/gallery/solar-dryer-field.jpg",    alt: "Ecosaras Hybrid Solar Dehydrator",                  category: "Renewable Energy", size: "wide" },
+  { id: 101, type: "video", youtube: "r8g0jfhxebo",                   alt: "Ecosaras Solar Tree",                               category: "Renewable Energy", size: "wide" },
+  { id: 2,   type: "image", src: "/gallery/cold-storage-onsite.jpg",  alt: "Ecosaras solar cold storage units on-site",         category: "Renewable Energy", size: "normal" },
+  { id: 102, type: "video", youtube: "PNyM00XACS4",                   alt: "Solar cold storage manufacturing",                  category: "Renewable Energy", size: "wide" },
+  { id: 3,   type: "image", src: "/gallery/solar-dryer-product.jpg",  alt: "Ecosaras Hybrid Solar Dryer",                       category: "Renewable Energy", size: "normal" },
+  { id: 103, type: "video", youtube: "VC1SMu8We3U",                   alt: "Solar cold storage with auto panel cleaning",       category: "Renewable Energy", size: "wide" },
+  { id: 4,   type: "image", src: "/gallery/cold-storage-install.jpg", alt: "EcoSaras solar-powered cold storage installation",  category: "Renewable Energy", size: "wide" },
+  { id: 104, type: "video", youtube: "t5YDJ5HXpWU",                   alt: "Ecosaras Solar Dryer / Dehydrator",                 category: "Renewable Energy", size: "wide" },
+  { id: 105, type: "video", youtube: "FA76SHsxFK0",                   alt: "50 kg hybrid food dehydrator",                      category: "Renewable Energy", size: "wide" },
+  { id: 106, type: "video", youtube: "6QVEtsiZ4nY",                   alt: "Solar dryer — innovation at CHDK",                  category: "Renewable Energy", size: "wide" },
+  { id: 107, type: "video", youtube: "7ZvwAb1Rufs",                   alt: "Solar cold storage benefits",                       category: "Renewable Energy", size: "wide" },
+  { id: 108, type: "video", youtube: "2I6l7Zlu7Ck",                   alt: "Solar dryer: chilli powder process",                category: "Renewable Energy", size: "wide" },
+  { id: 109, type: "video", youtube: "kQOiBJdMFSA",                   alt: "Customer review: Subji Cooler",                     category: "Renewable Energy", size: "wide" },
+  { id: 110, type: "video", youtube: "GTBhqE1UNfc",                   alt: "Ecosaras Customer Corner",                          category: "Renewable Energy", size: "wide" },
+  { id: 111, type: "video", youtube: "ryzB1QWPnG0",                   alt: "Ecosaras Customer Corner (Hindi)",                  category: "Renewable Energy", size: "wide" },
+  { id: 112, type: "video", youtube: "q2oe0EIRjBY",                   alt: "Eco-Saras solar cold storage",                      category: "Renewable Energy", size: "wide" },
+  { id: 113, type: "video", youtube: "9mL2GLOZXVM",                   alt: "Eco-Saras solar cold storage overview",             category: "Renewable Energy", size: "wide" },
+  { id: 114, type: "video", youtube: "5C_IT7BU9z0",                   alt: "Solar cold storage for every farmer (DND News)",    category: "Renewable Energy", size: "wide" },
+  { id: 115, type: "video", youtube: "H0YEYwd1aF0",                   alt: "Milk ATM machine",                                  category: "Renewable Energy", size: "wide" },
+
+  // ==========================================================================
+  // INFRASTRUCTURE
+  // ==========================================================================
+  { id: 120, type: "video", youtube: "C7VtXGUb00I",                   alt: "Portable office / house",                           category: "Infrastructure", size: "wide" },
+  { id: 121, type: "video", youtube: "U9fzKWWLYzo",                   alt: "Swatch smart waste chambers",                       category: "Infrastructure", size: "wide" },
+
+  // ==========================================================================
+  // ENGINEERING
+  // ==========================================================================
+  { id: 130, type: "video", youtube: "XBQKH09oOxE",                   alt: "FEA & CFD design services",                         category: "Engineering", size: "wide" },
 
   // ==========================================================================
   // EVENTS & TEAM
   // ==========================================================================
-  { id: 5,   type: "image", src: "/gallery/event-coldstorage-launch.jpg", alt: "Ecosaras solar cold storage launch event", category: "Events & Team", size: "wide" },
+  { id: 5,   type: "image", src: "/gallery/event-coldstorage-launch.jpg", alt: "Ecosaras solar cold storage launch event",      category: "Events & Team", size: "wide" },
+  { id: 140, type: "video", youtube: "P1Wj4lTcV2o",                       alt: "Eco-Saras launch",                                category: "Events & Team", size: "wide" },
   { id: 6,   type: "image", src: "/gallery/team-farmers.jpg",            alt: "EcoSaras team with farmers at a cold storage site", category: "Events & Team", size: "normal" },
-  { id: 103, type: "video", youtube: "ZSUm9vEg96Y",                      alt: "Solar Cold Storage inauguration ceremony", category: "Events & Team", size: "wide" },
-  { id: 7,   type: "image", src: "/gallery/team-officials.jpg",          alt: "EcoSaras team at an installation",          category: "Events & Team", size: "normal" },
+  { id: 141, type: "video", youtube: "qmum7NtCxz8",                       alt: "Gudhipadwa celebration — two-year milestone",     category: "Events & Team", size: "wide" },
+  { id: 7,   type: "image", src: "/gallery/team-officials.jpg",          alt: "EcoSaras team at an installation",                category: "Events & Team", size: "normal" },
 
-  // ==========================================================================
-  // OPTIONAL / TO ADD
-  // ==========================================================================
   // The three original placeholder event images — re-enable if you want them:
   // { id: 16, type: "image", src: "/event1.png", alt: "CHDK team at industry event", category: "Events & Team", size: "wide" },
   // { id: 17, type: "image", src: "/event2.png", alt: "Exhibition participation",     category: "Events & Team", size: "normal" },
   // { id: 18, type: "image", src: "/event3.png", alt: "Client collaboration session", category: "Events & Team", size: "tall" },
-
-  // Infrastructure (Ecofoam) — drop a file in /gallery/ and uncomment:
-  // { id: 20, type: "image", src: "/gallery/ecofoam-panel-1.jpg", alt: "Ecofoam insulated panel", category: "Infrastructure", size: "wide" },
-
-  // Extra Ecosaras video — uncomment to add:
-  // { id: 104, type: "video", youtube: "6QVEtsiZ4nY", alt: "Solar Dryer — innovation at CHDK", category: "Renewable Energy", size: "wide" },
 ];
 
-// Categories with content right now. Add others back when you have images.
-const FILTERS = ["All", "Renewable Energy", "Events & Team"];
+const FILTERS = ["All", "Renewable Energy", "Infrastructure", "Engineering", "Events & Team"];
 
 // Thumbnail for any item: explicit poster > image src > auto YouTube thumbnail
 function getThumb(item) {
