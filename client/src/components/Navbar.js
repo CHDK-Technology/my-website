@@ -139,6 +139,21 @@ function Navbar() {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
+  /* Close mobile menu / search / submenus on browser back or forward
+     (covers back button, back gesture, and closing via device back action) */
+  useEffect(() => {
+    const closeOverlaysOnNav = () => {
+      setMobileOpen(false);
+      setSearchOpen(false);
+      setMobileExpanded(null);
+      setActiveMenu(null);
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    };
+    window.addEventListener("popstate", closeOverlaysOnNav);
+    return () => window.removeEventListener("popstate", closeOverlaysOnNav);
+  }, []);
+
   /* Theme */
   useEffect(() => {
     document.body.classList.toggle("dark-mode",  darkMode);
