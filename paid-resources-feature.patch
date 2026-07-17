@@ -1,0 +1,608 @@
+diff --git a/.gitignore b/.gitignore
+index 2a6acae..988907e 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -5,6 +5,8 @@ node_modules/
+ .vscode/
+ desktop.ini
+ uploads/
++backend/private-docs/*
++!backend/private-docs/README.md
+ .env
+ build/
+ dist/
+diff --git a/backend/models/Document.js b/backend/models/Document.js
+new file mode 100644
+index 0000000..cbba7bb
+--- /dev/null
++++ b/backend/models/Document.js
+@@ -0,0 +1,21 @@
++// backend/models/Document.js
++const mongoose = require('mongoose');
++
++const documentSchema = new mongoose.Schema({
++  title: { type: String, required: true },
++  slug: { type: String, required: true, unique: true }, // e.g. "solar-dryer-brochure"
++  category: {
++    type: String,
++    enum: ['brochure', 'catalogue', 'sop', 'recipe-book'],
++    required: true
++  },
++  description: { type: String, required: false },
++  price: { type: Number, required: true },        // in INR, e.g. 199
++  currency: { type: String, default: 'INR' },
++  fileName: { type: String, required: true },      // actual filename inside backend/private-docs
++  thumbnail: { type: String, required: false },    // optional public preview image path
++  active: { type: Boolean, default: true },
++  createdAt: { type: Date, default: Date.now }
++});
++
++module.exports = mongoose.model('Document', documentSchema);
+diff --git a/backend/models/Purchase.js b/backend/models/Purchase.js
+new file mode 100644
+index 0000000..7ea6b08
+--- /dev/null
++++ b/backend/models/Purchase.js
+@@ -0,0 +1,25 @@
++// backend/models/Purchase.js
++const mongoose = require('mongoose');
++
++const purchaseSchema = new mongoose.Schema({
++  document: { type: mongoose.Schema.Types.ObjectId, ref: 'Document', required: true },
++  email: { type: String, required: true },
++  phone: { type: String, required: false },
++
++  razorpayOrderId: { type: String, required: true },
++  razorpayPaymentId: { type: String },
++  razorpaySignature: { type: String },
++
++  amount: { type: Number, required: true },
++  currency: { type: String, default: 'INR' },
++  status: { type: String, enum: ['created', 'paid', 'failed'], default: 'created' },
++
++  downloadToken: { type: String },       // set only after successful verification
++  downloadTokenExpiresAt: { type: Date },
++  downloadCount: { type: Number, default: 0 },
++  maxDownloads: { type: Number, default: 5 },
++
++  createdAt: { type: Date, default: Date.now }
++});
++
++module.exports = mongoose.model('Purchase', purchaseSchema);
+diff --git a/backend/private-docs/README.md b/backend/private-docs/README.md
+new file mode 100644
+index 0000000..eea2c38
+--- /dev/null
++++ b/backend/private-docs/README.md
+@@ -0,0 +1 @@
++Private docs folder - actual PDFs go here, never expose via express.static
+diff --git a/backend/routes/documents.js b/backend/routes/documents.js
+new file mode 100644
+index 0000000..f3f41b7
+--- /dev/null
++++ b/backend/routes/documents.js
+@@ -0,0 +1,25 @@
++// backend/routes/documents.js
++//
++// Stage 1: catalogue listing only — no payment dependency, safe to deploy
++// as-is. The payment-gated version (Razorpay order/verify/download) lives
++// in backend/routes/future/documents.payment-gated.js — swap this file for
++// that one once Razorpay is ready to go (see RESOURCES_FEATURE_SETUP.md).
++
++const express = require('express');
++const Document = require('../models/Document');
++
++const router = express.Router();
++
++router.get('/', async (req, res) => {
++  try {
++    const docs = await Document.find({ active: true }).select(
++      'title slug category description price currency thumbnail'
++    );
++    res.json(docs);
++  } catch (error) {
++    console.error('List Documents Error:', error);
++    res.status(500).json({ message: 'Failed to load documents.' });
++  }
++});
++
++module.exports = router;
+diff --git a/backend/routes/future/documents.payment-gated.js b/backend/routes/future/documents.payment-gated.js
+new file mode 100644
+index 0000000..72d4848
+--- /dev/null
++++ b/backend/routes/future/documents.payment-gated.js
+@@ -0,0 +1,184 @@
++// backend/routes/documents.js
++const express = require('express');
++const crypto = require('crypto');
++const path = require('path');
++const fs = require('fs');
++const rateLimit = require('express-rate-limit');
++const Razorpay = require('razorpay');
++
++const Document = require('../models/Document');
++const Purchase = require('../models/Purchase');
++
++const router = express.Router();
++
++const razorpay = new Razorpay({
++  key_id: process.env.RAZORPAY_KEY_ID,
++  key_secret: process.env.RAZORPAY_KEY_SECRET
++});
++
++const PRIVATE_DOCS_PATH = path.join(__dirname, '..', 'private-docs');
++
++const paymentLimiter = rateLimit({
++  windowMs: 15 * 60 * 1000,
++  max: 30,
++  message: { message: 'Too many requests. Please try again later.' }
++});
++
++/* ======= LIST DOCUMENTS (public metadata only, no file path) ====== */
++
++router.get('/', async (req, res) => {
++  try {
++    const docs = await Document.find({ active: true }).select(
++      'title slug category description price currency thumbnail'
++    );
++    res.json(docs);
++  } catch (error) {
++    console.error('List Documents Error:', error);
++    res.status(500).json({ message: 'Failed to load documents.' });
++  }
++});
++
++/* ======= CREATE RAZORPAY ORDER ====== */
++
++router.post('/:slug/create-order', paymentLimiter, async (req, res) => {
++  try {
++    const { email, phone } = req.body;
++    const emailRegex = /^\S+@\S+\.\S+$/;
++
++    if (!email || !emailRegex.test(email)) {
++      return res.status(400).json({ message: 'A valid email is required.' });
++    }
++
++    const doc = await Document.findOne({ slug: req.params.slug, active: true });
++    if (!doc) {
++      return res.status(404).json({ message: 'Document not found.' });
++    }
++
++    const amountInPaise = Math.round(doc.price * 100);
++
++    const order = await razorpay.orders.create({
++      amount: amountInPaise,
++      currency: doc.currency || 'INR',
++      receipt: `doc_${doc._id}_${Date.now()}`,
++      notes: { documentId: doc._id.toString(), email }
++    });
++
++    await new Purchase({
++      document: doc._id,
++      email,
++      phone,
++      razorpayOrderId: order.id,
++      amount: doc.price,
++      currency: doc.currency,
++      status: 'created'
++    }).save();
++
++    res.json({
++      orderId: order.id,
++      amount: amountInPaise,
++      currency: order.currency,
++      keyId: process.env.RAZORPAY_KEY_ID,
++      documentTitle: doc.title
++    });
++  } catch (error) {
++    console.error('Create Order Error:', error);
++    res.status(500).json({ message: 'Failed to create payment order.' });
++  }
++});
++
++/* ======= VERIFY PAYMENT & ISSUE DOWNLOAD TOKEN ====== */
++
++router.post('/verify', paymentLimiter, async (req, res) => {
++  try {
++    const {
++      razorpay_order_id,
++      razorpay_payment_id,
++      razorpay_signature
++    } = req.body;
++
++    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
++      return res.status(400).json({ message: 'Missing payment details.' });
++    }
++
++    const expectedSignature = crypto
++      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
++      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
++      .digest('hex');
++
++    if (expectedSignature !== razorpay_signature) {
++      return res.status(400).json({ message: 'Payment verification failed.' });
++    }
++
++    const purchase = await Purchase.findOne({ razorpayOrderId: razorpay_order_id });
++    if (!purchase) {
++      return res.status(404).json({ message: 'Order not found.' });
++    }
++
++    const downloadToken = crypto.randomBytes(24).toString('hex');
++
++    purchase.status = 'paid';
++    purchase.razorpayPaymentId = razorpay_payment_id;
++    purchase.razorpaySignature = razorpay_signature;
++    purchase.downloadToken = downloadToken;
++    purchase.downloadTokenExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24h
++    await purchase.save();
++
++    res.json({
++      message: 'Payment verified.',
++      downloadToken,
++      documentId: purchase.document
++    });
++  } catch (error) {
++    console.error('Verify Payment Error:', error);
++    res.status(500).json({ message: 'Payment verification failed.' });
++  }
++});
++
++/* ======= GATED DOWNLOAD ====== */
++
++router.get('/:slug/download', async (req, res) => {
++  try {
++    const { token } = req.query;
++    if (!token) {
++      return res.status(401).json({ message: 'Missing download token.' });
++    }
++
++    const doc = await Document.findOne({ slug: req.params.slug, active: true });
++    if (!doc) {
++      return res.status(404).json({ message: 'Document not found.' });
++    }
++
++    const purchase = await Purchase.findOne({
++      document: doc._id,
++      downloadToken: token,
++      status: 'paid'
++    });
++
++    if (!purchase) {
++      return res.status(403).json({ message: 'Invalid or unauthorized download link.' });
++    }
++
++    if (purchase.downloadTokenExpiresAt < new Date()) {
++      return res.status(410).json({ message: 'Download link has expired.' });
++    }
++
++    if (purchase.downloadCount >= purchase.maxDownloads) {
++      return res.status(429).json({ message: 'Download limit reached for this purchase.' });
++    }
++
++    const filePath = path.join(PRIVATE_DOCS_PATH, doc.fileName);
++    if (!fs.existsSync(filePath)) {
++      return res.status(404).json({ message: 'File missing on server.' });
++    }
++
++    purchase.downloadCount += 1;
++    await purchase.save();
++
++    res.download(filePath, `${doc.title}.pdf`);
++  } catch (error) {
++    console.error('Download Error:', error);
++    res.status(500).json({ message: 'Failed to download document.' });
++  }
++});
++
++module.exports = router;
+diff --git a/backend/scripts/seedDocuments.js b/backend/scripts/seedDocuments.js
+new file mode 100644
+index 0000000..d9a7b03
+--- /dev/null
++++ b/backend/scripts/seedDocuments.js
+@@ -0,0 +1,64 @@
++// backend/scripts/seedDocuments.js
++// Run once: node scripts/seedDocuments.js
++// Edit the array below, then place the matching PDF files in backend/private-docs/
++
++require('dotenv').config();
++const mongoose = require('mongoose');
++const Document = require('../models/Document');
++
++const sampleDocs = [
++  {
++    title: 'Solar Dryer Product Brochure',
++    slug: 'solar-dryer-brochure',
++    category: 'brochure',
++    description: 'Full specifications and use-cases for the CHDK Solar Food Dehydrator range.',
++    price: 199,
++    fileName: 'solar-dryer-brochure.pdf' // must exist in backend/private-docs/
++  },
++  {
++    title: 'Product Catalogue 2026',
++    slug: 'product-catalogue-2026',
++    category: 'catalogue',
++    description: 'Complete CHDK product catalogue across all business verticals.',
++    price: 299,
++    fileName: 'product-catalogue-2026.pdf'
++  },
++  {
++    title: 'Dehydration SOP Manual',
++    slug: 'dehydration-sop-manual',
++    category: 'sop',
++    description: 'Standard Operating Procedure for solar dryer operation and maintenance.',
++    price: 149,
++    fileName: 'dehydration-sop-manual.pdf'
++  },
++  {
++    title: 'Farm-to-Table Recipe Book',
++    slug: 'farm-to-table-recipe-book',
++    category: 'recipe-book',
++    description: 'Recipes using solar-dried produce, curated for home and commercial kitchens.',
++    price: 99,
++    fileName: 'farm-to-table-recipe-book.pdf'
++  }
++];
++
++async function seed() {
++  await mongoose.connect(process.env.MONGO_URI);
++  console.log('Connected to MongoDB');
++
++  for (const doc of sampleDocs) {
++    await Document.findOneAndUpdate(
++      { slug: doc.slug },
++      doc,
++      { upsert: true, new: true }
++    );
++    console.log(`Upserted: ${doc.title}`);
++  }
++
++  await mongoose.disconnect();
++  console.log('Done.');
++}
++
++seed().catch((err) => {
++  console.error(err);
++  process.exit(1);
++});
+diff --git a/backend/server.js b/backend/server.js
+index 7a17c45..973caaa 100644
+--- a/backend/server.js
++++ b/backend/server.js
+@@ -12,6 +12,7 @@ const helmet = require('helmet');
+ 
+ const Contact = require('./models/Contact');
+ const Apply = require('./models/Apply');
++const documentsRouter = require('./routes/documents');
+ 
+ const app = express();
+ 
+@@ -104,6 +105,10 @@ app.get('/', (req, res) => {
+   res.send('CHDK API is running...');
+ });
+ 
++/* ======= DOCUMENTS / PAYMENT-GATED CATALOGUE API ====== */
++
++app.use('/api/documents', documentsRouter);
++
+ /* ======= CONTACT API ====== */
+ 
+ app.post(
+diff --git a/client/src/App.js b/client/src/App.js
+index 9a3aba9..bde8e8c 100644
+--- a/client/src/App.js
++++ b/client/src/App.js
+@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
+ import Careers from "./pages/Careers";
+ import Gallery from "./pages/Gallery";
+ import Apply from "./pages/Apply";
++import Resources from "./pages/Resources";
+ 
+ /* BUSINESS */
+ import Agriculture from "./pages/business/Agriculture";
+@@ -64,6 +65,7 @@ function App() {
+           <Route path="/careers" element={<Careers />} />
+           <Route path="/gallery" element={<Gallery />} />
+           <Route path="/careers/Apply" element={<Apply />} />
++          <Route path="/resources" element={<Resources />} />
+ 
+           {/* BUSINESS */}
+           <Route path="/business/agriculture" element={<Agriculture />} />
+diff --git a/client/src/components/Navbar.js b/client/src/components/Navbar.js
+index 27179d5..0b33664 100644
+--- a/client/src/components/Navbar.js
++++ b/client/src/components/Navbar.js
+@@ -74,6 +74,7 @@ const NAV_ITEMS = [
+   { label: "Careers", to: "/careers" },
+   { label: "Contact", to: "/contact" },
+   { label: "Gallery", to: "/gallery" },
++  { label: "Resources", to: "/resources" },
+ ];
+ 
+ const SearchIcon = () => (
+diff --git a/client/src/pages/Resources.css b/client/src/pages/Resources.css
+new file mode 100644
+index 0000000..fc92eed
+--- /dev/null
++++ b/client/src/pages/Resources.css
+@@ -0,0 +1,105 @@
++.resources-page {
++  background: var(--black);
++  color: var(--light);
++  font-family: 'Poppins', sans-serif;
++  min-height: 100vh;
++  transition: background-color var(--dur-slow) var(--ease-inout),
++              color var(--dur-slow) var(--ease-inout);
++}
++
++.res-hero {
++  max-width: 1200px;
++  margin: 0 auto;
++  padding: var(--section-md) 5% var(--sp-10);
++}
++
++.res-hero-title {
++  font-size: var(--t-page);
++  font-weight: 700;
++  letter-spacing: -1px;
++  margin: var(--sp-3) 0 var(--sp-5);
++}
++
++.res-hero-sub {
++  font-size: var(--t-body);
++  line-height: 1.8;
++  color: var(--light-60);
++  max-width: 560px;
++}
++
++.res-container {
++  max-width: 1200px;
++  margin: 0 auto;
++  padding: 0 5% var(--section-lg);
++}
++
++.res-state {
++  color: var(--light-60);
++  font-size: var(--t-body);
++  padding: var(--sp-10) 0;
++}
++
++.res-grid {
++  display: grid;
++  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
++  gap: var(--sp-6);
++}
++
++.res-card {
++  display: flex;
++  flex-direction: column;
++  padding: var(--sp-8);
++  transition: var(--t-all);
++}
++
++.res-card:hover {
++  border-color: var(--chdk-accent-20);
++  box-shadow: var(--shadow-md);
++  transform: translateY(-2px);
++}
++
++.res-card-tag {
++  font-size: var(--t-micro);
++  font-weight: 500;
++  letter-spacing: 2px;
++  text-transform: uppercase;
++  color: var(--chdk-cyan);
++}
++
++.res-card-title {
++  font-size: var(--t-card);
++  font-weight: 600;
++  margin: var(--sp-3) 0 var(--sp-2);
++}
++
++.res-card-desc {
++  font-size: var(--t-small);
++  line-height: 1.7;
++  color: var(--light-60);
++  flex-grow: 1;
++  margin-bottom: var(--sp-6);
++}
++
++.res-card-footer {
++  display: flex;
++  justify-content: space-between;
++  align-items: center;
++  padding-top: var(--sp-4);
++  border-top: 1px solid var(--light-08);
++}
++
++.res-card-price {
++  font-size: var(--t-card);
++  font-weight: 700;
++  color: var(--light);
++}
++
++.res-card-btn {
++  padding: var(--sp-2) var(--sp-5);
++  border-radius: var(--radius-pill);
++  background: var(--light-08);
++  color: var(--light-60);
++  font-size: var(--t-small);
++  font-weight: 500;
++  cursor: not-allowed;
++}
+diff --git a/client/src/pages/Resources.js b/client/src/pages/Resources.js
+new file mode 100644
+index 0000000..5cbecdd
+--- /dev/null
++++ b/client/src/pages/Resources.js
+@@ -0,0 +1,67 @@
++import { useEffect, useState } from "react";
++import "./Resources.css";
++
++const CATEGORY_LABELS = {
++  brochure: "Brochure",
++  catalogue: "Catalogue",
++  sop: "SOP",
++  "recipe-book": "Recipe Book",
++};
++
++function DocumentCard({ doc }) {
++  return (
++    <div className="res-card u-surface-card">
++      <span className="res-card-tag">{CATEGORY_LABELS[doc.category] || doc.category}</span>
++      <h3 className="res-card-title">{doc.title}</h3>
++      {doc.description && <p className="res-card-desc">{doc.description}</p>}
++      <div className="res-card-footer">
++        <span className="res-card-price">₹{doc.price}</span>
++        <button className="res-card-btn" disabled title="Payment gateway coming soon">
++          Coming Soon
++        </button>
++      </div>
++    </div>
++  );
++}
++
++export default function Resources() {
++  const [docs, setDocs] = useState([]);
++  const [loading, setLoading] = useState(true);
++  const [error, setError] = useState("");
++
++  useEffect(() => {
++    fetch(`${process.env.REACT_APP_API_URL}/api/documents`)
++      .then((res) => res.json())
++      .then((data) => setDocs(Array.isArray(data) ? data : []))
++      .catch(() => setError("Failed to load resources."))
++      .finally(() => setLoading(false));
++  }, []);
++
++  return (
++    <div className="resources-page">
++      <section className="res-hero">
++        <span className="u-text-label">Downloads</span>
++        <h1 className="res-hero-title">Resources</h1>
++        <p className="res-hero-sub">
++          Brochures, catalogues, SOPs and recipe books from the CHDK Group —
++          available for purchase soon.
++        </p>
++        <div className="u-divider-brand" />
++      </section>
++
++      <section className="res-container">
++        {loading && <p className="res-state">Loading resources…</p>}
++        {!loading && error && <p className="res-state">{error}</p>}
++        {!loading && !error && docs.length === 0 && (
++          <p className="res-state">No resources published yet — check back soon.</p>
++        )}
++
++        <div className="res-grid">
++          {docs.map((doc) => (
++            <DocumentCard key={doc._id} doc={doc} />
++          ))}
++        </div>
++      </section>
++    </div>
++  );
++}

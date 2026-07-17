@@ -12,6 +12,7 @@ const helmet = require('helmet');
 
 const Contact = require('./models/Contact');
 const Apply = require('./models/Apply');
+const documentsRouter = require('./routes/documents');
 
 const app = express();
 
@@ -103,6 +104,10 @@ mongoose.connect(process.env.MONGO_URI)
 app.get('/', (req, res) => {
   res.send('CHDK API is running...');
 });
+
+/* ======= DOCUMENTS / PAYMENT-GATED CATALOGUE API ====== */
+
+app.use('/api/documents', documentsRouter);
 
 /* ======= CONTACT API ====== */
 

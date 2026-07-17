@@ -5,6 +5,8 @@ node_modules/
 .vscode/
 desktop.ini
 uploads/
+backend/private-docs/*
+!backend/private-docs/README.md
 .env
 build/
 dist/

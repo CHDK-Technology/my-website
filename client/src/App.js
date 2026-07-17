@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Gallery from "./pages/Gallery";
 import Apply from "./pages/Apply";
+import Resources from "./pages/Resources";
 
 /* BUSINESS */
 import Agriculture from "./pages/business/Agriculture";
@@ -64,6 +65,7 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/careers/Apply" element={<Apply />} />
+          <Route path="/resources" element={<Resources />} />
 
           {/* BUSINESS */}
           <Route path="/business/agriculture" element={<Agriculture />} />

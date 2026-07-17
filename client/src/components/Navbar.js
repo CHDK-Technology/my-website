@@ -74,6 +74,7 @@ const NAV_ITEMS = [
   { label: "Careers", to: "/careers" },
   { label: "Contact", to: "/contact" },
   { label: "Gallery", to: "/gallery" },
+  { label: "Library", to: "/resources" },
 ];
 
 const SearchIcon = () => (
@@ -105,9 +106,12 @@ const ThemeToggle = ({ darkMode, onToggle, style }) => (
 );
 
 function Navbar() {
-  const [darkMode, setDarkMode] = useState(() =>
-    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem("chdk-theme");
+    if (saved === "dark") return true;
+    if (saved === "light") return false;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
   const [scrolled, setScrolled]             = useState(false);
   const [activeMenu, setActiveMenu]         = useState(null);
   const [searchOpen, setSearchOpen]         = useState(false);
@@ -139,6 +143,7 @@ function Navbar() {
   useEffect(() => {
     document.body.classList.toggle("dark-mode",  darkMode);
     document.body.classList.toggle("light-mode", !darkMode);
+    localStorage.setItem("chdk-theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
   useEffect(() => {
@@ -339,3 +344,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
