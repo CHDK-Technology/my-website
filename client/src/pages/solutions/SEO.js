@@ -9,7 +9,7 @@ import seoHero from "../../assets/seo-hero.png";
 const SERVICES_DATA = [
   {
     title: "Technical SEO Audit",
-    desc: "A comprehensive audit of your website's technical health — identifying crawl errors, speed issues, indexation problems, and structural weaknesses that are limiting your search rankings.",
+    desc: "A comprehensive audit of your website's technical health â€” identifying crawl errors, speed issues, indexation problems, and structural weaknesses that are limiting your search rankings.",
     points: [
       "Crawlability and indexation analysis",
       "Core Web Vitals and page speed audit",
@@ -29,7 +29,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Keyword Research & Strategy",
-    desc: "In-depth keyword research to identify high-value search terms your target audience is using — forming the foundation of your entire content and SEO strategy.",
+    desc: "In-depth keyword research to identify high-value search terms your target audience is using â€” forming the foundation of your entire content and SEO strategy.",
     points: [
       "Short-tail and long-tail keyword identification",
       "Search intent and competitor gap analysis",
@@ -39,7 +39,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Content SEO & Blogging",
-    desc: "SEO-focused content creation — from blog articles and landing pages to service pages — written to rank for your target keywords and drive organic traffic.",
+    desc: "SEO-focused content creation â€” from blog articles and landing pages to service pages â€” written to rank for your target keywords and drive organic traffic.",
     points: [
       "Keyword-optimised blog articles",
       "SEO landing page creation and optimisation",
@@ -59,7 +59,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Local SEO",
-    desc: "Optimisation of your online presence for local and regional search — ensuring your business appears prominently when customers in your area search for your services.",
+    desc: "Optimisation of your online presence for local and regional search â€” ensuring your business appears prominently when customers in your area search for your services.",
     points: [
       "Google Business Profile optimisation",
       "Local citation building and NAP consistency",
@@ -109,9 +109,9 @@ export default function SEO() {
           <svg className="chevron chevron-4" viewBox="0 0 32 18" fill="none"><polyline points="2,2 16,16 30,2" /></svg>
         </a>
         <div className="social">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
         </div>
       </section>
@@ -122,7 +122,7 @@ export default function SEO() {
             <p className="section-label">Our Capability</p>
             <h2 className="section-heading">BE FOUND. BE CHOSEN.</h2>
             <p className="section-description">
-              CHDK Technology Center delivers end-to-end SEO services that combine technical expertise, content strategy, and authority building — helping your business rank for the keywords that matter and attract customers who are ready to buy.
+              CHDK Technology Center delivers end-to-end SEO services that combine technical expertise, content strategy, and authority building â€” helping your business rank for the keywords that matter and attract customers who are ready to buy.
             </p>
           </div>
         </div>

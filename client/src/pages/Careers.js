@@ -7,16 +7,16 @@ import "./Careers.css";
 const FILTERS = ["All", "Engineering", "Operations", "Sales", "IT & Digital", "Management"];
 
 const JOBS = [
-  { id: 1, dept: "Aerospace & Defence", title: "Mechanical Design Engineer", type: "Full Time", location: "Pune", experience: "3–5 yrs", category: "Engineering" },
-  { id: 2, dept: "Renewable Energy", title: "Project Coordinator – Solar", type: "Full Time", location: "Remote", experience: "2–4 yrs", category: "Operations" },
-  { id: 3, dept: "IT Solutions & Digital Marketing", title: "React Developer", type: "Full Time", location: "Hybrid", experience: "1–3 yrs", category: "IT & Digital" },
-  { id: 4, dept: "Material Handling", title: "Site Operations Manager", type: "Full Time", location: "Pune", experience: "5–8 yrs", category: "Operations" },
-  { id: 5, dept: "Smart Storage", title: "Sales Executive – Agri Sector", type: "Full Time", location: "Mumbai", experience: "2–5 yrs", category: "Sales" },
-  { id: 6, dept: "Infrastructure", title: "Civil Engineer – Project Lead", type: "Full Time", location: "Pune", experience: "4–7 yrs", category: "Engineering" },
+  { id: 1, dept: "Aerospace & Defence", title: "Mechanical Design Engineer", type: "Full Time", location: "Pune", experience: "3â€“5 yrs", category: "Engineering" },
+  { id: 2, dept: "Renewable Energy", title: "Project Coordinator â€“ Solar", type: "Full Time", location: "Remote", experience: "2â€“4 yrs", category: "Operations" },
+  { id: 3, dept: "IT Solutions & Digital Marketing", title: "React Developer", type: "Full Time", location: "Hybrid", experience: "1â€“3 yrs", category: "IT & Digital" },
+  { id: 4, dept: "Material Handling", title: "Site Operations Manager", type: "Full Time", location: "Pune", experience: "5â€“8 yrs", category: "Operations" },
+  { id: 5, dept: "Smart Storage", title: "Sales Executive â€“ Agri Sector", type: "Full Time", location: "Mumbai", experience: "2â€“5 yrs", category: "Sales" },
+  { id: 6, dept: "Infrastructure", title: "Civil Engineer â€“ Project Lead", type: "Full Time", location: "Pune", experience: "4â€“7 yrs", category: "Engineering" },
 ];
 
 const WHY_JOIN = [
-  { id: 0, title: "Multi-Sector Exposure", desc: "Work across aerospace, defence, agri-tech, energy and more — no two days are the same." },
+  { id: 0, title: "Multi-Sector Exposure", desc: "Work across aerospace, defence, agri-tech, energy and more â€” no two days are the same." },
   { id: 1, title: "Continuous Learning", desc: "Training programs, mentorship and innovation-led projects to accelerate your growth." },
   { id: 2, title: "People-First Culture", desc: "Inclusive, collaborative and purpose-driven environment where your voice matters." },
   { id: 3, title: "Impactful Work", desc: "Your engineering contributes directly to national infrastructure and critical industries." },
@@ -66,7 +66,7 @@ function JobListings() {
                 </div>
               </div>
 <a href="/careers/apply" className="careers-apply-btn">
-  Apply →
+  Apply â†’
 </a>
             </div>
           ))}
@@ -113,9 +113,9 @@ function Careers() {
   </a>
 
   <div className="social">
-    <a href="https://linkedin.com" className="social-link social-linkedin"><FaLinkedin /></a>
-    <a href="https://instagram.com" className="social-link social-instagram"><FaInstagram /></a>
-    <a href="https://facebook.com" className="social-link social-facebook"><FaFacebook /></a>
+    <a href="https://www.linkedin.com/company/chdk-india/" className="social-link social-linkedin"><FaLinkedin /></a>
+    <a href="https://www.instagram.com/chdk_technology_center/" className="social-link social-instagram"><FaInstagram /></a>
+    <a href="https://www.facebook.com/share/1J1A5P7Co1/" className="social-link social-facebook"><FaFacebook /></a>
     <a href="mailto:info@chdkindia.com" className="social-link social-mail"><HiOutlineMail /></a>
   </div>
 </section>
@@ -129,9 +129,9 @@ function Careers() {
               <p className="careers-section-label">Why CHDK</p>
               <h2 className="careers-section-heading">SHAPE IDEAS<br />INTO INNOVATION</h2>
               <p className="careers-section-desc">
-                At CHDK Technology Center, your career is more than a designation. It is a mission. We build critical solutions across industries that matter — and we do it with talented, driven people like you.
+                At CHDK Technology Center, your career is more than a designation. It is a mission. We build critical solutions across industries that matter â€” and we do it with talented, driven people like you.
               </p>
-              <a href="/about/overview" className="careers-know-more-btn">About Us <span>→</span></a>
+              <a href="/about/overview" className="careers-know-more-btn">About Us <span>â†’</span></a>
             </div>
 
             <div className="careers-why-cards-grid">

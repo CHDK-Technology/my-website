@@ -65,9 +65,9 @@ export default function Aerospace() {
 </a>
 
         <div className="social">
-          <a href="https://linkedin.com" className="social-link social-linkedin"><FaLinkedin /></a>
-          <a href="https://instagram.com" className="social-link social-instagram"><FaInstagram /></a>
-          <a href="https://facebook.com" className="social-link social-facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" className="social-link social-linkedin"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" className="social-link social-instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" className="social-link social-facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail"><HiOutlineMail /></a>
         </div>
       </section>
@@ -87,7 +87,7 @@ export default function Aerospace() {
 
             <p className="section-description">
               From structural components to advanced defence solutions, CHDK delivers
-              technology that performs under extreme conditions — where reliability is everything.
+              technology that performs under extreme conditions â€” where reliability is everything.
             </p>
           </div>
 
@@ -178,7 +178,7 @@ export default function Aerospace() {
 
       <ul className="domain-list">
         {item.points.map((point, index) => (
-          <li key={index}>• {point}</li>
+          <li key={index}>â€¢ {point}</li>
         ))}
       </ul>
 

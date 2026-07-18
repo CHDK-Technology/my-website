@@ -87,7 +87,7 @@ export default function CalibrationPage() {
             <span>ON-SITE ACCURACY.</span>
           </h1>
           <p className="calibration-hero-subtitle">
-            Highly accurate portable calibration and inspection services — ensuring your equipment meets strict quality and dimensional standards, right where you need it.
+            Highly accurate portable calibration and inspection services â€” ensuring your equipment meets strict quality and dimensional standards, right where you need it.
           </p>
         </div>
 
@@ -99,9 +99,9 @@ export default function CalibrationPage() {
         </a>
 
         <div className="social">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
         </div>
       </section>

@@ -9,10 +9,10 @@ import "./precision-manufacturing.css";
 const SERVICES_DATA = [
   {
     title: "CNC Precision Machining",
-    desc: "High-accuracy CNC milling, turning, and multi-axis machining of complex components across a wide range of materials — from aluminium alloys to titanium and exotic aerospace materials.",
+    desc: "High-accuracy CNC milling, turning, and multi-axis machining of complex components across a wide range of materials â€” from aluminium alloys to titanium and exotic aerospace materials.",
     points: [
       "3, 4, and 5-axis CNC machining",
-      "Tight tolerance manufacturing (±0.005mm)",
+      "Tight tolerance manufacturing (Â±0.005mm)",
       "Aluminium, steel, titanium, Inconel, and plastics",
       "Prototyping through to high-volume production",
     ],
@@ -59,7 +59,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Quality Inspection & CMM",
-    desc: "In-house CMM and portable metrology inspection at every stage of manufacturing — ensuring every component meets drawing tolerances before it leaves our facility.",
+    desc: "In-house CMM and portable metrology inspection at every stage of manufacturing â€” ensuring every component meets drawing tolerances before it leaves our facility.",
     points: [
       "CMM dimensional inspection",
       "First article inspection (FAI)",
@@ -99,7 +99,7 @@ export default function PrecisionManufacturing() {
             <span>BUILT RIGHT.</span>
           </h1>
           <p className="precmfg-hero-subtitle">
-            High-accuracy CNC machining, fabrication, and assembly for aerospace, defence, and industrial applications — where every micron matters.
+            High-accuracy CNC machining, fabrication, and assembly for aerospace, defence, and industrial applications â€” where every micron matters.
           </p>
         </div>
         <a href="#precmfg-services" className="hero-scroll-chevrons" aria-label="Scroll down">
@@ -109,9 +109,9 @@ export default function PrecisionManufacturing() {
           <svg className="chevron chevron-4" viewBox="0 0 32 18" fill="none"><polyline points="2,2 16,16 30,2" /></svg>
         </a>
         <div className="social">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
         </div>
       </section>
@@ -122,7 +122,7 @@ export default function PrecisionManufacturing() {
             <p className="section-label">Our Capability</p>
             <h2 className="section-heading">MANUFACTURED TO THE LAST MICRON.</h2>
             <p className="section-description">
-              CHDK Technology Center operates precision manufacturing facilities equipped with advanced CNC machining, metrology, and quality systems — delivering components that meet the tightest tolerances in aerospace, defence, and industrial engineering.
+              CHDK Technology Center operates precision manufacturing facilities equipped with advanced CNC machining, metrology, and quality systems â€” delivering components that meet the tightest tolerances in aerospace, defence, and industrial engineering.
             </p>
           </div>
         </div>

@@ -53,7 +53,7 @@ const SLIDES = [
     panel: "Defence Technology",
   },
   {
-    bg: "/slide3.jpeg",
+    bg: "/slide3.webp",
     title: ["Keep Every", "Harvest", "Fresh"],
     stat: "Smart technologies designed to minimize losses, enhance shelf life, and maximize the value of every harvest.",
     link:{
@@ -63,7 +63,7 @@ const SLIDES = [
     panel: "Agricultural Solutions",
   },
   {
-    bg: "/slide4.png",
+    bg: "/slide4.webp",
     title: ["Clean Energy", "With", "Iconic Designs"],
     stat: "Sustainable Energy Solutions for a Cleaner Tomorrow",
     link:{
@@ -73,7 +73,7 @@ const SLIDES = [
     panel: "Renewable Energy Technology",
   },
   {
-    bg: "/slide5.png",
+    bg: "/slide5.webp",
     title: ["Redefining", "Modern", "Infrastructure"],
     stat: "Durable, Efficient Solutions For Corporate & Residential Needs.",
     link:{
@@ -103,28 +103,28 @@ const ACCORDION_DATA = [
     id: "03",
     title: "Renewable Energy",
     desc: "Building Energy Ecosystems Powered by Nature.",
-    img: "/acc4.jpg",
+    img: "/acc4.webp",
     link: "/business/renewable-energy"
   },
   {
     id: "05",
     title: "Infrastructure",
     desc: "Building , future-ready infrastructure from the ground up.",
-    img: "/acc6.jpg",
+    img: "/acc6.webp",
     link: "/business/infrastructure"
   },
   {
     id: "04",
     title: "Industrial Services",
     desc: "Innovation That Drives Industrial Growth.",
-    img: "/acc5.png",
+    img: "/acc5.webp",
     link: "/business/industrial-services"
   },
   {
     id: "06",
     title: "Waste Management",
     desc: "Driving sustainability through advanced waste reduction methods.",
-    img: "/acc7.png",
+    img: "/acc7.webp",
     link: "/business/waste-management"
   },
   {
@@ -237,12 +237,12 @@ function WhySection() {
   );
 }
 const EVENT_IMAGES = [
-  { src: "/event1.png", alt: "CHDK Event" },
-  { src: "/event2.png", alt: "CHDK Event" },
-  { src: "/event3.png", alt: "CHDK Event" },
-  { src: "/event1.png", alt: "CHDK Event" },
-  { src: "/event2.png", alt: "CHDK Event" },
-  { src: "/event3.png", alt: "CHDK Event" },
+  { src: "/event1.webp", alt: "CHDK Event" },
+  { src: "/event2.webp", alt: "CHDK Event" },
+  { src: "/event3.webp", alt: "CHDK Event" },
+  { src: "/event1.webp", alt: "CHDK Event" },
+  { src: "/event2.webp", alt: "CHDK Event" },
+  { src: "/event3.webp", alt: "CHDK Event" },
 ];
 
 

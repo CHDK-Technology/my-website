@@ -81,17 +81,17 @@ const APPROACH_STEPS = [
   {
     num: "01",
     title: "Understand",
-    desc: "We start with a deep-dive into your operational environment, technical requirements, and quality expectations — ensuring our solution is precisely engineered for your context.",
+    desc: "We start with a deep-dive into your operational environment, technical requirements, and quality expectations â€” ensuring our solution is precisely engineered for your context.",
   },
   {
     num: "02",
     title: "Engineer",
-    desc: "Using advanced tools and industry expertise, we design and build solutions that meet your exact specifications — with zero compromise on accuracy, compliance, or performance.",
+    desc: "Using advanced tools and industry expertise, we design and build solutions that meet your exact specifications â€” with zero compromise on accuracy, compliance, or performance.",
   },
   {
     num: "03",
     title: "Deliver",
-    desc: "Comprehensive deliverables — whether inspection reports, CAD files, manufactured parts, or deployed digital products — handed off with full documentation and support.",
+    desc: "Comprehensive deliverables â€” whether inspection reports, CAD files, manufactured parts, or deployed digital products â€” handed off with full documentation and support.",
   },
 ];
 
@@ -159,16 +159,16 @@ export default function SolutionsOverview() {
 
   {/* Social Icons */}
   <div className="social">
-    <a href="https://linkedin.com" className="social-link social-linkedin"><FaLinkedin /></a>
-    <a href="https://instagram.com" className="social-link social-instagram"><FaInstagram /></a>
-    <a href="https://facebook.com" className="social-link social-facebook"><FaFacebook /></a>
+    <a href="https://www.linkedin.com/company/chdk-india/" className="social-link social-linkedin"><FaLinkedin /></a>
+    <a href="https://www.instagram.com/chdk_technology_center/" className="social-link social-instagram"><FaInstagram /></a>
+    <a href="https://www.facebook.com/share/1J1A5P7Co1/" className="social-link social-facebook"><FaFacebook /></a>
     <a href="mailto:info@chdkindia.com" className="social-link social-mail"><HiOutlineMail /></a>
   </div>
 
 </section>
 
 
-      {/* ─── INTRO ─── */}
+      {/* â”€â”€â”€ INTRO â”€â”€â”€ */}
       <section className="sol-intro">
         <div className="sol-container">
           <div className="sol-intro-grid">
@@ -186,7 +186,7 @@ CHDK Technology Center delivers engineering and digital solutions across metrolo
         </div>
       </section>
 
-      {/* ─── SERVICE CATEGORIES ─── */}
+      {/* â”€â”€â”€ SERVICE CATEGORIES â”€â”€â”€ */}
       <section className="sol-categories">
         <div className="sol-container">
           <div className="sol-categories-header">
@@ -213,7 +213,7 @@ CHDK Technology Center delivers engineering and digital solutions across metrolo
       </section>
 
 
-      {/* ─── INDUSTRIES ─── */}
+      {/* â”€â”€â”€ INDUSTRIES â”€â”€â”€ */}
       <section className="sol-industries">
         <div className="sol-container">
           <div className="sol-industries-header">

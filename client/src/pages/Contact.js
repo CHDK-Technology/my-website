@@ -24,7 +24,7 @@ function ContactForm() {
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // ── FIXED: Now calls your real backend API ──────────────────────────────────
+  // â”€â”€ FIXED: Now calls your real backend API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("submitting");
@@ -57,7 +57,7 @@ function ContactForm() {
     <form className="contact-form-block" onSubmit={handleSubmit}>
       {status === "success" && (
         <div style={{ padding: "14px 16px", background: "rgba(46, 213, 115, 0.1)", border: "1px solid #2ed573", color: "#2ed573", borderRadius: "4px", fontSize: "14px", fontWeight: "500" }}>
-          ✅ Your message has been sent successfully! We will be in touch within 24 hours.
+          âœ… Your message has been sent successfully! We will be in touch within 24 hours.
         </div>
       )}
       {status === "error" && (
@@ -108,7 +108,7 @@ function ContactForm() {
       </div>
 
       <button type="submit" className="contact-submit-btn" disabled={status === "submitting"}>
-        {status === "submitting" ? "Sending..." : "Send Message"} <span>→</span>
+        {status === "submitting" ? "Sending..." : "Send Message"} <span>â†’</span>
       </button>
     </form>
   );
@@ -137,11 +137,11 @@ function Contact() {
           <svg className="chevron chevron-4" viewBox="0 0 32 18" fill="none"><polyline points="2,2 16,16 30,2" /></svg>
         </a>
 
-        {/* ── FIXED: Real CHDK social links ── */}
+        {/* â”€â”€ FIXED: Real CHDK social links â”€â”€ */}
         <div className="social">
-          <a href="https://linkedin.com/company/chdk-technology-center" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://instagram.com/chdktechnology" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://facebook.com/chdktechnology" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
         </div>
       </section>

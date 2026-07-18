@@ -37,11 +37,11 @@ const CAPABILITIES = [
   },
   {
     title: "Flush & Overlap Doors",
-    desc: "Precision-manufactured flush and overlap doors built for industrial facilities — combining structural integrity with smooth, reliable operation.",
+    desc: "Precision-manufactured flush and overlap doors built for industrial facilities â€” combining structural integrity with smooth, reliable operation.",
   },
   {
     title: "Portable Houses",
-    desc: "Rapidly deployable portable housing solutions for remote sites, project camps, and temporary accommodation — engineered for durability and comfort.",
+    desc: "Rapidly deployable portable housing solutions for remote sites, project camps, and temporary accommodation â€” engineered for durability and comfort.",
   },
   {
     title: "Portable Offices",
@@ -49,14 +49,14 @@ const CAPABILITIES = [
   },
   {
     title: "Custom Modular Structures",
-    desc: "Bespoke modular infrastructure solutions designed to client specifications — from control rooms and guard cabins to large-scale prefabricated facilities.",
+    desc: "Bespoke modular infrastructure solutions designed to client specifications â€” from control rooms and guard cabins to large-scale prefabricated facilities.",
   },
 ];
 
 const STEPS = [
   {
     title: "Durability First",
-    desc: "Every infrastructure product we manufacture is built to last — engineered with high-grade materials that withstand extreme weather, heavy use, and industrial environments.",
+    desc: "Every infrastructure product we manufacture is built to last â€” engineered with high-grade materials that withstand extreme weather, heavy use, and industrial environments.",
   },
   {
     title: "Insulation Efficiency",
@@ -64,11 +64,11 @@ const STEPS = [
   },
   {
     title: "Rapid Deployment",
-    desc: "Prefabricated and modular construction dramatically reduces on-site build time — getting your facility operational faster with minimal disruption.",
+    desc: "Prefabricated and modular construction dramatically reduces on-site build time â€” getting your facility operational faster with minimal disruption.",
   },
   {
     title: "End-to-End Manufacturing",
-    desc: "From design and fabrication to delivery and installation — CHDK manages the entire infrastructure supply chain under one roof.",
+    desc: "From design and fabrication to delivery and installation â€” CHDK manages the entire infrastructure supply chain under one roof.",
   },
 ];
 
@@ -89,7 +89,7 @@ export default function Infrastructure() {
             STRUCTURES BUILT<br />TO LAST
           </h1>
           <p className="biz-hero-subtitle">
-            High-quality modular infrastructure products — PUF panels, roofing systems, portable offices and houses — engineered for durability, speed, and efficiency.
+            High-quality modular infrastructure products â€” PUF panels, roofing systems, portable offices and houses â€” engineered for durability, speed, and efficiency.
           </p>
         </div>
 
@@ -101,9 +101,9 @@ export default function Infrastructure() {
         </a>
 
         <div className="social">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
         </div>
       </section>
@@ -119,7 +119,7 @@ export default function Infrastructure() {
               CHDK Technology Center manufactures high-quality infrastructure products designed for durability, insulation efficiency, and rapid deployment across diverse industries.
             </p>
             <p className="section-description">
-              Our product range includes PUF Panels, Sandwich Panels, Roofing Panels, Flush Doors, Overlap Doors, Portable Houses, and Portable Offices — built to perform in demanding industrial and commercial environments.
+              Our product range includes PUF Panels, Sandwich Panels, Roofing Panels, Flush Doors, Overlap Doors, Portable Houses, and Portable Offices â€” built to perform in demanding industrial and commercial environments.
             </p>
           </div>
 

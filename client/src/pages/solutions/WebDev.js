@@ -9,7 +9,7 @@ import "./WebDev.css";
 const SERVICES_DATA = [
   {
     title: "Custom Website Development",
-    desc: "Bespoke websites built from the ground up — designed for your brand, optimised for performance, and engineered to convert visitors into customers.",
+    desc: "Bespoke websites built from the ground up â€” designed for your brand, optimised for performance, and engineered to convert visitors into customers.",
     points: [
       "Fully custom design and development",
       "React, Next.js, and modern web technologies",
@@ -21,7 +21,7 @@ const SERVICES_DATA = [
 
   {
     title: "Web Portal & Dashboard Development",
-    desc: "Secure web portals, admin dashboards, and client-facing platforms — giving your team and customers real-time access to the data and tools they need.",
+    desc: "Secure web portals, admin dashboards, and client-facing platforms â€” giving your team and customers real-time access to the data and tools they need.",
     points: [
       "Role-based access control",
       "Real-time data dashboards",
@@ -31,7 +31,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Website Maintenance & Support",
-    desc: "Ongoing website maintenance, security updates, performance monitoring, and content updates — keeping your website fast, secure, and up to date.",
+    desc: "Ongoing website maintenance, security updates, performance monitoring, and content updates â€” keeping your website fast, secure, and up to date.",
     points: [
       "Regular security patches and updates",
       "Performance monitoring and optimisation",
@@ -71,7 +71,7 @@ export default function WebDev() {
             <span>BUILT FOR THE WEB.</span>
           </h1>
           <p className="webdev-hero-subtitle">
-            Custom, high-performance websites and web applications — built to represent your brand, engage your audience, and grow your business online.
+            Custom, high-performance websites and web applications â€” built to represent your brand, engage your audience, and grow your business online.
           </p>
         </div>
         <a href="#webdev-services" className="hero-scroll-chevrons" aria-label="Scroll down">
@@ -81,9 +81,9 @@ export default function WebDev() {
           <svg className="chevron chevron-4" viewBox="0 0 32 18" fill="none"><polyline points="2,2 16,16 30,2" /></svg>
         </a>
         <div className="social">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
         </div>
       </section>

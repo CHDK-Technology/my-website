@@ -51,7 +51,7 @@ const CAPABILITIES = [
   },
   {
     title: "Ripening Chambers",
-    desc: "Precision-controlled ripening chambers for uniform, commercial-grade ripening of fruits — reducing waste and improving market quality.",
+    desc: "Precision-controlled ripening chambers for uniform, commercial-grade ripening of fruits â€” reducing waste and improving market quality.",
   },
 ];
 
@@ -66,7 +66,7 @@ const STEPS = [
   },
   {
     title: "Customised for Every Scale",
-    desc: "From small farm units to large commercial facilities — our systems are designed and sized to meet your exact requirements.",
+    desc: "From small farm units to large commercial facilities â€” our systems are designed and sized to meet your exact requirements.",
   },
   {
     title: "End-to-End Support",
@@ -104,9 +104,9 @@ export default function Agriculture() {
         </a>
 
         <div className="social">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
         </div>
       </section>
@@ -122,7 +122,7 @@ export default function Agriculture() {
               CHDK Technology Center is a leading manufacturer of advanced food preservation and processing solutions that directly address post-harvest losses across India.
             </p>
             <p className="section-description">
-              Our product range — from Solar Cold Storage to Tunnel Dryers and Ripening Chambers — is designed to enhance shelf life, support sustainable agricultural practices, and empower farmers and agri-businesses at every scale.
+              Our product range â€” from Solar Cold Storage to Tunnel Dryers and Ripening Chambers â€” is designed to enhance shelf life, support sustainable agricultural practices, and empower farmers and agri-businesses at every scale.
             </p>
           </div>
 

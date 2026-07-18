@@ -10,7 +10,7 @@ import "./AppDev.css";
 const APPDEV_DATA = [
   {
     title: "Mobile App Development",
-    desc: "Native and cross-platform mobile applications for iOS and Android — built for performance, scalability, and a seamless user experience.",
+    desc: "Native and cross-platform mobile applications for iOS and Android â€” built for performance, scalability, and a seamless user experience.",
     points: [
       "React Native and Flutter cross-platform apps",
       "Native iOS (Swift) and Android (Kotlin) development",
@@ -20,7 +20,7 @@ const APPDEV_DATA = [
   },
   {
     title: "Web Application Development",
-    desc: "Robust, scalable web applications that power business operations — from internal tools and dashboards to customer-facing platforms.",
+    desc: "Robust, scalable web applications that power business operations â€” from internal tools and dashboards to customer-facing platforms.",
     points: [
       "React, Next.js, and modern frontend frameworks",
       "RESTful API and GraphQL integration",
@@ -40,7 +40,7 @@ const APPDEV_DATA = [
   },
   {
     title: "UI/UX Design",
-    desc: "User-centred design that combines aesthetic precision with intuitive functionality — ensuring every touchpoint delivers a great experience.",
+    desc: "User-centred design that combines aesthetic precision with intuitive functionality â€” ensuring every touchpoint delivers a great experience.",
     points: [
       "Wireframing and interactive prototyping",
       "Design systems and component libraries",
@@ -103,7 +103,7 @@ export default function AppDev() {
             <span>PRODUCTS THAT GROW.</span>
           </h1>
           <p className="appdev-hero-subtitle">
-            End-to-end mobile and web application development — from strategy and design to deployment and support, built to scale with your business.
+            End-to-end mobile and web application development â€” from strategy and design to deployment and support, built to scale with your business.
           </p>
         </div>
 
@@ -115,9 +115,9 @@ export default function AppDev() {
         </a>
 
         <div className="social">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
+          <a href="https://www.linkedin.com/company/chdk-india/" target="_blank" rel="noreferrer" className="social-link social-linkedin" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/chdk_technology_center/" target="_blank" rel="noreferrer" className="social-link social-instagram" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1J1A5P7Co1/" target="_blank" rel="noreferrer" className="social-link social-facebook" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:info@chdkindia.com" className="social-link social-mail" aria-label="Email"><HiOutlineMail /></a>
         </div>
       </section>
