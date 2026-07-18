@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-/* ════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ROOT VARIABLES
-════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 :root {
   --nav-height: 62px;
   --nav-bg:     rgba(10, 10, 10, 0.4);
@@ -197,14 +197,14 @@ body.light-mode .navbar.dropdown-open .quote-btn:hover {
 .navbar.dropdown-open .quote-btn     { color: #efefef !important; border-color: rgba(239,239,239,0.25) !important; }
 .navbar.dropdown-open .quote-btn:hover { background: #efefef !important; color: #111 !important; border-color: #efefef !important; }
 
-/* ── Logo ── */
+/* â”€â”€ Logo â”€â”€ */
 .nav-left { display: flex; align-items: center; }
 .logo-img {
 height: 62px;
   display: block;
   object-fit: contain;
 }
-/* ── Center ── */
+/* â”€â”€ Center â”€â”€ */
 .nav-center {
   display: flex;
   align-items: center;
@@ -266,7 +266,7 @@ height: 62px;
   width: 100%;
 }
 
-/* ── Right ── */
+/* â”€â”€ Right â”€â”€ */
 .nav-right {
   display: flex;
   align-items: center;
@@ -279,7 +279,7 @@ height: 62px;
   align-items: center;
 }
 
-/* ── Search icon ── */
+/* â”€â”€ Search icon â”€â”€ */
 .search-icon-btn {
   background: none;
   border: none;
@@ -294,7 +294,7 @@ height: 62px;
 .search-icon-btn:hover { opacity: 0.75; }
 .search-icon-btn svg   { width: 23px; height: 23px; display: block; }
 
-/* ── Theme switch ── */
+/* â”€â”€ Theme switch â”€â”€ */
 .theme-switch {
   display: flex;
   align-items: center;
@@ -349,7 +349,7 @@ height: 62px;
   left: 3px;
 }
 
-/* ── Quote button ── */
+/* â”€â”€ Quote button â”€â”€ */
 .quote-btn {
   display: flex;
   align-items: center;
@@ -371,7 +371,7 @@ height: 62px;
 }
 .quote-btn .quote-arrow { width: 14px; height: 14px; transition: transform 0.25s ease; flex-shrink: 0; }
 .quote-btn:hover {
-  /* IMPROVEMENT: Brand gradient fill on hover — premium CTA feel */
+  /* IMPROVEMENT: Brand gradient fill on hover â€” premium CTA feel */
   background: linear-gradient(90deg,  #3057b9 0%, #063b92 100%);
   color: #ffffff;
   border-color: transparent;
@@ -579,6 +579,53 @@ width: auto;
 }
 .mobile-drawer.open { transform: translateX(0); }
 
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 20px 12px;
+  flex-shrink: 0;
+}
+
+.mobile-drawer-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--light);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.mobile-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--light);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.mobile-drawer-close:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+  transform: rotate(90deg);
+}
+
+body.light-mode .mobile-drawer-title { color: var(--light); }
+body.light-mode .mobile-drawer-close {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.1);
+  color: var(--light);
+}
+body.light-mode .mobile-drawer-close:hover {
+  background: rgba(0,0,0,0.1);
+  border-color: rgba(0,0,0,0.2);
+}
+
 .mobile-search-bar {
   display: flex;
   align-items: center;
@@ -745,7 +792,7 @@ body.light-mode .mobile-submenu-overview:hover { color: #000; }
 }
 
 
-/* ── 1200px: tighter gaps ── */
+/* â”€â”€ 1200px: tighter gaps â”€â”€ */
 @media (max-width: 1200px) {
   .navbar       { padding: 0 40px; }
   .nav-center   { gap: 22px; }
@@ -753,7 +800,7 @@ body.light-mode .mobile-submenu-overview:hover { color: #000; }
   .quote-btn    { padding: 8px 14px; font-size: 12px; }
 }
 
-/* ── 1024px: hide quote, tighten ── */
+/* â”€â”€ 1024px: hide quote, tighten â”€â”€ */
 @media (max-width: 1024px) {
   .navbar { padding: 0 32px; }
   .nav-center { gap: 18px; }
@@ -762,7 +809,7 @@ body.light-mode .mobile-submenu-overview:hover { color: #000; }
   .nav-desktop-only .quote-btn { display: none; }
 }
 
-/* ── 900px: switch to hamburger ── */
+/* â”€â”€ 900px: switch to hamburger â”€â”€ */
 @media (max-width: 900px) {
   .navbar { padding: 0 20px; }
 
@@ -781,7 +828,7 @@ body.light-mode .mobile-submenu-overview:hover { color: #000; }
   .search-icon-btn { display: flex; }
 }
 
-/* ── 480px: smallest phones ── */
+/* â”€â”€ 480px: smallest phones â”€â”€ */
 @media (max-width: 480px) {
   .navbar       { padding: 0 16px; }
   .logo-img     { height: 56px; }

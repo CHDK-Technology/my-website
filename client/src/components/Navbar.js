@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "./Navbar.css";
@@ -81,6 +81,13 @@ const SearchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
     <circle cx="11" cy="11" r="8" />
     <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
   </svg>
 );
 
@@ -216,7 +223,7 @@ function Navbar() {
   };
   return (
     <>
-      {/* ══ NAVBAR ══ */}
+      {/* â•â• NAVBAR â•â• */}
       <nav className={["navbar", scrolled ? "scrolled" : "", activeMenu ? "dropdown-open" : ""].filter(Boolean).join(" ")}>
 
         <div className="nav-left">
@@ -271,15 +278,27 @@ function Navbar() {
 
       {renderMegaMenu()}
 
-      {/* ══ MOBILE: dim backdrop ══ */}
+      {/* â•â• MOBILE: dim backdrop â•â• */}
       <div
         className={`mobile-backdrop ${mobileOpen ? "open" : ""}`}
         onClick={closeMobile}
         aria-hidden="true"
       />
 
-      {/* ══ MOBILE DRAWER ══ */}
+      {/* â•â• MOBILE DRAWER â•â• */}
       <aside className={`mobile-drawer ${mobileOpen ? "open" : ""}`} aria-label="Navigation menu">
+
+        {/* Drawer header: title + close button */}
+        <div className="mobile-drawer-header">
+          <span className="mobile-drawer-title">Menu</span>
+          <button
+            className="mobile-drawer-close"
+            onClick={closeMobile}
+            aria-label="Close menu"
+          >
+            <CloseIcon />
+          </button>
+        </div>
 
         {/* Search bar */}
         <button
@@ -287,7 +306,7 @@ function Navbar() {
           onClick={() => { setSearchOpen(true); closeMobile(); }}
         >
           <SearchIcon />
-          <span>Search pages, services…</span>
+          <span>Search pages, servicesâ€¦</span>
         </button>
 
         {/* Links */}
@@ -327,7 +346,7 @@ function Navbar() {
                       className="mobile-submenu-link mobile-submenu-overview"
                       onClick={closeMobile}
                     >
-                      {MENU_DATA[item.label].overviewText} →
+                      {MENU_DATA[item.label].overviewText} â†’
                     </Link>
                   )}
                   {MENU_DATA[item.label].columns.flat().map((link, i) => (
