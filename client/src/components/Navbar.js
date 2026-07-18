@@ -306,7 +306,7 @@ function Navbar() {
           onClick={() => { setSearchOpen(true); closeMobile(); }}
         >
           <SearchIcon />
-          <span>Search pages, servicesâ€¦</span>
+          <span>Search pages, services…</span>
         </button>
 
         {/* Links */}
@@ -346,7 +346,7 @@ function Navbar() {
                       className="mobile-submenu-link mobile-submenu-overview"
                       onClick={closeMobile}
                     >
-                      {MENU_DATA[item.label].overviewText} â†’
+                      {MENU_DATA[item.label].overviewText} →
                     </Link>
                   )}
                   {MENU_DATA[item.label].columns.flat().map((link, i) => (
