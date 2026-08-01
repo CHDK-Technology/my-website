@@ -18,10 +18,25 @@ const Purchase = require('../models/Purchase');
 
 const router = express.Router();
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET
-});
+// Razorpay is only constructed lazily, on first actual use — never at
+// module-load time. This means a missing/misconfigured API key disables
+// just the payment route (with a clear error) instead of crashing the
+// entire backend and taking down every other route on deploy.
+let razorpay = null;
+function getRazorpay() {
+  if (razorpay) return razorpay;
+  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+    console.error(
+      'RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET are not set — the document purchase route is disabled until they are configured in the environment.'
+    );
+    return null;
+  }
+  razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
+  });
+  return razorpay;
+}
 
 const PRIVATE_DOCS_PATH = path.join(__dirname, '..', 'private-docs');
 
@@ -95,9 +110,16 @@ router.post('/:slug/create-order', paymentLimiter, async (req, res) => {
       return res.status(404).json({ message: 'Document not found.' });
     }
 
+    const razorpayClient = getRazorpay();
+    if (!razorpayClient) {
+      return res.status(503).json({
+        message: 'Payments are temporarily unavailable. Please try again later.'
+      });
+    }
+
     const amountInPaise = Math.round(doc.price * 100);
 
-    const order = await razorpay.orders.create({
+    const order = await razorpayClient.orders.create({
       amount: amountInPaise,
       currency: doc.currency || 'INR',
       receipt: `doc_${doc._id.toString().slice(-10)}_${Date.now()}`,
