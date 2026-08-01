@@ -104,7 +104,7 @@ export default function AdvancedMetrology() {
             <span>EVERY SCALE.</span>
           </h1>
           <p className="metrology-hero-subtitle">
-            Precision-driven engineering and inspection solutions powered by advanced technologies â€” supporting aerospace, defence, manufacturing, and heavy engineering.
+            Precision-driven engineering and inspection solutions powered by advanced technologies — supporting aerospace, defence, manufacturing, and heavy engineering.
           </p>
         </div>
 

@@ -29,7 +29,7 @@ function useReveal() {
 const CAPABILITIES = [
   {
     title: "Precision Inspection",
-    desc: "High-accuracy dimensional inspection using advanced portable metrology tools â€” ensuring components conform to design specifications and industry standards.",
+    desc: "High-accuracy dimensional inspection using advanced portable metrology tools — ensuring components conform to design specifications and industry standards.",
   },
   {
     title: "Tracking & Measurement",
@@ -56,7 +56,7 @@ const CAPABILITIES = [
 const STEPS = [
   {
     title: "Improve Accuracy & Efficiency",
-    desc: "Our precision inspection and measurement services help manufacturers identify deviations early â€” reducing rework, scrap, and quality costs.",
+    desc: "Our precision inspection and measurement services help manufacturers identify deviations early — reducing rework, scrap, and quality costs.",
   },
   {
     title: "Advanced Technology Stack",
@@ -119,7 +119,7 @@ export default function IndustrialServices() {
               CHDK offers comprehensive industrial and metrology services that help manufacturers improve accuracy, streamline operations, and accelerate product development.
             </p>
             <p className="section-description">
-              From precision inspection and tracking measurement to 3D design, reverse engineering, CAD/CAM solutions, 3D scanning, and 3D printing â€” our services cover the full industrial engineering workflow.
+              From precision inspection and tracking measurement to 3D design, reverse engineering, CAD/CAM solutions, 3D scanning, and 3D printing — our services cover the full industrial engineering workflow.
             </p>
           </div>
 

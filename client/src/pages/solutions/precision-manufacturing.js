@@ -9,7 +9,7 @@ import "./precision-manufacturing.css";
 const SERVICES_DATA = [
   {
     title: "CNC Precision Machining",
-    desc: "High-accuracy CNC milling, turning, and multi-axis machining of complex components across a wide range of materials â€” from aluminium alloys to titanium and exotic aerospace materials.",
+    desc: "High-accuracy CNC milling, turning, and multi-axis machining of complex components across a wide range of materials — from aluminium alloys to titanium and exotic aerospace materials.",
     points: [
       "3, 4, and 5-axis CNC machining",
       "Tight tolerance manufacturing (Â±0.005mm)",
@@ -59,7 +59,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Quality Inspection & CMM",
-    desc: "In-house CMM and portable metrology inspection at every stage of manufacturing â€” ensuring every component meets drawing tolerances before it leaves our facility.",
+    desc: "In-house CMM and portable metrology inspection at every stage of manufacturing — ensuring every component meets drawing tolerances before it leaves our facility.",
     points: [
       "CMM dimensional inspection",
       "First article inspection (FAI)",
@@ -99,7 +99,7 @@ export default function PrecisionManufacturing() {
             <span>BUILT RIGHT.</span>
           </h1>
           <p className="precmfg-hero-subtitle">
-            High-accuracy CNC machining, fabrication, and assembly for aerospace, defence, and industrial applications â€” where every micron matters.
+            High-accuracy CNC machining, fabrication, and assembly for aerospace, defence, and industrial applications — where every micron matters.
           </p>
         </div>
         <a href="#precmfg-services" className="hero-scroll-chevrons" aria-label="Scroll down">
@@ -122,7 +122,7 @@ export default function PrecisionManufacturing() {
             <p className="section-label">Our Capability</p>
             <h2 className="section-heading">MANUFACTURED TO THE LAST MICRON.</h2>
             <p className="section-description">
-              CHDK Technology Center operates precision manufacturing facilities equipped with advanced CNC machining, metrology, and quality systems â€” delivering components that meet the tightest tolerances in aerospace, defence, and industrial engineering.
+              CHDK Technology Center operates precision manufacturing facilities equipped with advanced CNC machining, metrology, and quality systems — delivering components that meet the tightest tolerances in aerospace, defence, and industrial engineering.
             </p>
           </div>
         </div>

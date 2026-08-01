@@ -81,17 +81,17 @@ const APPROACH_STEPS = [
   {
     num: "01",
     title: "Understand",
-    desc: "We start with a deep-dive into your operational environment, technical requirements, and quality expectations â€” ensuring our solution is precisely engineered for your context.",
+    desc: "We start with a deep-dive into your operational environment, technical requirements, and quality expectations — ensuring our solution is precisely engineered for your context.",
   },
   {
     num: "02",
     title: "Engineer",
-    desc: "Using advanced tools and industry expertise, we design and build solutions that meet your exact specifications â€” with zero compromise on accuracy, compliance, or performance.",
+    desc: "Using advanced tools and industry expertise, we design and build solutions that meet your exact specifications — with zero compromise on accuracy, compliance, or performance.",
   },
   {
     num: "03",
     title: "Deliver",
-    desc: "Comprehensive deliverables â€” whether inspection reports, CAD files, manufactured parts, or deployed digital products â€” handed off with full documentation and support.",
+    desc: "Comprehensive deliverables — whether inspection reports, CAD files, manufactured parts, or deployed digital products — handed off with full documentation and support.",
   },
 ];
 

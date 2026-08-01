@@ -29,7 +29,7 @@ function useReveal() {
 const CAPABILITIES = [
   {
     title: "Solar Rooftop Systems",
-    desc: "High-efficiency solar rooftop installations for residential, commercial, and industrial facilities â€” reducing energy bills and carbon footprint.",
+    desc: "High-efficiency solar rooftop installations for residential, commercial, and industrial facilities — reducing energy bills and carbon footprint.",
   },
   {
     title: "Solar Trees",
@@ -45,26 +45,26 @@ const CAPABILITIES = [
   },
   {
     title: "Operations & Maintenance",
-    desc: "Ongoing O&M support to ensure solar installations perform at peak efficiency â€” including monitoring, cleaning, and technical servicing.",
+    desc: "Ongoing O&M support to ensure solar installations perform at peak efficiency — including monitoring, cleaning, and technical servicing.",
   },
 ];
 
 const STEPS = [
   {
     title: "Clean Energy for Every Scale",
-    desc: "From rooftop systems for homes to large-scale solar installations for industrial parks â€” our solutions are designed to meet diverse energy needs.",
+    desc: "From rooftop systems for homes to large-scale solar installations for industrial parks — our solutions are designed to meet diverse energy needs.",
   },
   {
     title: "Innovative Solar Tree Design",
-    desc: "Our patented Solar Tree combines aesthetic architecture with clean power generation â€” ideal for public spaces, campuses, and commercial properties.",
+    desc: "Our patented Solar Tree combines aesthetic architecture with clean power generation — ideal for public spaces, campuses, and commercial properties.",
   },
   {
     title: "Reduced Operating Costs",
-    desc: "Solar energy significantly lowers electricity expenses â€” delivering measurable financial returns alongside environmental benefits.",
+    desc: "Solar energy significantly lowers electricity expenses — delivering measurable financial returns alongside environmental benefits.",
   },
   {
     title: "End-to-End Project Execution",
-    desc: "From site assessment and system design through to installation, commissioning, and long-term maintenance â€” CHDK handles the complete project lifecycle.",
+    desc: "From site assessment and system design through to installation, commissioning, and long-term maintenance — CHDK handles the complete project lifecycle.",
   },
 ];
 
@@ -86,7 +86,7 @@ export default function Renewable() {
             POWERING A<br />CLEANER FUTURE
           </h1>
           <p className="biz-hero-subtitle">
-            Innovative solar energy solutions â€” from rooftop systems to Solar Trees â€” delivering clean, sustainable power across industries and communities.
+            Innovative solar energy solutions — from rooftop systems to Solar Trees — delivering clean, sustainable power across industries and communities.
           </p>
         </div>
 
@@ -116,7 +116,7 @@ export default function Renewable() {
               CHDK Technology Center is a leading provider of innovative renewable energy solutions, delivering solar systems that reduce costs, protect the environment, and power the future.
             </p>
             <p className="section-description">
-              Our Solar Tree is a unique, space-saving solution that generates clean energy while enhancing the aesthetic appeal of locations such as resorts, hotels, business parks, parking areas, and government facilities â€” combining sustainability with design.
+              Our Solar Tree is a unique, space-saving solution that generates clean energy while enhancing the aesthetic appeal of locations such as resorts, hotels, business parks, parking areas, and government facilities — combining sustainability with design.
             </p>
           </div>
 

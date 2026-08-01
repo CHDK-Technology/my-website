@@ -9,7 +9,7 @@ import JigMouldHero from "../../assets/jig-mould-hero.png";
 const SERVICES_DATA = [
   {
     title: "Aerospace Assembly Jigs & Fixtures",
-    desc: "Design and manufacture of precision assembly jigs and fixtures for aircraft structures, fuselage sections, and wing assemblies â€” ensuring dimensional accuracy throughout the build process.",
+    desc: "Design and manufacture of precision assembly jigs and fixtures for aircraft structures, fuselage sections, and wing assemblies — ensuring dimensional accuracy throughout the build process.",
     points: [
       "Drill jigs and assembly fixtures",
       "Wing, fuselage, and empennage tooling",
@@ -19,7 +19,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Injection Mould Tooling",
-    desc: "High-precision injection mould tool design and manufacture for plastics and composites â€” delivering tools built for long production runs with consistent dimensional output.",
+    desc: "High-precision injection mould tool design and manufacture for plastics and composites — delivering tools built for long production runs with consistent dimensional output.",
     points: [
       "Single and multi-cavity mould tools",
       "Hot runner and cold runner systems",
@@ -29,7 +29,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Press & Forming Dies",
-    desc: "Precision press tools, forming dies, and blanking tools for sheet metal operations â€” designed for repeatability and longevity in high-volume production environments.",
+    desc: "Precision press tools, forming dies, and blanking tools for sheet metal operations — designed for repeatability and longevity in high-volume production environments.",
     points: [
       "Blanking, piercing, and forming dies",
       "Progressive and compound die sets",
@@ -49,7 +49,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Composite & Layup Tooling",
-    desc: "Precision composite layup tools, mandrels, and mould tools for carbon fibre and glass fibre components â€” critical for aerospace, defence, and motorsport applications.",
+    desc: "Precision composite layup tools, mandrels, and mould tools for carbon fibre and glass fibre components — critical for aerospace, defence, and motorsport applications.",
     points: [
       "CFRP and GFRP layup mandrels",
       "Autoclave-rated composite moulds",
@@ -59,7 +59,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Tooling Repair & Refurbishment",
-    desc: "Inspection, repair, and refurbishment of worn or damaged jigs, moulds, and fixtures â€” restoring tooling to original specification and extending operational life.",
+    desc: "Inspection, repair, and refurbishment of worn or damaged jigs, moulds, and fixtures — restoring tooling to original specification and extending operational life.",
     points: [
       "Dimensional survey of existing tooling",
       "Weld repair and remachining",
@@ -99,7 +99,7 @@ export default function JigMouldAerospaceTooling() {
             <span>ZERO TOLERANCE.</span>
           </h1>
           <p className="jigmould-hero-subtitle">
-            Precision jigs, moulds, fixtures, and aerospace tooling â€” manufactured to the tightest tolerances for applications where failure is not an option.
+            Precision jigs, moulds, fixtures, and aerospace tooling — manufactured to the tightest tolerances for applications where failure is not an option.
           </p>
         </div>
         <a href="#jigmould-services" className="hero-scroll-chevrons" aria-label="Scroll down">

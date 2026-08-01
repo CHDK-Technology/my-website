@@ -87,7 +87,7 @@ export default function CalibrationPage() {
             <span>ON-SITE ACCURACY.</span>
           </h1>
           <p className="calibration-hero-subtitle">
-            Highly accurate portable calibration and inspection services â€” ensuring your equipment meets strict quality and dimensional standards, right where you need it.
+            Highly accurate portable calibration and inspection services — ensuring your equipment meets strict quality and dimensional standards, right where you need it.
           </p>
         </div>
 

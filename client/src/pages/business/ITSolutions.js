@@ -29,11 +29,11 @@ function useReveal() {
 const CAPABILITIES = [
   {
     title: "Website Development",
-    desc: "Professional, high-performance websites built with modern frameworks â€” from corporate portals and landing pages to complex multi-page web applications.",
+    desc: "Professional, high-performance websites built with modern frameworks — from corporate portals and landing pages to complex multi-page web applications.",
   },
   {
     title: "Mobile App Development",
-    desc: "Native and cross-platform mobile applications for iOS and Android â€” designed for performance, usability, and seamless user experience.",
+    desc: "Native and cross-platform mobile applications for iOS and Android — designed for performance, usability, and seamless user experience.",
   },
   {
     title: "Meta Ads (Facebook & Instagram)",
@@ -41,7 +41,7 @@ const CAPABILITIES = [
   },
   {
     title: "Google Ads",
-    desc: "Strategic Google Ads management â€” Search, Display, and YouTube campaigns designed to drive high-intent traffic and measurable business results.",
+    desc: "Strategic Google Ads management — Search, Display, and YouTube campaigns designed to drive high-intent traffic and measurable business results.",
   },
   {
     title: "Search Engine Optimisation (SEO)",
@@ -49,22 +49,22 @@ const CAPABILITIES = [
   },
   {
     title: "Digital Strategy & Consulting",
-    desc: "End-to-end digital transformation consulting â€” helping businesses define, plan, and execute their digital growth strategy with clarity and confidence.",
+    desc: "End-to-end digital transformation consulting — helping businesses define, plan, and execute their digital growth strategy with clarity and confidence.",
   },
 ];
 
 const STEPS = [
   {
     title: "End-to-End Digital Partner",
-    desc: "From building your digital presence to driving measurable growth â€” CHDK provides the full spectrum of IT and digital marketing services under one roof.",
+    desc: "From building your digital presence to driving measurable growth — CHDK provides the full spectrum of IT and digital marketing services under one roof.",
   },
   {
     title: "Performance-Driven Marketing",
-    desc: "Every campaign, ad, and SEO strategy we execute is tied to clear, measurable business goals â€” traffic, leads, conversions, and revenue growth.",
+    desc: "Every campaign, ad, and SEO strategy we execute is tied to clear, measurable business goals — traffic, leads, conversions, and revenue growth.",
   },
   {
     title: "Technology That Scales",
-    desc: "The websites and apps we build are architected to grow with your business â€” scalable, secure, and ready for the demands of tomorrow.",
+    desc: "The websites and apps we build are architected to grow with your business — scalable, secure, and ready for the demands of tomorrow.",
   },
   {
     title: "Dedicated Team. Real Results.",
@@ -89,7 +89,7 @@ export default function ITSolutions() {
             DIGITAL GROWTH.<br />REAL RESULTS.
           </h1>
           <p className="biz-hero-subtitle">
-            End-to-end IT and digital marketing services â€” from website and app development to Meta Ads, Google Ads, and SEO â€” helping businesses grow their digital presence and reach.
+            End-to-end IT and digital marketing services — from website and app development to Meta Ads, Google Ads, and SEO — helping businesses grow their digital presence and reach.
           </p>
         </div>
 
@@ -119,7 +119,7 @@ export default function ITSolutions() {
               CHDK Technology Center provides end-to-end IT and digital marketing services that help businesses build a powerful online presence and drive measurable growth.
             </p>
             <p className="section-description">
-              From website and mobile app development to performance-driven marketing solutions â€” Meta Ads, Google Ads, and SEO â€” we deliver the complete digital toolkit modern businesses need to compete and grow.
+              From website and mobile app development to performance-driven marketing solutions — Meta Ads, Google Ads, and SEO — we deliver the complete digital toolkit modern businesses need to compete and grow.
             </p>
           </div>
 
