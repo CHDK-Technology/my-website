@@ -130,4 +130,94 @@
   font-size: 13px;
   font-weight: 500;
   cursor: not-allowed;
+  border: none;
+}
+
+.res-card-btn-active {
+  background: #00AEEF;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.res-card-btn-active:hover {
+  background: #0090c9;
+  transform: translateY(-1px);
+}
+
+.res-purchase-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--light-15);
+}
+
+.res-purchase-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--light-15);
+  background: var(--black);
+  color: var(--light);
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.res-purchase-input:focus {
+  border-color: #00AEEF;
+}
+.res-purchase-input::placeholder {
+  color: var(--light-60);
+}
+
+.res-purchase-error {
+  font-size: 12px;
+  color: #ff6b6b;
+  margin: 0;
+}
+
+.res-purchase-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.res-purchase-cancel {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--light-15);
+  color: var(--light-60);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.res-purchase-cancel:hover {
+  border-color: var(--light-60);
+  color: var(--light);
+}
+
+.res-purchase-pay {
+  flex: 2;
+  padding: 10px;
+  border-radius: 6px;
+  background: #00AEEF;
+  border: none;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.res-purchase-pay:hover {
+  background: #0090c9;
+}
+.res-purchase-pay:disabled,
+.res-purchase-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
