@@ -11,7 +11,7 @@ import "./3d-scanning.css";
 const SCANNING_DATA = [
   {
     title: "High-Resolution 3D Scanning",
-    desc: "Cutting-edge scanning technology that captures millions of data points to create precise digital representations of physical objects â€” accurate to microns.",
+    desc: "Cutting-edge scanning technology that captures millions of data points to create precise digital representations of physical objects — accurate to microns.",
     points: [
       "High-resolution digital data capture",
       "Non-contact and non-destructive inspection",
@@ -41,7 +41,7 @@ const SCANNING_DATA = [
   },
   {
     title: "Reverse Engineering Support",
-    desc: "3D scanning forms the foundation of our reverse engineering workflow â€” enabling accurate recreation of legacy parts, moulds, or assemblies with no existing drawings.",
+    desc: "3D scanning forms the foundation of our reverse engineering workflow — enabling accurate recreation of legacy parts, moulds, or assemblies with no existing drawings.",
     points: [
       "Recreate obsolete components",
       "Extract design intent from physical parts",
@@ -87,7 +87,7 @@ export default function ThreeDScanning() {
             <span>DIMENSION.</span>
           </h1>
           <p className="scanning-hero-subtitle">
-            Precise digital representations of physical objects â€” millions of data points, zero contact, maximum accuracy for inspection, analysis, and product development.
+            Precise digital representations of physical objects — millions of data points, zero contact, maximum accuracy for inspection, analysis, and product development.
           </p>
         </div>
 

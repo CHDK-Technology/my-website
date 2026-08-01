@@ -9,7 +9,7 @@ import digitalbg from "../../assets/digital-marketing-hero.png";
 const SERVICES_DATA = [
   {
     title: "Social Media Marketing",
-    desc: "Strategic social media management across LinkedIn, Instagram, Facebook, and more â€” building your brand presence, growing your audience, and driving meaningful engagement.",
+    desc: "Strategic social media management across LinkedIn, Instagram, Facebook, and more — building your brand presence, growing your audience, and driving meaningful engagement.",
     points: [
       "Platform strategy and content calendar",
       "Branded post design and copywriting",
@@ -29,7 +29,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Pay-Per-Click Advertising (PPC)",
-    desc: "Data-driven PPC campaigns on Google, Meta, and LinkedIn â€” designed to maximise return on ad spend and drive qualified leads to your business.",
+    desc: "Data-driven PPC campaigns on Google, Meta, and LinkedIn — designed to maximise return on ad spend and drive qualified leads to your business.",
     points: [
       "Google Search and Display campaigns",
       "Meta (Facebook & Instagram) ads",
@@ -39,7 +39,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Email Marketing",
-    desc: "Targeted email marketing campaigns that nurture leads, retain customers, and drive repeat business â€” built around your audience segments and buyer journey.",
+    desc: "Targeted email marketing campaigns that nurture leads, retain customers, and drive repeat business — built around your audience segments and buyer journey.",
     points: [
       "Email campaign design and copywriting",
       "Automation workflows and drip sequences",
@@ -49,7 +49,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Brand Strategy & Identity",
-    desc: "Defining and articulating your brand's positioning, messaging, and visual identity â€” ensuring consistency across every digital touchpoint.",
+    desc: "Defining and articulating your brand's positioning, messaging, and visual identity — ensuring consistency across every digital touchpoint.",
     points: [
       "Brand positioning and messaging framework",
       "Logo and visual identity design",
@@ -59,7 +59,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Analytics & Performance Reporting",
-    desc: "Clear, actionable reporting on your digital marketing performance â€” giving you the data you need to make informed decisions and optimise campaigns.",
+    desc: "Clear, actionable reporting on your digital marketing performance — giving you the data you need to make informed decisions and optimise campaigns.",
     points: [
       "Google Analytics 4 setup and reporting",
       "Monthly performance dashboards",

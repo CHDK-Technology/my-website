@@ -371,7 +371,7 @@ height: 62px;
 }
 .quote-btn .quote-arrow { width: 14px; height: 14px; transition: transform 0.25s ease; flex-shrink: 0; }
 .quote-btn:hover {
-  /* IMPROVEMENT: Brand gradient fill on hover â€” premium CTA feel */
+  /* IMPROVEMENT: Brand gradient fill on hover — premium CTA feel */
   background: linear-gradient(90deg,  #3057b9 0%, #063b92 100%);
   color: #ffffff;
   border-color: transparent;

@@ -108,7 +108,7 @@ function ContactForm() {
       </div>
 
       <button type="submit" className="contact-submit-btn" disabled={status === "submitting"}>
-        {status === "submitting" ? "Sending..." : "Send Message"} <span>â†’</span>
+        {status === "submitting" ? "Sending..." : "Send Message"} <span>→</span>
       </button>
     </form>
   );

@@ -19,7 +19,7 @@ const SERVICES_DATA = [
   },
   {
     title: "CAD Model Generation",
-    desc: "Physical parts are scanned and converted into precise parametric or surface CAD models compatible with all major platforms â€” ready for manufacturing or further development.",
+    desc: "Physical parts are scanned and converted into precise parametric or surface CAD models compatible with all major platforms — ready for manufacturing or further development.",
     points: [
       "Point cloud to parametric CAD conversion",
       "CATIA, SolidWorks, NX, and STEP/IGES output",
@@ -39,7 +39,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Tooling & Fixture Replication",
-    desc: "Precision replication of worn or lost tooling, jigs, and fixtures â€” ensuring manufacturing operations can resume without costly lead times or OEM dependency.",
+    desc: "Precision replication of worn or lost tooling, jigs, and fixtures — ensuring manufacturing operations can resume without costly lead times or OEM dependency.",
     points: [
       "Jig and fixture reverse modelling",
       "Mould and die replication",
@@ -79,7 +79,7 @@ export default function ReverseEngineering() {
             <span>REBUILD THE FUTURE.</span>
           </h1>
           <p className="revengg-hero-subtitle">
-            Advanced reverse engineering services to recreate, analyse, and improve existing components â€” generating accurate CAD models and technical data when none exists.
+            Advanced reverse engineering services to recreate, analyse, and improve existing components — generating accurate CAD models and technical data when none exists.
           </p>
         </div>
         <a href="#revengg-services" className="hero-scroll-chevrons" aria-label="Scroll down">
@@ -102,7 +102,7 @@ export default function ReverseEngineering() {
             <p className="section-label">Our Capability</p>
             <h2 className="section-heading">FROM PHYSICAL PART TO DIGITAL MODEL.</h2>
             <p className="section-description">
-              CHDK Technology Center combines 3D scanning, precision metrology, and advanced CAD tools to deliver complete reverse engineering workflows â€” helping you recreate, improve, or manufacture any component with full accuracy and confidence.
+              CHDK Technology Center combines 3D scanning, precision metrology, and advanced CAD tools to deliver complete reverse engineering workflows — helping you recreate, improve, or manufacture any component with full accuracy and confidence.
             </p>
           </div>
         </div>

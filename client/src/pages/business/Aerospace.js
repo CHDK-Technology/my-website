@@ -87,7 +87,7 @@ export default function Aerospace() {
 
             <p className="section-description">
               From structural components to advanced defence solutions, CHDK delivers
-              technology that performs under extreme conditions â€” where reliability is everything.
+              technology that performs under extreme conditions — where reliability is everything.
             </p>
           </div>
 
@@ -178,7 +178,7 @@ export default function Aerospace() {
 
       <ul className="domain-list">
         {item.points.map((point, index) => (
-          <li key={index}>â€¢ {point}</li>
+          <li key={index}>• {point}</li>
         ))}
       </ul>
 

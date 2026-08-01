@@ -9,7 +9,7 @@ import "../Home.css";
 
 
 const VALUES = [
-  { num: "01", title: "Engineering Excellence", desc: "Every solution we deliver meets the highest standards of precision, safety, and reliability â€” from individual components to complete systems." },
+  { num: "01", title: "Engineering Excellence", desc: "Every solution we deliver meets the highest standards of precision, safety, and reliability — from individual components to complete systems." },
   { num: "02", title: "Client Partnership", desc: "We don't work for clients, we work with them. Long-term relationships built on trust, transparency, and shared goals." },
   { num: "03", title: "Innovative Mindset", desc: "Continuous investment in R&D, emerging technologies, and new capabilities that keep our clients ahead of the curve." },
   { num: "04", title: "Sustainability First", desc: "From renewable energy to circular waste management, sustainability is embedded in every business decision we make." },
@@ -26,13 +26,13 @@ const LEADERSHIP = [
   },
   {
     name: "",
-    title: "Director â€“ Operations",
+    title: "Director – Operations",
     bio: "Leading operational excellence across all eight business verticals with a focus on delivery quality, process efficiency, and customer satisfaction.",
     img: "/team2.jpg",
   },
   {
     name: "",
-    title: "Director â€“ Business Development",
+    title: "Director – Business Development",
     bio: "Driving strategic growth, partnerships and new market entries. Instrumental in expanding CHDK's footprint from aerospace into renewable energy and digital sectors.",
     img: "/team3.jpg",
   },
@@ -45,7 +45,7 @@ const TIMELINE = [
   { year: "2021", event: "Smart Agriculture & Material Handling", desc: "Introduced AgriStoreâ„¢ IoT platform and warehouse automation solutions, expanding into two new verticals." },
   { year: "2022", event: "Gujarat Regional Office Opened", desc: "Established second regional office in Vadodara to serve clients across Western India." },
   { year: "2023", event: "IT Solutions & Digital Division Launch", desc: "Entered digital transformation services, offering enterprise web platforms, app development, and industrial IoT integration." },
-  { year: "2024", event: "â‚¹150Cr+ Project Milestone", desc: "Crossed a landmark total project value delivered across all business verticals â€” a testament to scale and trust." },
+  { year: "2024", event: "â‚¹150Cr+ Project Milestone", desc: "Crossed a landmark total project value delivered across all business verticals — a testament to scale and trust." },
   { year: "2025", event: "200+ Strong Team", desc: "Team crosses 200 members across engineering, operations, sales, and technology functions." },
 ];
 
@@ -149,13 +149,13 @@ return (
               <p className="overview-label ov-animate">Our Mission</p>
               <h2 className="overview-heading ov-animate">From Earth to Sky <br />We Engineer</h2>
               <p className="ov-mission-body ov-animate" style={{ marginTop: "32px" }}>
-                CHDK Technology Center was founded on a simple but powerful belief: India's industrial future depends on engineering companies that refuse to compromise. We operate across eight distinct verticals â€” not because we diversified arbitrarily, but because each sector represents a critical national need that we are uniquely positioned to serve.
+                CHDK Technology Center was founded on a simple but powerful belief: India's industrial future depends on engineering companies that refuse to compromise. We operate across eight distinct verticals — not because we diversified arbitrarily, but because each sector represents a critical national need that we are uniquely positioned to serve.
               </p>
               <p className="ov-mission-body ov-animate">
                 Our clients are India's leading OEMs, government bodies, infrastructure developers, and Fortune 500 companies. They trust us because we bring the engineering depth of a specialist and the operational breadth of an integrated group.
               </p>
               <p className="ov-mission-body ov-animate">
-                Since 2018, we have delivered over â‚¹150 Crore in project value, supported national defence programmes, powered clean energy transitions, and transformed supply chains â€” all while growing a team of 200+ passionate engineers and professionals.
+                Since 2018, we have delivered over â‚¹150 Crore in project value, supported national defence programmes, powered clean energy transitions, and transformed supply chains — all while growing a team of 200+ passionate engineers and professionals.
               </p>
             </div>
             <div className="ov-mission-img-wrap ov-animate">

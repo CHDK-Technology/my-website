@@ -28,16 +28,16 @@ function useReveal() {
 
 const CAPABILITIES = [
   {
-    title: "SWACH â€” Smart Waste Management",
-    desc: "Our patented SWACH system efficiently compresses waste into compact blocks â€” dramatically reducing storage space, simplifying handling, and enabling easier recycling.",
+    title: "SWACH — Smart Waste Management",
+    desc: "Our patented SWACH system efficiently compresses waste into compact blocks — dramatically reducing storage space, simplifying handling, and enabling easier recycling.",
   },
   {
     title: "Waste Compaction Systems",
-    desc: "Industrial-grade compaction equipment designed for dump yards and large-scale waste processing facilities â€” improving operational efficiency and reducing transport costs.",
+    desc: "Industrial-grade compaction equipment designed for dump yards and large-scale waste processing facilities — improving operational efficiency and reducing transport costs.",
   },
   {
     title: "Recycling Integration",
-    desc: "End-to-end solutions that connect waste collection, compression, and recycling â€” supporting a complete circular economy approach for municipalities and industries.",
+    desc: "End-to-end solutions that connect waste collection, compression, and recycling — supporting a complete circular economy approach for municipalities and industries.",
   },
   {
     title: "Municipal Waste Solutions",
@@ -49,22 +49,22 @@ const CAPABILITIES = [
   },
   {
     title: "Sustainability Consulting",
-    desc: "Expert guidance on adopting sustainable waste management practices â€” helping organisations reduce landfill dependence and meet environmental compliance requirements.",
+    desc: "Expert guidance on adopting sustainable waste management practices — helping organisations reduce landfill dependence and meet environmental compliance requirements.",
   },
 ];
 
 const STEPS = [
   {
-    title: "Patented Innovation â€” SWACH",
-    desc: "Our flagship SWACH system is a patented, home-grown innovation that compresses waste into compact blocks â€” making storage, transport, and recycling significantly more efficient.",
+    title: "Patented Innovation — SWACH",
+    desc: "Our flagship SWACH system is a patented, home-grown innovation that compresses waste into compact blocks — making storage, transport, and recycling significantly more efficient.",
   },
   {
     title: "Reduce, Compress, Recycle",
-    desc: "Our approach addresses waste at every stage â€” reducing volume at source, compressing for handling, and enabling recycling â€” contributing to cleaner, more sustainable environments.",
+    desc: "Our approach addresses waste at every stage — reducing volume at source, compressing for handling, and enabling recycling — contributing to cleaner, more sustainable environments.",
   },
   {
     title: "Scalable for Any Setting",
-    desc: "From small municipal facilities to large industrial dump yards â€” our waste management systems are designed and sized to match the scale of your operation.",
+    desc: "From small municipal facilities to large industrial dump yards — our waste management systems are designed and sized to match the scale of your operation.",
   }
 ];
 
@@ -88,7 +88,7 @@ export default function WasteManagement() {
            CLEANER CITIES.<br />SMARTER WASTE.
           </h1>
           <p className="biz-hero-subtitle">
-           Patented smart waste management solutions that compress, simplify, and support recycling â€” building cleaner and more sustainable environments.
+           Patented smart waste management solutions that compress, simplify, and support recycling — building cleaner and more sustainable environments.
           </p>
         </div>
 
@@ -115,10 +115,10 @@ export default function WasteManagement() {
             <p className="section-label">Overview</p>
             <h2 className="section-heading">SMART WASTE MANAGEMENT</h2>
             <p className="section-description highlight">
-              CHDK Technology Center has developed SWACH â€” a patented Smart Waste Management solution that efficiently compresses waste into compact blocks, transforming how cities and industries handle their waste.
+              CHDK Technology Center has developed SWACH — a patented Smart Waste Management solution that efficiently compresses waste into compact blocks, transforming how cities and industries handle their waste.
             </p>
             <p className="section-description">
-              By reducing storage space, simplifying handling, and promoting recycling, SWACH contributes to cleaner and more sustainable environments â€” supporting municipalities, industrial facilities, and communities across India.
+              By reducing storage space, simplifying handling, and promoting recycling, SWACH contributes to cleaner and more sustainable environments — supporting municipalities, industrial facilities, and communities across India.
             </p>
           </div>
 
