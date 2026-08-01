@@ -254,15 +254,13 @@ export default function Gallery() {
                 <div className="gallery-item-overlay">
                   <span className="gallery-item-category">{item.category}</span>
                   <p className="gallery-item-alt">{item.alt}</p>
-                  <span className="gallery-item-icon">
-                    {item.type === "video" ? (
-                      <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M8 5v14l11-7z" /></svg>
-                    ) : (
+                  {item.type !== "video" && (
+                    <span className="gallery-item-icon">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20">
                         <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                       </svg>
-                    )}
-                  </span>
+                    </span>
+                  )}
                 </div>
               </div>
             ))}
