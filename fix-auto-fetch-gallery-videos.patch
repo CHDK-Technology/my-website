@@ -1,0 +1,171 @@
+diff --git a/backend/routes/galleryVideos.js b/backend/routes/galleryVideos.js
+new file mode 100644
+index 0000000..0aa4872
+--- /dev/null
++++ b/backend/routes/galleryVideos.js
+@@ -0,0 +1,78 @@
++const express = require("express");
++const router = express.Router();
++
++// Add / remove channel IDs here as needed.
++const CHANNEL_IDS = [
++  "UCsPomiGREIAUpF6zwyaYPig", // Ecosaras
++  "UC13sEUHncwMkCPSb8-14usQ", // CHDK Technology Center
++];
++
++const FEED_URL = (channelId) =>
++  `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
++
++// Simple in-memory cache so we don't hit YouTube on every page load.
++// YouTube's public RSS feed only ever returns the most recent 15 uploads
++// per channel, so this is meant to surface *new* videos automatically —
++// older / back-catalog videos still need to be added by hand once.
++let cache = { data: null, fetchedAt: 0 };
++const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
++
++function extractEntries(xml) {
++  const entries = [];
++  const entryBlocks = xml.split("<entry>").slice(1);
++  for (const block of entryBlocks) {
++    const videoId = (block.match(/<yt:videoId>(.*?)<\/yt:videoId>/) || [])[1];
++    const title = (block.match(/<title>([\s\S]*?)<\/title>/) || [])[1];
++    const published = (block.match(/<published>(.*?)<\/published>/) || [])[1];
++    const channelTitle = (block.match(/<name>(.*?)<\/name>/) || [])[1];
++    if (videoId && title) {
++      entries.push({
++        youtube: videoId,
++        title: title.trim(),
++        publishedAt: published || null,
++        channel: channelTitle || null,
++      });
++    }
++  }
++  return entries;
++}
++
++async function fetchChannelVideos(channelId) {
++  const res = await fetch(FEED_URL(channelId));
++  if (!res.ok) {
++    throw new Error(`Failed to fetch feed for ${channelId}: ${res.status}`);
++  }
++  const xml = await res.text();
++  return extractEntries(xml);
++}
++
++async function getAllVideos() {
++  const now = Date.now();
++  if (cache.data && now - cache.fetchedAt < CACHE_TTL_MS) {
++    return cache.data;
++  }
++
++  const results = await Promise.allSettled(CHANNEL_IDS.map(fetchChannelVideos));
++  const all = results
++    .filter((r) => r.status === "fulfilled")
++    .flatMap((r) => r.value);
++
++  // Newest first
++  all.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
++
++  cache = { data: all, fetchedAt: now };
++  return all;
++}
++
++// GET /api/gallery-videos
++router.get("/", async (req, res) => {
++  try {
++    const videos = await getAllVideos();
++    res.json({ videos });
++  } catch (err) {
++    console.error("gallery-videos error:", err.message);
++    res.status(200).json({ videos: [] }); // fail soft, never break the page
++  }
++});
++
++module.exports = router;
+diff --git a/backend/server.js b/backend/server.js
+index 973caaa..03aa96c 100644
+--- a/backend/server.js
++++ b/backend/server.js
+@@ -13,6 +13,7 @@ const helmet = require('helmet');
+ const Contact = require('./models/Contact');
+ const Apply = require('./models/Apply');
+ const documentsRouter = require('./routes/documents');
++const galleryVideosRouter = require('./routes/galleryVideos');
+ 
+ const app = express();
+ 
+@@ -108,6 +109,7 @@ app.get('/', (req, res) => {
+ /* ======= DOCUMENTS / PAYMENT-GATED CATALOGUE API ====== */
+ 
+ app.use('/api/documents', documentsRouter);
++app.use('/api/gallery-videos', galleryVideosRouter);
+ 
+ /* ======= CONTACT API ====== */
+ 
+diff --git a/client/src/pages/Gallery.js b/client/src/pages/Gallery.js
+index f50d5b7..1dd37cd 100644
+--- a/client/src/pages/Gallery.js
++++ b/client/src/pages/Gallery.js
+@@ -199,15 +199,60 @@ function useReveal() {
+   return [ref, visible];
+ }
+ 
++// Best-guess category for auto-fetched videos, based on which channel
++// they came from. Feel free to move any of these into GALLERY_ITEMS above
++// by hand later if you want a different category or a specific "size".
++const CHANNEL_CATEGORY = {
++  "Ecosaras": "Renewable Energy",
++  "CHDK Technology Center": "Engineering",
++};
++const DEFAULT_AUTO_CATEGORY = "Renewable Energy";
++
+ // ===== PAGE =====
+ export default function Gallery() {
+   const [activeFilter, setActiveFilter] = useState("All");
+   const [lightboxIndex, setLightboxIndex] = useState(null);
+   const [ref1, show1] = useReveal();
++  const [autoVideos, setAutoVideos] = useState([]);
++
++  // Pull in any new uploads from YouTube automatically. This only ever
++  // *adds* videos that aren't already in GALLERY_ITEMS above — it never
++  // removes or overrides anything you've added by hand. If the request
++  // fails for any reason, the page just falls back to the static list.
++  useEffect(() => {
++    let cancelled = false;
++    fetch(`${process.env.REACT_APP_API_URL}/api/gallery-videos`)
++      .then((r) => r.json())
++      .then((data) => {
++        if (cancelled || !data?.videos) return;
++        const existingIds = new Set(
++          GALLERY_ITEMS.filter((i) => i.youtube).map((i) => i.youtube)
++        );
++        const fresh = data.videos
++          .filter((v) => !existingIds.has(v.youtube))
++          .map((v, idx) => ({
++            id: `auto-${v.youtube}`,
++            type: "video",
++            youtube: v.youtube,
++            alt: v.title,
++            category: CHANNEL_CATEGORY[v.channel] || DEFAULT_AUTO_CATEGORY,
++            size: "wide",
++          }));
++        setAutoVideos(fresh);
++      })
++      .catch(() => {
++        // Silently ignore — static GALLERY_ITEMS list still works fine.
++      });
++    return () => {
++      cancelled = true;
++    };
++  }, []);
++
++  const allItems = [...GALLERY_ITEMS, ...autoVideos];
+ 
+   const filtered = activeFilter === "All"
+-    ? GALLERY_ITEMS
+-    : GALLERY_ITEMS.filter((item) => item.category === activeFilter);
++    ? allItems
++    : allItems.filter((item) => item.category === activeFilter);
+ 
+   const openLightbox  = (i) => setLightboxIndex(i);
+   const closeLightbox = () => setLightboxIndex(null);

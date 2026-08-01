@@ -199,15 +199,60 @@ function useReveal() {
   return [ref, visible];
 }
 
+// Best-guess category for auto-fetched videos, based on which channel
+// they came from. Feel free to move any of these into GALLERY_ITEMS above
+// by hand later if you want a different category or a specific "size".
+const CHANNEL_CATEGORY = {
+  "Ecosaras": "Renewable Energy",
+  "CHDK Technology Center": "Engineering",
+};
+const DEFAULT_AUTO_CATEGORY = "Renewable Energy";
+
 // ===== PAGE =====
 export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [ref1, show1] = useReveal();
+  const [autoVideos, setAutoVideos] = useState([]);
+
+  // Pull in any new uploads from YouTube automatically. This only ever
+  // *adds* videos that aren't already in GALLERY_ITEMS above — it never
+  // removes or overrides anything you've added by hand. If the request
+  // fails for any reason, the page just falls back to the static list.
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`${process.env.REACT_APP_API_URL}/api/gallery-videos`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (cancelled || !data?.videos) return;
+        const existingIds = new Set(
+          GALLERY_ITEMS.filter((i) => i.youtube).map((i) => i.youtube)
+        );
+        const fresh = data.videos
+          .filter((v) => !existingIds.has(v.youtube))
+          .map((v, idx) => ({
+            id: `auto-${v.youtube}`,
+            type: "video",
+            youtube: v.youtube,
+            alt: v.title,
+            category: CHANNEL_CATEGORY[v.channel] || DEFAULT_AUTO_CATEGORY,
+            size: "wide",
+          }));
+        setAutoVideos(fresh);
+      })
+      .catch(() => {
+        // Silently ignore — static GALLERY_ITEMS list still works fine.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const allItems = [...GALLERY_ITEMS, ...autoVideos];
 
   const filtered = activeFilter === "All"
-    ? GALLERY_ITEMS
-    : GALLERY_ITEMS.filter((item) => item.category === activeFilter);
+    ? allItems
+    : allItems.filter((item) => item.category === activeFilter);
 
   const openLightbox  = (i) => setLightboxIndex(i);
   const closeLightbox = () => setLightboxIndex(null);

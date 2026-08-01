@@ -13,6 +13,7 @@ const helmet = require('helmet');
 const Contact = require('./models/Contact');
 const Apply = require('./models/Apply');
 const documentsRouter = require('./routes/documents');
+const galleryVideosRouter = require('./routes/galleryVideos');
 
 const app = express();
 
@@ -108,6 +109,7 @@ app.get('/', (req, res) => {
 /* ======= DOCUMENTS / PAYMENT-GATED CATALOGUE API ====== */
 
 app.use('/api/documents', documentsRouter);
+app.use('/api/gallery-videos', galleryVideosRouter);
 
 /* ======= CONTACT API ====== */
 
