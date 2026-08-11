@@ -89,6 +89,25 @@
   .thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:3rem;color:#fff;background:linear-gradient(135deg,var(--leaf),var(--ink));letter-spacing:-.02em}
   .tag{position:absolute;top:12px;left:12px;z-index:2;padding:5px 11px;border-radius:999px;background:rgba(255,253,248,.92);backdrop-filter:blur(4px);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--solar-deep)}
   .tag.new{color:#fff;background:var(--leaf)}
+
+  /* File-type badge — top-right, always visible, tells you image/video/pdf/ppt at a glance */
+  .type-badge{position:absolute;top:12px;right:12px;z-index:2;display:inline-flex;align-items:center;gap:5px;
+    padding:5px 10px;border-radius:999px;background:rgba(255,253,248,.92);backdrop-filter:blur(4px);
+    font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+  .type-badge svg{width:12px;height:12px;flex:none}
+  .type-badge.type-image{color:var(--leaf)}
+  .type-badge.type-video{color:var(--solar-deep)}
+  .type-badge.type-pdf{color:var(--ink-soft)}
+  .type-badge.type-ppt{color:var(--muted)}
+
+  /* Centered play cue on video thumbnails */
+  .play-cue{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1;
+    background:linear-gradient(0deg,rgba(16,36,26,.15),rgba(16,36,26,.05))}
+  .play-cue svg{width:52px;height:52px;filter:drop-shadow(0 4px 10px rgba(16,36,26,.35))}
+
+  /* Format filter row — sits under the category filters, same chip system, smaller */
+  .format-label{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2px 0 10px}
+  .filters.format-filters .chip{padding:6px 14px;font-size:.82rem}
   .card-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
   .card-body h3{font-family:var(--display);font-weight:600;font-size:1.18rem;letter-spacing:-.01em;line-height:1.2}
   .card-body p{margin-top:9px;font-size:.92rem;color:var(--muted);flex:1}
@@ -155,6 +174,8 @@
       <p>Tap a category to filter. Each card links to its catalogue on Drive — and new uploads to the folder appear here automatically.</p>
     </div>
     <div class="filters" id="filters"></div>
+    <div class="format-label">Filter by format</div>
+    <div class="filters format-filters" id="formatFilters"></div>
     <div class="grid" id="grid">
       <div class="loading"><span class="spin"></span> Loading products…</div>
     </div>
@@ -239,17 +260,17 @@ const CURATED = [
       be reached, so the page is never empty. (Known file IDs.)
    ============================================================ */
 const FALLBACK = [
-  {name:"Solar Cold Room",cat:"Cold Storage & Cooling",desc:"Off-grid solar cold room, available in −15°C and −20°C configurations.",fileId:"1XrDS6P_ECoRPbnPHN16JDwDBgzpusw39"},
-  {name:"Vegetable & Subjee Cooler",cat:"Cold Storage & Cooling",desc:"Compact cooler that extends the shelf life of fresh vegetables.",fileId:"1yAvcjm-o4fkjDH0XV456uZNxbmX4ytJ0"},
-  {name:"Evaporative Cool Chamber",cat:"Cold Storage & Cooling",desc:"Low-energy evaporative chamber for short-term produce storage.",fileId:"1KXioUz23dF__mXzXcyKWzOMmCPNkKleI"},
-  {name:"Solar Dryer",cat:"Solar Solutions",desc:"Fuel-free solar dryer for crops, spices and produce.",fileId:"12VE4bZ9TpwQYTvsTWStMV-rNRkT69AHb"},
-  {name:"Solar Tunnel Dryer",cat:"Solar Solutions",desc:"Large-format tunnel dryer for bulk solar drying.",fileId:"1bw9DLjBn57a0BLTRnNekxiR2z-Ln-20j"},
-  {name:"Solar Tree",cat:"Solar Solutions",desc:"Vertical solar array that generates clean power from a compact footprint.",fileId:"1h2dzRigqouV-DCJM_yrzstXJSTZN_okS"},
-  {name:"Food Processing Machine",cat:"Food & Dairy",desc:"Food processing and handling machinery for agri-businesses.",fileId:"12a6D7HsHZa9dym95ryWbXX3NN_AmxJ2O"},
-  {name:"Milk ATM",cat:"Food & Dairy",desc:"Automated milk vending unit for fresh, measured dispensing.",fileId:"1Elg7H4xyTMYp0_IaWGnNJ1-9XsiV2Eey"},
-  {name:"Vegetable Cart",cat:"Mobility & Materials",desc:"Mobile vending cart designed for fresh-produce sellers.",fileId:"1_-UumNdy1YnjJo2QSBHfQgqMykJk6Je_"},
-  {name:"Ecofoam",cat:"Mobility & Materials",desc:"Insulation / packaging foam solution. (Verify description.)",fileId:"1_Hjnei3phydl9wEv_yV62Cnkh1J3YsDF"},
-  {name:"Latchgrab",cat:"Industrial",desc:"Engineered latching / hardware product line. (Verify description.)",fileId:"187QhkwZ_OVQcy-7FsPKCzinsAXxJf-E5"},
+  {name:"Solar Cold Room",cat:"Cold Storage & Cooling",desc:"Off-grid solar cold room, available in −15°C and −20°C configurations.",type:"pdf",fileId:"1XrDS6P_ECoRPbnPHN16JDwDBgzpusw39"},
+  {name:"Vegetable & Subjee Cooler",cat:"Cold Storage & Cooling",desc:"Compact cooler that extends the shelf life of fresh vegetables.",type:"pdf",fileId:"1yAvcjm-o4fkjDH0XV456uZNxbmX4ytJ0"},
+  {name:"Evaporative Cool Chamber",cat:"Cold Storage & Cooling",desc:"Low-energy evaporative chamber for short-term produce storage.",type:"pdf",fileId:"1KXioUz23dF__mXzXcyKWzOMmCPNkKleI"},
+  {name:"Solar Dryer",cat:"Solar Solutions",desc:"Fuel-free solar dryer for crops, spices and produce.",type:"pdf",fileId:"12VE4bZ9TpwQYTvsTWStMV-rNRkT69AHb"},
+  {name:"Solar Tunnel Dryer",cat:"Solar Solutions",desc:"Large-format tunnel dryer for bulk solar drying.",type:"pdf",fileId:"1bw9DLjBn57a0BLTRnNekxiR2z-Ln-20j"},
+  {name:"Solar Tree",cat:"Solar Solutions",desc:"Vertical solar array that generates clean power from a compact footprint.",type:"pdf",fileId:"1h2dzRigqouV-DCJM_yrzstXJSTZN_okS"},
+  {name:"Food Processing Machine",cat:"Food & Dairy",desc:"Food processing and handling machinery for agri-businesses.",type:"pdf",fileId:"12a6D7HsHZa9dym95ryWbXX3NN_AmxJ2O"},
+  {name:"Milk ATM",cat:"Food & Dairy",desc:"Automated milk vending unit for fresh, measured dispensing.",type:"pdf",fileId:"1Elg7H4xyTMYp0_IaWGnNJ1-9XsiV2Eey"},
+  {name:"Vegetable Cart",cat:"Mobility & Materials",desc:"Mobile vending cart designed for fresh-produce sellers.",type:"pdf",fileId:"1_-UumNdy1YnjJo2QSBHfQgqMykJk6Je_"},
+  {name:"Ecofoam",cat:"Mobility & Materials",desc:"Insulation / packaging foam solution. (Verify description.)",type:"pdf",fileId:"1_Hjnei3phydl9wEv_yV62Cnkh1J3YsDF"},
+  {name:"Latchgrab",cat:"Industrial",desc:"Engineered latching / hardware product line. (Verify description.)",type:"pdf",fileId:"187QhkwZ_OVQcy-7FsPKCzinsAXxJf-E5"},
 ];
 
 /* ============================================================
@@ -262,6 +283,36 @@ const NEW_CAT = "New / Uncategorised";
 const grid = document.getElementById("grid");
 const statusEl = document.getElementById("status");
 let ITEMS = [];
+let activeCat = "All";
+let activeFormat = "All";
+
+/* File-format detection — reads the mimeType Drive already gives us for
+   every file, so images / videos / PDFs / PPTs are told apart automatically. */
+const TYPE_META = {
+  image: { label:"Image", cls:"type-image",
+    icon:`<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>` },
+  video: { label:"Video", cls:"type-video",
+    icon:`<rect x="1" y="5" width="15" height="14" rx="2"/><path d="M23 7l-7 5 7 5V7z"/>` },
+  pdf:   { label:"PDF", cls:"type-pdf",
+    icon:`<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/>` },
+  ppt:   { label:"PPT", cls:"type-ppt",
+    icon:`<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="8.5" x2="21" y2="8.5"/><line x1="8" y1="14" x2="8" y2="18"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="16" y1="15.5" x2="16" y2="18"/>` },
+  file:  { label:"File", cls:"type-pdf",
+    icon:`<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>` },
+};
+const FORMAT_ORDER = ["All","image","video","pdf","ppt","file"];
+
+function typeBadgeSvg(type){
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${TYPE_META[type].icon}</svg>`;
+}
+function detectType(mimeType, name){
+  mimeType = mimeType || "";
+  if(mimeType.startsWith("video/")) return "video";
+  if(mimeType.startsWith("image/")) return "image";
+  if(mimeType === "application/pdf") return "pdf";
+  if(mimeType.includes("presentation") || /\.pptx?$/i.test(name||"")) return "ppt";
+  return "file";
+}
 
 document.getElementById("fullCatalogue").href = fileUrl(MASTER_FALLBACK);
 document.getElementById("yr").textContent = new Date().getFullYear();
@@ -303,6 +354,7 @@ function buildItems(files){
       cat:  c?.cat  || f._cat || NEW_CAT,
       desc: c?.desc || "Recently added to the catalogue — add a description for this product.",
       fileId: f.id,
+      type: detectType(f.mimeType, f.name),
       isNew: !c && !f._cat
     });
   }
@@ -312,14 +364,22 @@ function buildItems(files){
 function buildCard(p){
   const link = fileUrl(p.fileId);
   const initial = (p.name.trim()[0]||"E").toUpperCase();
+  const isVideo = p.type === "video";
   const img = p.fileId
     ? `<img src="${thumbUrl(p.fileId)}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"
          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
        <div class="ph" style="display:none">${initial}</div>`
     : `<div class="ph">${initial}</div>`;
+  const playCue = isVideo
+    ? `<div class="play-cue"><svg viewBox="0 0 24 24" fill="#fffdf8"><circle cx="12" cy="12" r="11" fill="rgba(16,36,26,.45)"/><path d="M9.5 7.5v9l7-4.5z"/></svg></div>`
+    : "";
   const tagTxt = p.isNew ? "New" : p.cat.split(" ")[0];
   return `<article class="card reveal">
-      <div class="thumb"><span class="tag ${p.isNew?'new':''}">${tagTxt}</span>${img}</div>
+      <div class="thumb">
+        <span class="tag ${p.isNew?'new':''}">${tagTxt}</span>
+        <span class="type-badge ${TYPE_META[p.type].cls}">${typeBadgeSvg(p.type)}${TYPE_META[p.type].label}</span>
+        ${img}${playCue}
+      </div>
       <div class="card-body">
         <h3>${p.name}</h3><p>${p.desc}</p>
         <a class="more" href="${link}" target="_blank" rel="noopener">View catalogue ${arrow}</a>
@@ -335,8 +395,11 @@ function categoriesOf(items){
   return ["All",...known,...extra,...tail];
 }
 
-function render(filter){
-  const list = ITEMS.filter(p=> filter==="All" || p.cat===filter);
+function render(){
+  const list = ITEMS.filter(p =>
+    (activeCat==="All"    || p.cat===activeCat) &&
+    (activeFormat==="All" || p.type===activeFormat)
+  );
   grid.innerHTML = list.map(buildCard).join("") || `<div class="loading">No products in this category yet.</div>`;
   requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach((el,i)=>setTimeout(()=>el.classList.add("in"), i*40)));
 }
@@ -349,7 +412,32 @@ function buildFilters(){
     const b=document.createElement("button");
     b.className="chip"+(i===0?" active":"");
     b.innerHTML=`${c}<span class="c">${n}</span>`;
-    b.onclick=()=>{document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(c);};
+    b.onclick=()=>{
+      activeCat = c;
+      document.querySelectorAll("#filters .chip").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+      render();
+    };
+    fbar.appendChild(b);
+  });
+}
+
+function buildFormatFilters(){
+  const present = new Set(ITEMS.map(i=>i.type));
+  const types = FORMAT_ORDER.filter(t=> t==="All" || present.has(t));
+  const fbar = document.getElementById("formatFilters"); fbar.innerHTML="";
+  types.forEach((t,i)=>{
+    const n = t==="All" ? ITEMS.length : ITEMS.filter(x=>x.type===t).length;
+    const label = t==="All" ? "All formats" : TYPE_META[t].label + "s";
+    const b=document.createElement("button");
+    b.className="chip"+(i===0?" active":"");
+    b.innerHTML=`${label}<span class="c">${n}</span>`;
+    b.onclick=()=>{
+      activeFormat = t;
+      document.querySelectorAll("#formatFilters .chip").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+      render();
+    };
     fbar.appendChild(b);
   });
 }
@@ -357,7 +445,8 @@ function buildFilters(){
 function finish(){
   document.getElementById("statProducts").textContent = ITEMS.length;
   document.getElementById("statCats").textContent = Math.max(0, categoriesOf(ITEMS).length-1);
-  buildFilters(); render("All");
+  activeCat = "All"; activeFormat = "All";
+  buildFilters(); buildFormatFilters(); render();
 }
 
 function useFallback(){
