@@ -108,6 +108,27 @@
   /* Format filter row — sits under the category filters, same chip system, smaller */
   .format-label{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2px 0 10px}
   .filters.format-filters .chip{padding:6px 14px;font-size:.82rem}
+
+  /* ===== LIGHTBOX — inline playback for videos, viewer for pdf/ppt/image ===== */
+  .thumb{cursor:pointer}
+  .lb-overlay{position:fixed;inset:0;z-index:900;background:rgba(16,24,18,.88);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s}
+  .lb-overlay.open{opacity:1;pointer-events:auto}
+  .lb-panel{position:relative;width:min(94vw,1080px);background:var(--paper-2);border-radius:16px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.45);transform:translateY(14px);transition:transform .25s}
+  .lb-overlay.open .lb-panel{transform:translateY(0)}
+  .lb-frame-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#0d1811}
+  .lb-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  .lb-caption{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 22px}
+  .lb-caption h4{font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:-.01em}
+  .lb-caption a{flex:none;font-size:.85rem;font-weight:700;color:var(--ink);display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+  .lb-caption a:hover{color:var(--solar-deep)}
+  .lb-caption a svg{width:14px;height:14px}
+  .lb-close{position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;border-radius:50%;
+    background:rgba(16,24,18,.55);color:#fffdf8;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:20px;line-height:1;border:1px solid rgba(255,255,255,.18);transition:background .2s}
+  .lb-close:hover{background:rgba(16,24,18,.85)}
+  @media(max-width:640px){ .lb-panel{width:100%} }
   .card-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
   .card-body h3{font-family:var(--display);font-weight:600;font-size:1.18rem;letter-spacing:-.01em;line-height:1.2}
   .card-body p{margin-top:9px;font-size:.92rem;color:var(--muted);flex:1}
@@ -214,6 +235,19 @@
   </div>
 </footer>
 
+<div class="lb-overlay" id="lbOverlay">
+  <div class="lb-panel" onclick="event.stopPropagation()">
+    <span class="lb-close" id="lbClose" role="button" aria-label="Close">&times;</span>
+    <div class="lb-frame-wrap"><iframe id="lbFrame" src="" title="" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <div class="lb-caption">
+      <h4 id="lbTitle"></h4>
+      <a id="lbOpenNew" href="#" target="_blank" rel="noopener">Open in Drive
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ============================================================
    1. CONFIG  — paste your API key here to turn on live sync
@@ -313,6 +347,35 @@ function detectType(mimeType, name){
   if(mimeType.includes("presentation") || /\.pptx?$/i.test(name||"")) return "ppt";
   return "file";
 }
+function escAttr(s){
+  return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+/* ===== LIGHTBOX — click any card thumbnail to preview/play it inline,
+   instead of only linking out. Drive's own /preview embed plays video,
+   flips through PDF pages, and renders PPT slides, all in one iframe. */
+const lbOverlay = document.getElementById("lbOverlay");
+const lbFrame   = document.getElementById("lbFrame");
+const lbTitle   = document.getElementById("lbTitle");
+const lbOpenNew = document.getElementById("lbOpenNew");
+
+function openLightbox(fileId, name){
+  if(!fileId) return;
+  lbFrame.src = `https://drive.google.com/file/d/${fileId}/preview`;
+  lbFrame.title = name;
+  lbTitle.textContent = name;
+  lbOpenNew.href = fileUrl(fileId);
+  lbOverlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeLightbox(){
+  lbOverlay.classList.remove("open");
+  lbFrame.src = ""; // stop playback
+  document.body.style.overflow = "";
+}
+document.getElementById("lbClose").addEventListener("click", closeLightbox);
+lbOverlay.addEventListener("click", closeLightbox); // click on the dark backdrop
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeLightbox(); });
 
 document.getElementById("fullCatalogue").href = fileUrl(MASTER_FALLBACK);
 document.getElementById("yr").textContent = new Date().getFullYear();
@@ -365,6 +428,7 @@ function buildCard(p){
   const link = fileUrl(p.fileId);
   const initial = (p.name.trim()[0]||"E").toUpperCase();
   const isVideo = p.type === "video";
+  const safeName = escAttr(p.name);
   const img = p.fileId
     ? `<img src="${thumbUrl(p.fileId)}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"
          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -375,7 +439,7 @@ function buildCard(p){
     : "";
   const tagTxt = p.isNew ? "New" : p.cat.split(" ")[0];
   return `<article class="card reveal">
-      <div class="thumb">
+      <div class="thumb" data-fileid="${p.fileId}" data-name="${safeName}" title="Click to preview">
         <span class="tag ${p.isNew?'new':''}">${tagTxt}</span>
         <span class="type-badge ${TYPE_META[p.type].cls}">${typeBadgeSvg(p.type)}${TYPE_META[p.type].label}</span>
         ${img}${playCue}
@@ -403,6 +467,13 @@ function render(){
   grid.innerHTML = list.map(buildCard).join("") || `<div class="loading">No products in this category yet.</div>`;
   requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach((el,i)=>setTimeout(()=>el.classList.add("in"), i*40)));
 }
+
+// Click any thumbnail (image, video, pdf or ppt) to preview it inline.
+grid.addEventListener("click", e => {
+  const thumb = e.target.closest(".thumb");
+  if(!thumb) return;
+  openLightbox(thumb.dataset.fileid, thumb.dataset.name);
+});
 
 function buildFilters(){
   const cats = categoriesOf(ITEMS);
