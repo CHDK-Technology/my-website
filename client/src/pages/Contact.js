@@ -8,9 +8,13 @@ import "../pages/Home.css";
 import "./Contact.css";
 
 const OFFICES = [
-  { id: 0, city: "Pune", type: "Headquarters", address: "Gate No.83, Yelwadi Gatha Mandir Bypass Road, Near Sairaj Chowk, At : Yelwadi, Dehu Tal : Khed, Pune, Maharashtra -412109", phone: "+91  9687620011" },
-  { id: 1, city: "Pune", type: "Regional Office", address: "2nd Floor, A-12, Sawant Elite, Near Sai Eshanya, Balewadi,Pune-411045, Maharashtra,India", phone: "+91 8080473278" },
-  { id: 2, city: "Gujarat", type: "Regional Office", address: "Fortune gateway, 3rd Floor, Office No. 336, Opposite Kunj Plaza TP13, Channi Jakatnaka, Vadodara- 391740 ( Gujarat)", phone: "+91 8142427476" },
+  // { id: 0, city: "Pune", type: "Headquarters", address: "Gate No.83, Yelwadi Gatha Mandir Bypass Road, Near Sairaj Chowk, At : Yelwadi, Dehu Tal : Khed, Pune, Maharashtra -412109", phone: "+91  9687620011" },
+  // { id: 1, city: "Pune", type: "Regional Office", address: "2nd Floor, A-12, Sawant Elite, Near Sai Eshanya, Balewadi,Pune-411045, Maharashtra,India", phone: "+91 8080473278" },
+  // { id: 2, city: "Gujarat", type: "Regional Office", address: "Fortune gateway, 3rd Floor, Office No. 336, Opposite Kunj Plaza TP13, Channi Jakatnaka, Vadodara- 391740 ( Gujarat)", phone: "+91 8142427476" },
+
+  { id: 0, city: "Pune", type: "Headquarters", address: "Gate No.83, Yelwadi Gatha Mandir Bypass Road, Near Sairaj Chowk, At : Yelwadi, Dehu Tal : Khed, Pune, Maharashtra -412109" },
+  { id: 1, city: "Pune", type: "Regional Office", address: "2nd Floor, A-12, Sawant Elite, Near Sai Eshanya, Balewadi,Pune-411045, Maharashtra,India" },
+  { id: 2, city: "Gujarat", type: "Regional Office", address: "Fortune gateway, 3rd Floor, Office No. 336, Opposite Kunj Plaza TP13, Channi Jakatnaka, Vadodara- 391740 ( Gujarat)"},
 ];
 
 const ENQUIRY_TYPES = [
@@ -49,7 +53,8 @@ function ContactForm() {
       }
     } catch (error) {
       setStatus("error");
-      setErrorMessage("Unable to connect. Please email us directly at info@chdkindia.com");
+      // setErrorMessage("Unable to connect. Please email us directly at info@chdkindia.com");
+      setErrorMessage("Unable to connect. Please email us directly at growsync@chdkindia.com");
     }
   };
 
