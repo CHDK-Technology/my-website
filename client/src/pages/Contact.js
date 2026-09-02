@@ -170,7 +170,6 @@ function Contact() {
                 <div className="contact-info-icon"><HiOutlineMail size={22} /></div>
                 <div className="contact-info-text" style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                   <p className="contact-info-label">Email</p>
-                  // <p className="contact-info-val">info@chdkindia.com</p>
                   <p className="contact-info-val">growsync@chdkindia.com</p>
                   <p className="contact-info-sub">We respond within 24 hours</p>
                 </div>
